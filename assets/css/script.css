@@ -1,10 +1,18 @@
-/* Variables & Reset */
+/* =========================================
+   1. VARIABLES & RESET GLOBAL
+   ========================================= */
 :root {
+    /* Couleurs principales (Site) */
     --bg-dark: #232323;
     --bg-olive-dark: #505c35;
     --bg-olive-light: #96a86e;
     --text-white: #f5f5f5;
     --radius: 3px;
+
+    /* Couleurs spécifiques (Navigation & Footer) */
+    --nav-bg: #1a1a1a;       /* Légèrement plus foncé que le body pour le contraste */
+    --nav-border: #505c35;   /* Identique à olive-dark */
+    --nav-hover: #96a86e;    /* Identique à olive-light */
 }
 
 * {
@@ -18,15 +26,97 @@ body {
     color: var(--text-white);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Permet au footer de rester en bas si la page est vide */
 }
 
+/* Conteneur principal du site */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    flex: 1; /* Pousse le footer vers le bas */
 }
 
-/* 1. Bannières */
+/* =========================================
+   2. HEADER & NAVIGATION (Nouveau)
+   ========================================= */
+header {
+    background-color: var(--nav-bg);
+    border-bottom: 3px solid var(--nav-border);
+    padding: 15px 0;
+    width: 100%;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-white);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo span {
+    color: var(--nav-hover);
+}
+
+/* Menu */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+nav a {
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+nav a:hover {
+    color: var(--nav-hover);
+}
+
+/* Boutons Navigation (Connexion/Vendre) */
+.btn-nav {
+    background-color: var(--nav-border);
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    transition: background 0.3s;
+}
+
+.btn-nav:hover {
+    background-color: var(--nav-hover);
+    color: #232323;
+}
+
+/* =========================================
+   3. CONTENU DU SITE (Existant - Intouché)
+   ========================================= */
+
+/* Bannières */
 .banner {
     display: flex;
     align-items: center;
@@ -59,7 +149,7 @@ body {
     letter-spacing: 1px;
 }
 
-/* 2. Grilles (Articles & Avis) */
+/* Grilles (Articles) */
 .grid-articles {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -83,7 +173,7 @@ body {
     cursor: pointer;
 }
 
-/* 3. Section À Propos */
+/* Section À Propos */
 .about-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -101,7 +191,7 @@ body {
     justify-content: center;
 }
 
-/* 4. Section Avis */
+/* Section Avis */
 .grid-reviews {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -116,8 +206,72 @@ body {
     border-radius: var(--radius);
 }
 
-/* 5. Media Queries (Responsive) */
+/* =========================================
+   4. FOOTER (Nouveau)
+   ========================================= */
+footer {
+    background-color: var(--nav-bg);
+    border-top: 1px solid #333;
+    padding: 40px 0 20px;
+    margin-top: auto; /* Sécurité pour le sticky footer */
+    color: #bbb;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-col h4 {
+    color: var(--text-white);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 8px;
+}
+
+.footer-col a {
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-col a:hover {
+    color: var(--nav-hover);
+}
+
+.social-links a {
+    font-size: 1.2rem;
+    margin-right: 15px;
+    color: var(--text-white);
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    font-size: 0.8rem;
+}
+
+/* =========================================
+   5. MEDIA QUERIES (Responsive Fusionné)
+   ========================================= */
+
 @media (max-width: 992px) {
+    /* Hérité du script original */
     .grid-articles {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -126,7 +280,20 @@ body {
     }
 }
 
+@media (max-width: 768px) {
+    /* Hérité du Nav (Mobile Menu) */
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
 @media (max-width: 600px) {
+    /* Hérité du script original */
     .grid-articles {
         grid-template-columns: 1fr;
     }
