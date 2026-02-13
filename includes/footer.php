@@ -1,4 +1,3 @@
-</main>
 <footer>
     <div class="footer-content">
         <div class="footer-col">
@@ -30,7 +29,7 @@
     </div>
 </footer>
 
-<script src="assets/js/script.js?v=<?= time(); ?>"></script>
+<script src="assets/js/script.js?v=<?= filemtime(__DIR__ . '/../assets/js/script.js'); ?>"></script>
 
 </body>
 

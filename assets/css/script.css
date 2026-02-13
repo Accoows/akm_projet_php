@@ -488,7 +488,7 @@ footer {
         gap: 15px;
     }
 
-    .nav ul {
+    nav ul {
         flex-wrap: wrap;
         justify-content: center;
     }
@@ -800,6 +800,52 @@ footer {
     text-decoration: none !important;
 }
 
+/* =========================================
+   9. UTILITY & PAGE SPECIFIC
+   ========================================= */
+
+/* Sell Page */
+.sell-intro {
+    text-align: center;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.auth-container.wide {
+    max-width: 800px;
+}
+
+.dark-form.wide {
+    max-width: 100%;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.file-input {
+    padding: 8px !important;
+}
+
+.form-help {
+    color: #666;
+    display: block;
+    margin-top: 5px;
+}
+
+.form-actions {
+    margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+
 .auth-footer {
     margin-top: 20px;
     text-align: center;
@@ -1066,4 +1112,8 @@ footer {
     .checkout-container {
         grid-template-columns: 1fr;
     }
+}
+
+.table-scroll {
+    overflow-x: auto;
 }

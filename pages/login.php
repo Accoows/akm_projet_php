@@ -15,7 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_btn'])) {
 
             <?php if ($error): ?>
                 <div class="alert alert-error">
-                    <i class="fa-solid fa-triangle-exclamation"></i> <?= $error ?>
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <?= htmlspecialchars($error, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>
                 </div>
             <?php endif; ?>
 

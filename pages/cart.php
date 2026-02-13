@@ -9,7 +9,7 @@ $cart_items = [
         'name' => 'Casque FAST',
         'price' => 120.00,
         'quantity' => 1,
-        'image' => 'assets/images/placeholder.png' // You might need a placeholder image
+        'image' => 'assets/images/placeholder.png'
     ],
     [
         'id' => 2,
@@ -36,12 +36,12 @@ foreach ($cart_items as $item) {
             <i class="fa-solid fa-cart-arrow-down"></i>
             <h3>Votre panier est vide</h3>
             <p>Préparez votre équipement avant de partir en mission.</p>
-            <a href="./" class="btn-primary">
+            <a href="articles" class="btn-primary">
                 Retour au catalogue
             </a>
         </div>
     <?php else: ?>
-        <div style="overflow-x: auto;">
+        <div class="table-scroll">
             <table class="table-dark">
                 <thead>
                     <tr>
@@ -87,7 +87,7 @@ foreach ($cart_items as $item) {
             </div>
 
             <div class="cart-actions">
-                <a href="./" class="btn-secondary">Continuer mes achats</a>
+                <a href="articles" class="btn-secondary">Continuer mes achats</a>
                 <a href="cart_validation" class="btn-primary">
                     <i class="fa-solid fa-check"></i> Valider la commande
                 </a>
