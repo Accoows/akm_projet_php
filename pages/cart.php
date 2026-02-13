@@ -36,7 +36,7 @@ foreach ($cart_items as $item) {
             <i class="fa-solid fa-cart-arrow-down"></i>
             <h3>Votre panier est vide</h3>
             <p>Préparez votre équipement avant de partir en mission.</p>
-            <a href="home" class="btn-primary">
+            <a href="./" class="btn-primary">
                 Retour au catalogue
             </a>
         </div>
@@ -55,7 +55,7 @@ foreach ($cart_items as $item) {
                 <tbody>
                     <?php foreach ($cart_items as $item): ?>
                         <tr>
-                            <td>
+                            <td data-label="Article">
                                 <div class="cart-item-container">
                                     <div class="cart-item-image">
                                         <i class="fa-solid fa-image cart-item-placeholder-icon"></i>
@@ -63,14 +63,14 @@ foreach ($cart_items as $item) {
                                     <span class="cart-item-name"><?= htmlspecialchars($item['name']) ?></span>
                                 </div>
                             </td>
-                            <td><?= number_format($item['price'], 2) ?> €</td>
-                            <td>
+                            <td data-label="Prix Unitaire"><?= number_format($item['price'], 2) ?> €</td>
+                            <td data-label="Quantité">
                                 <input type="number" value="<?= $item['quantity'] ?>" min="1" class="cart-input-quantity">
                             </td>
-                            <td class="cart-row-total">
+                            <td class="cart-row-total" data-label="Total">
                                 <?= number_format($item['price'] * $item['quantity'], 2) ?> €
                             </td>
-                            <td>
+                            <td data-label="Action">
                                 <button class="btn-danger">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
@@ -87,7 +87,7 @@ foreach ($cart_items as $item) {
             </div>
 
             <div class="cart-actions">
-                <a href="home" class="btn-secondary">Continuer mes achats</a>
+                <a href="./" class="btn-secondary">Continuer mes achats</a>
                 <a href="cart_validation" class="btn-primary">
                     <i class="fa-solid fa-check"></i> Valider la commande
                 </a>

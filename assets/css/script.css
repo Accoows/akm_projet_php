@@ -104,6 +104,27 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    /* Allow wrapping */
+}
+
+/* ... existing code ... */
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav ul {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .logo {
+        margin-bottom: 5px;
+    }
 }
 
 /* Logo */
@@ -219,6 +240,139 @@ nav a:hover {
 .article-box:hover {
     border-color: var(--bg-olive-light);
     cursor: pointer;
+}
+
+/* Product Card (Catalogue) */
+.product-card {
+    background-color: #2a2a2a;
+    border: 1px solid #333;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transition: transform 0.3s ease, border-color 0.3s;
+    height: 100%;
+}
+
+.product-card:hover {
+    border-color: var(--bg-olive-light);
+    transform: translateY(-5px);
+}
+
+.btn-details {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    padding: 8px;
+    text-align: center;
+}
+
+.article-image {
+    height: 150px;
+    background-color: #1a1a1a;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* Product Detail Page */
+.product-detail-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    background-color: #2a2a2a;
+    padding: 30px;
+    border-radius: var(--radius);
+    border: 1px solid #333;
+}
+
+.detail-image {
+    background-color: #1a1a1a;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: #444;
+    min-height: 400px;
+}
+
+.detail-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-title {
+    font-size: 2rem;
+    color: var(--text-white);
+    margin-bottom: 10px;
+}
+
+.detail-category {
+    color: #888;
+    background-color: #333;
+    padding: 5px 10px;
+    border-radius: var(--radius);
+    align-self: flex-start;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.detail-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--bg-olive-light);
+    margin-bottom: 20px;
+}
+
+.detail-description {
+    color: #ccc;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+}
+
+.detail-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .product-detail-container {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-image {
+        min-height: 250px;
+        font-size: 4rem;
+    }
+}
+
+.article-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--text-white);
+    margin-bottom: 5px;
+}
+
+.article-category {
+    color: #888;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+.article-price {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--bg-olive-light);
+    margin-bottom: 15px;
+    margin-top: auto;
 }
 
 /* About Section */
@@ -800,6 +954,59 @@ footer {
 
 .cart-input-quantity:focus {
     border-color: var(--bg-olive-light);
+}
+
+/* Mobile Responsive Table (Card View) */
+@media (max-width: 768px) {
+    .table-dark thead {
+        display: none;
+    }
+
+    .table-dark,
+    .table-dark tbody,
+    .table-dark tr,
+    .table-dark td {
+        display: block;
+        width: 100%;
+    }
+
+    .table-dark tr {
+        margin-bottom: 20px;
+        border: 1px solid #444;
+        border-radius: var(--radius);
+        background-color: #2a2a2a;
+        padding: 10px;
+    }
+
+    .table-dark td {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #333;
+        padding: 15px;
+        text-align: right;
+    }
+
+    .table-dark td:last-child {
+        border-bottom: none;
+        justify-content: center;
+    }
+
+    .table-dark td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: var(--bg-olive-light);
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        margin-right: 20px;
+        text-align: left;
+    }
+
+    .cart-item-container {
+        justify-content: flex-end;
+        flex: 1;
+    }
 }
 
 .cart-row-total {

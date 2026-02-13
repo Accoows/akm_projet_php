@@ -11,7 +11,7 @@
             <h1>Mission Interrompue</h1>
             <p>La page que vous recherchez est introuvable ou a été déplacée vers une zone sécurisée.</p>
 
-            <a href="home" class="btn-error">
+            <a href="./" class="btn-error">
                 <i class="fa-solid fa-house"></i> Retour à la base
             </a>
         </div>

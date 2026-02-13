@@ -33,7 +33,8 @@ if (substr($scriptPath, -1) !== '/') {
         <div class="dev-menu">
             <button class="dev-menu-btn"><i class="fa-solid fa-bars"></i></button>
             <div class="dev-menu-dropdown">
-                <a href="home">Home</a>
+                <a href="./">Home</a>
+                <a href="articles">Articles</a>
                 <a href="login">Login</a>
                 <a href="register">Register</a>
                 <a href="account">Account</a>
@@ -47,13 +48,14 @@ if (substr($scriptPath, -1) !== '/') {
         <!--======================================== -->
 
         <div class="header-content">
-            <a href="home" class="logo">
+            <a href="./" class="logo">
                 <i class="fa-solid fa-shield-halved"></i> AT<span>CFM</span>
             </a>
 
             <nav>
                 <ul>
-                    <li><a href="home">Accueil</a></li>
+                    <li><a href="./">Accueil</a></li>
+                    <li><a href="articles">Catalogue</a></li>
 
                     <?php if ($isLogged): ?>
                         <li><a href="sell">Vendre</a></li>
