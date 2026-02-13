@@ -17,13 +17,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_btn'])) {
 
             <?php if ($error): ?>
                 <div class="alert alert-error">
-                    <i class="fa-solid fa-triangle-exclamation"></i> <?= $error ?>
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <?= htmlspecialchars($error, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>
                 </div>
             <?php endif; ?>
 
             <?php if ($success): ?>
                 <div class="alert alert-success">
-                    <i class="fa-solid fa-check-circle"></i> <?= $success ?>
+                    <i class="fa-solid fa-check-circle"></i>
+                    <?= htmlspecialchars($success, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>
                 </div>
             <?php endif; ?>
 

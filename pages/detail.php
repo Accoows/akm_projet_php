@@ -109,7 +109,7 @@ $pageTitle = $product ? $product['name'] : "Produit introuvable";
                     <button class="btn-primary">
                         <i class="fa-solid fa-cart-plus"></i> Ajouter au panier
                     </button>
-                    <a href="articles" class="btn-secondary" style="text-decoration: none;">
+                    <a href="articles" class="btn-secondary">
                         <i class="fa-solid fa-arrow-left"></i> Retour au catalogue
                     </a>
                 </div>

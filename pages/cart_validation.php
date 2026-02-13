@@ -33,7 +33,7 @@ foreach ($cart_items as $item) {
         <!-- Left: Shipping Form -->
         <div class="checkout-form dark-form">
             <h3><i class="fa-solid fa-location-dot"></i> Adresse de livraison</h3>
-            <form action="" method="POST">
+            <form action="" method="POST" id="checkout-form">
                 <div class="form-group">
                     <label for="fullname">Nom complet</label>
                     <input type="text" id="fullname" name="fullname" placeholder="John Doe" required>
@@ -86,7 +86,7 @@ foreach ($cart_items as $item) {
                 </span>
             </div>
 
-            <button class="btn-primary btn-full-width">
+            <button type="submit" form="checkout-form" class="btn-primary btn-full-width">
                 <i class="fa-solid fa-lock"></i> Confirmer et Payer
             </button>
             <br>

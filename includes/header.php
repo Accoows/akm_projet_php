@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $isLogged = isset($_SESSION['user']);
+$isAdmin = $isLogged && isset($_SESSION['user']['role']) && $_SESSION['user']['role'] === 'admin';
 $scriptPath = dirname($_SERVER['SCRIPT_NAME']);
 $scriptPath = str_replace('\\', '/', $scriptPath);
 if (substr($scriptPath, -1) !== '/') {
@@ -22,7 +23,7 @@ if (substr($scriptPath, -1) !== '/') {
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link rel="stylesheet" href="assets/css/script.css?v=<?= time(); ?>">
+    <link rel="stylesheet" href="assets/css/script.css?v=<?= filemtime('assets/css/script.css'); ?>">
 </head>
 
 <body>
@@ -41,7 +42,7 @@ if (substr($scriptPath, -1) !== '/') {
                 <a href="cart">Cart</a>
                 <a href="cart_validation">Cart Validation</a>
                 <a href="sell">Sell</a>
-                <a href="?page=admin_users">Admin Users</a>
+                <a href="admin">Admin Users</a>
                 <a href="404">404 Page</a>
             </div>
         </div>

@@ -3,16 +3,16 @@
 // Note : La logique de traitement PHP sera ajoutée plus tard.
 ?>
 
-<div class="auth-container">
+<div class="auth-container wide">
     <h2 class="section-title auth-title">
         <i class="fa-solid fa-tags"></i> Mettre en vente un article
     </h2>
 
-    <p style="text-align: center; color: #aaa; margin-bottom: 20px;">
+    <p class="sell-intro">
         Remplissez les informations ci-dessous pour ajouter votre équipement au catalogue.
     </p>
 
-    <div class="dark-form" style="max-width: 800px; margin: 0 auto;">
+    <div class="dark-form wide">
         <form action="sell" method="POST" enctype="multipart/form-data">
 
             <div class="form-group">
@@ -24,10 +24,10 @@
                 <label for="description">Description détaillée</label>
                 <textarea id="description" name="description" rows="5"
                     placeholder="Décrivez les caractéristiques de votre article..."
-                    style="width: 100%; padding: 12px; background-color: #1a1a1a; border: 1px solid #444; color: var(--text-white); border-radius: var(--radius); outline: none;"></textarea>
+                    placeholder="Décrivez les caractéristiques de votre article..."></textarea>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-row">
                 <div class="form-group">
                     <label for="price">Prix (€)</label>
                     <input type="number" id="price" name="price" step="0.01" min="0" required placeholder="0.00">
@@ -41,11 +41,11 @@
 
             <div class="form-group">
                 <label for="image">Image de l'article</label>
-                <input type="file" id="image" name="image" accept="image/*" style="padding: 8px;">
-                <small style="color: #666;">Format suggéré : JPG ou PNG. Poids max : 1Mo.</small>
+                <input type="file" id="image" name="image" accept="image/*" class="file-input">
+                <small class="form-help">Format suggéré : JPG ou PNG. Poids max : 1Mo.</small>
             </div>
 
-            <div style="margin-top: 30px;">
+            <div class="form-actions">
                 <button type="submit" name="sell_btn" class="btn-primary btn-full-width">
                     <i class="fa-solid fa-plus-circle"></i> Publier l'annonce
                 </button>

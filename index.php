@@ -1,6 +1,6 @@
 <?php
 session_start();
-$path = "./";
+
 
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
