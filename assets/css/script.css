@@ -304,3 +304,88 @@ footer {
         padding: 15px;
     }
 }
+
+
+
+/* =========================================
+   6. PAGE 404 (MODERNE)
+   ========================================= */
+
+.error-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh; /* Centre verticalement entre header et footer */
+}
+
+.error-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: var(--radius);
+    padding: 50px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.error-icon {
+    font-size: 4rem;
+    color: var(--bg-olive-light);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.error-icon span {
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: var(--text-white);
+    opacity: 0.5;
+}
+
+.error-content h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--text-white);
+}
+
+.error-content p {
+    color: #bbb;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+/* Bouton Spécifique 404 */
+.btn-error {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--bg-olive-dark);
+    color: var(--text-white);
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.btn-error:hover {
+    background-color: var(--bg-olive-light);
+    color: var(--bg-dark);
+    transform: translateY(-2px);
+}
+
+/* Ajustement Mobile */
+@media (max-width: 600px) {
+    .error-card {
+        padding: 30px 20px;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+}
