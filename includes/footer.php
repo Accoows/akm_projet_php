@@ -1,8 +1,9 @@
-</main> <footer>
+</main>
+<footer>
     <div class="footer-content">
         <div class="footer-col">
             <h4>À Propos</h4>
-            <p>JRSOFT est votre référence en équipement tactique. Qualité et fiabilité pour vos missions.</p>
+            <p>ATCFM est votre référence en équipement tactique. Qualité et fiabilité pour vos missions.</p>
         </div>
 
         <div class="footer-col">
@@ -25,11 +26,12 @@
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; <?php echo date('Y'); ?> JRSOFT - Projet PHP E-Commerce.</p>
+        <p>&copy; <?php echo date('Y'); ?> ATCFM - Projet PHP E-Commerce.</p>
     </div>
 </footer>
 
 <script src="<?= isset($path) ? $path : './' ?>assets/js/script.js"></script>
 
 </body>
+
 </html>

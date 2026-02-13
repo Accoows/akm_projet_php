@@ -557,3 +557,62 @@ footer {
         box-shadow: none;
     }
 }
+
+/* =========================================
+   8. AUTHENTIFICATION (Login/Register)
+   ========================================= */
+
+.auth-container {
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.auth-title {
+    text-align: center;
+}
+
+.alert {
+    padding: 10px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.alert-error {
+    background-color: rgba(231, 76, 60, 0.2);
+    border-color: #e74c3c;
+    color: #ffadad;
+}
+
+.alert-success {
+    background-color: rgba(46, 204, 113, 0.2);
+    border-color: #2ecc71;
+    color: #a3e4d7;
+}
+
+.btn-full-width {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.auth-footer {
+    margin-top: 20px;
+    text-align: center;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+}
+
+.auth-text {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.auth-link {
+    color: var(--bg-olive-light);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
