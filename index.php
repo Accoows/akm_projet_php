@@ -1,9 +1,15 @@
 <?php 
+session_start();
 $path = "./"; 
 
-include_once 'includes/header.php';
-
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+
+if ($page === 'logout') {
+    include 'pages/logout.php';
+    exit();
+}
+
+include_once 'includes/header.php';
 ?>
 
 <main class="container">
@@ -30,13 +36,12 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
             break;
 
         default:
-            echo "<h2>Erreur 404 : Page introuvable</h2>";
+            include 'pages/404.php';
             break;
     }
     ?>
 </main>
 
 <?php 
-// 4. Inclusion du pied de page
 include_once 'includes/footer.php'; 
 ?>
