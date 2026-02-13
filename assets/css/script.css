@@ -130,13 +130,13 @@ nav a:hover {
 
 .hero-banner {
     height: 400px;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../css/bg1.png');
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/bg1.png');
     text-align: center;
 }
 
 .mid-banner {
     height: 250px;
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../css/bg2.png');
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../images/bg2.png');
     background-color: var(--bg-olive-dark);
 }
 
@@ -302,5 +302,174 @@ footer {
     }
     .container {
         padding: 15px;
+    }
+}
+
+/* =========================================
+   6. PAGE COMPTE (ACCOUNT)
+   ========================================= */
+
+/* En-tête de profil (Carte) */
+.profile-header {
+    background-color: #2a2a2a; /* Fond gris foncé */
+    border: 1px solid #333;
+    border-radius: var(--radius);
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barre décorative à gauche */
+.profile-header::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background-color: var(--bg-olive-light);
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    background-color: var(--bg-olive-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--text-white);
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-info h1 {
+    margin-bottom: 5px;
+    font-size: 2rem;
+    color: var(--text-white);
+}
+
+.profile-info .email {
+    color: #aaa;
+    margin-bottom: 15px;
+}
+
+.badges {
+    display: flex;
+    gap: 10px;
+}
+
+.badge {
+    padding: 5px 12px;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.badge-role {
+    background-color: #333;
+    color: #ccc;
+    border: 1px solid #444;
+}
+
+.badge-solde {
+    background-color: var(--bg-olive-dark);
+    color: var(--text-white);
+    border: 1px solid var(--bg-olive-light);
+}
+
+/* Sections du dashboard */
+.section-title {
+    border-bottom: 2px solid var(--bg-olive-dark);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    margin-top: 40px;
+    font-size: 1.5rem;
+    color: var(--bg-olive-light);
+}
+
+/* Formulaires Sombres (Login/Register/Account) */
+.dark-form {
+    background-color: #2a2a2a;
+    padding: 30px;
+    border-radius: var(--radius);
+    border: 1px solid #333;
+    max-width: 600px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ccc;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    color: var(--text-white);
+    border-radius: var(--radius);
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: var(--bg-olive-light);
+}
+
+.btn-primary {
+    background-color: var(--bg-olive-light);
+    color: var(--bg-dark);
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #fff;
+}
+
+/* Tableau simple (Factures) */
+.table-dark {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #2a2a2a;
+}
+
+.table-dark th, .table-dark td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.table-dark th {
+    background-color: #333;
+    color: var(--bg-olive-light);
+}
+
+/* Responsive spécifique */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .badges {
+        justify-content: center;
     }
 }
