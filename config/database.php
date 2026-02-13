@@ -1,19 +1,16 @@
 <?php
-session_start();
+$host = '127.0.0.1';
+$port = '3307'; 
+$dbname = 'php_exam_db';
+$username = 'root';
+$password = ''; 
 
-define('DB_HOST', '127.0.0.1');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'atcfm');
-
-function getDB() {
-    static $mysqli = null;
+try {
+    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $username, $password);
     
-    if ($mysqli === null) {
-        $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME) ? : die("Connection error : " . mysqli_connect_error());
-        
-        $mysqli->set_charset("utf8mb4");
-    }
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     
-    return $mysqli;
+} catch (PDOException $e) {
+    die("Erreur de connexion MariaDB : " . $e->getMessage());
 }
