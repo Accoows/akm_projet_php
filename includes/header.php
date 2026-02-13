@@ -3,9 +3,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Le chemin racine est maintenant géré via la balise <base> dans le HTML
 $isLogged = isset($_SESSION['user']);
-$isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+$scriptPath = dirname($_SERVER['SCRIPT_NAME']);
+$scriptPath = str_replace('\\', '/', $scriptPath);
+if (substr($scriptPath, -1) !== '/') {
+    $scriptPath .= '/';
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,7 +18,7 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ATCFM - Équipement Tactique</title>
 
-    <base href="/akm_projet_php/">
+    <base href="<?= $scriptPath ?>">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -25,6 +28,24 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 <body>
 
     <header>
+        <!--======================================== -->
+        <!-- DEV MENU -->
+        <div class="dev-menu">
+            <button class="dev-menu-btn"><i class="fa-solid fa-bars"></i></button>
+            <div class="dev-menu-dropdown">
+                <a href="home">Home</a>
+                <a href="login">Login</a>
+                <a href="register">Register</a>
+                <a href="account">Account</a>
+                <a href="cart">Cart</a>
+                <a href="cart_validation">Cart Validation</a>
+                <a href="sell">Sell</a>
+                <a href="?page=admin_users">Admin Users</a>
+                <a href="404">404 Page</a>
+            </div>
+        </div>
+        <!--======================================== -->
+
         <div class="header-content">
             <a href="home" class="logo">
                 <i class="fa-solid fa-shield-halved"></i> AT<span>CFM</span>

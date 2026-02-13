@@ -1,24 +1,24 @@
 <?php
 // pages/cart.php
 // Mock data for display purposes
-$cart_items = [];
+// $cart_items = [];
 
-// $cart_items = [
-//     [
-//         'id' => 1,
-//         'name' => 'Casque FAST',
-//         'price' => 120.00,
-//         'quantity' => 1,
-//         'image' => 'assets/images/placeholder.png' // You might need a placeholder image
-//     ],
-//     [
-//         'id' => 2,
-//         'name' => 'Gilet Tactique JPC',
-//         'price' => 85.50,
-//         'quantity' => 2,
-//         'image' => 'assets/images/placeholder.png'
-//     ]
-// ];
+$cart_items = [
+    [
+        'id' => 1,
+        'name' => 'Casque FAST',
+        'price' => 120.00,
+        'quantity' => 1,
+        'image' => 'assets/images/placeholder.png' // You might need a placeholder image
+    ],
+    [
+        'id' => 2,
+        'name' => 'Gilet Tactique JPC',
+        'price' => 85.50,
+        'quantity' => 2,
+        'image' => 'assets/images/placeholder.png'
+    ]
+];
 
 $total = 0;
 foreach ($cart_items as $item) {
@@ -88,9 +88,9 @@ foreach ($cart_items as $item) {
 
             <div class="cart-actions">
                 <a href="home" class="btn-secondary">Continuer mes achats</a>
-                <button class="btn-primary">
+                <a href="cart_validation" class="btn-primary">
                     <i class="fa-solid fa-check"></i> Valider la commande
-                </button>
+                </a>
             </div>
         </div>
     <?php endif; ?>

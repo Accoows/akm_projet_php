@@ -1,22 +1,68 @@
 /* =========================================
-   1. VARIABLES & RESET GLOBAL
+   1. VARIABLES & GLOBAL RESET
    ========================================= */
 :root {
-    /* Couleurs principales (Site) */
     --bg-dark: #232323;
     --bg-olive-dark: #505c35;
     --bg-olive-light: #96a86e;
     --text-white: #f5f5f5;
     --radius: 3px;
 
-    /* Couleurs spécifiques (Navigation & Footer) */
     --nav-bg: #1a1a1a;
-    /* Légèrement plus foncé que le body pour le contraste */
     --nav-border: #505c35;
-    /* Identique à olive-dark */
     --nav-hover: #96a86e;
-    /* Identique à olive-light */
 }
+
+/* ============================================== */
+/* DEV MENU (Temporary) */
+.dev-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.dev-menu-btn {
+    background-color: var(--bg-olive-dark);
+    color: white;
+    padding: 10px 15px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    border: 1px solid var(--bg-olive-light);
+    font-size: 1.2rem;
+}
+
+.dev-menu-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: var(--radius);
+    width: 200px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    margin-top: 5px;
+}
+
+.dev-menu-dropdown.show {
+    display: block;
+}
+
+.dev-menu-dropdown a {
+    display: block;
+    padding: 10px;
+    color: #ccc;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+}
+
+.dev-menu-dropdown a:hover {
+    background-color: #444;
+    color: white;
+}
+
+/* ============================================== */
 
 * {
     box-sizing: border-box;
@@ -32,20 +78,17 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    /* Permet au footer de rester en bas si la page est vide */
 }
 
-/* Conteneur principal du site */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     flex: 1;
-    /* Pousse le footer vers le bas */
 }
 
 /* =========================================
-   2. HEADER & NAVIGATION (Nouveau)
+   2. HEADER & NAVIGATION
    ========================================= */
 header {
     background-color: var(--nav-bg);
@@ -104,7 +147,7 @@ nav a:hover {
     color: var(--nav-hover);
 }
 
-/* Boutons Navigation (Connexion/Vendre) */
+/* Navigation Buttons */
 .btn-nav {
     background-color: var(--nav-border);
     padding: 8px 16px;
@@ -118,10 +161,10 @@ nav a:hover {
 }
 
 /* =========================================
-   3. CONTENU DU SITE (Existant - Intouché)
+   3. SITE CONTENT
    ========================================= */
 
-/* Bannières */
+/* Banners */
 .banner {
     display: flex;
     align-items: center;
@@ -154,7 +197,7 @@ nav a:hover {
     letter-spacing: 1px;
 }
 
-/* Grilles (Articles) */
+/* Article Grids */
 .grid-articles {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -178,7 +221,7 @@ nav a:hover {
     cursor: pointer;
 }
 
-/* Section À Propos */
+/* About Section */
 .about-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -196,7 +239,7 @@ nav a:hover {
     justify-content: center;
 }
 
-/* Section Avis */
+/* Reviews Section */
 .grid-reviews {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -212,14 +255,13 @@ nav a:hover {
 }
 
 /* =========================================
-   4. FOOTER (Nouveau)
+   4. FOOTER
    ========================================= */
 footer {
     background-color: var(--nav-bg);
     border-top: 1px solid #333;
     padding: 40px 0 20px;
     margin-top: auto;
-    /* Sécurité pour le sticky footer */
     color: #bbb;
 }
 
@@ -273,12 +315,10 @@ footer {
 }
 
 /* =========================================
-   5. MEDIA QUERIES (Responsive Fusionné)
+   5. MEDIA QUERIES (RESPONSIVE)
    ========================================= */
 
 @media (max-width: 992px) {
-
-    /* Hérité du script original */
     .grid-articles {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -289,22 +329,27 @@ footer {
 }
 
 @media (max-width: 768px) {
-
-    /* Hérité du Nav (Mobile Menu) */
     .header-content {
         flex-direction: column;
         gap: 15px;
     }
 
-    nav ul {
+    .nav ul {
         flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .badges {
         justify-content: center;
     }
 }
 
 @media (max-width: 600px) {
-
-    /* Hérité du script original */
     .grid-articles {
         grid-template-columns: 1fr;
     }
@@ -316,16 +361,22 @@ footer {
     .container {
         padding: 15px;
     }
+
+    .error-card {
+        padding: 30px 20px;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
 }
 
 /* =========================================
-   6. PAGE COMPTE (ACCOUNT)
+   6. ACCOUNT PAGE
    ========================================= */
 
-/* En-tête de profil (Carte) */
+/* Profile Header */
 .profile-header {
     background-color: #2a2a2a;
-    /* Fond gris foncé */
     border: 1px solid #333;
     border-radius: var(--radius);
     padding: 30px;
@@ -337,7 +388,6 @@ footer {
     overflow: hidden;
 }
 
-/* Barre décorative à gauche */
 .profile-header::before {
     content: '';
     position: absolute;
@@ -400,7 +450,7 @@ footer {
     border: 1px solid var(--bg-olive-light);
 }
 
-/* Sections du dashboard */
+/* Dashboard Sections */
 .section-title {
     border-bottom: 2px solid var(--bg-olive-dark);
     padding-bottom: 10px;
@@ -410,7 +460,7 @@ footer {
     color: var(--bg-olive-light);
 }
 
-/* Formulaires Sombres (Login/Register/Account) */
+/* Dark Forms (Login/Register/Account) */
 .dark-form {
     background-color: #2a2a2a;
     padding: 30px;
@@ -461,7 +511,7 @@ footer {
     background-color: #fff;
 }
 
-/* Tableau simple (Factures) */
+/* Simple Table */
 .table-dark {
     width: 100%;
     border-collapse: collapse;
@@ -480,21 +530,8 @@ footer {
     color: var(--bg-olive-light);
 }
 
-/* Responsive spécifique */
-@media (max-width: 768px) {
-    .profile-header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .badges {
-        justify-content: center;
-    }
-}
-
-
 /* =========================================
-   7. PAGE 404 (MODERNE)
+   7. 404 PAGE
    ========================================= */
 
 .error-page {
@@ -502,7 +539,6 @@ footer {
     align-items: center;
     justify-content: center;
     min-height: 60vh;
-    /* Centre verticalement entre header et footer */
 }
 
 .error-card {
@@ -546,7 +582,7 @@ footer {
     font-size: 1rem;
 }
 
-/* Bouton Spécifique 404 */
+/* 404 Button */
 .btn-error {
     display: inline-flex;
     align-items: center;
@@ -567,18 +603,8 @@ footer {
     transform: translateY(-2px);
 }
 
-/* Ajustement Mobile */
-@media (max-width: 600px) {
-    .error-card {
-        padding: 30px 20px;
-        border: none;
-        background: transparent;
-        box-shadow: none;
-    }
-}
-
 /* =========================================
-   8. AUTHENTIFICATION (Login/Register)
+   8. AUTHENTICATION (Login/Register)
    ========================================= */
 
 .auth-container {
@@ -612,6 +638,12 @@ footer {
 .btn-full-width {
     width: 100%;
     margin-top: 10px;
+    text-align: center;
+}
+
+.btn-primary,
+.btn-secondary {
+    text-decoration: none !important;
 }
 
 .auth-footer {
@@ -657,7 +689,7 @@ footer {
 }
 
 /* =========================================
-   9. PANIER (Cart)
+   9. CART
    ========================================= */
 
 .btn-danger {
@@ -773,4 +805,58 @@ footer {
 .cart-row-total {
     color: var(--bg-olive-light);
     font-weight: bold;
+}
+
+/* =========================================
+   10. CHECKOUT (Validation)
+   ========================================= */
+
+.checkout-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+.checkout-summary {
+    background-color: #2a2a2a;
+    padding: 30px;
+    border-radius: var(--radius);
+    border: 1px solid #333;
+    height: fit-content;
+}
+
+.checkout-summary h3 {
+    border-bottom: 2px solid var(--bg-olive-dark);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    color: var(--text-white);
+}
+
+.summary-items {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--bg-olive-light);
+    margin-bottom: 30px;
+}
+
+@media (max-width: 900px) {
+    .checkout-container {
+        grid-template-columns: 1fr;
+    }
 }
