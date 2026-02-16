@@ -81,7 +81,6 @@ foreach ($products as $p) {
     }
 }
 
-$pageTitle = $product ? $product['name'] : "Produit introuvable";
 ?>
 
 <div class="container">

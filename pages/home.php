@@ -5,11 +5,39 @@
     </div>
 </section>
 
+<?php
+require_once 'config/database.php';
+
+try {
+    // Section 1
+    $stmt1 = $pdo->query("SELECT * FROM Article ORDER BY publication_date DESC LIMIT 4");
+    $latestArticles = $stmt1->fetchAll();
+    // Section 2
+    $stmt2 = $pdo->query("SELECT * FROM Article ORDER BY publication_date DESC LIMIT 4 OFFSET 4");
+    $nextArticles = $stmt2->fetchAll();
+} catch (PDOException $e) {
+    $latestArticles = [];
+    $nextArticles = [];
+}
+?>
+
 <section class="grid-articles">
-    <div class="article-box"><span>Article 1</span></div>
-    <div class="article-box"><span>Article 2</span></div>
-    <div class="article-box"><span>Article 3</span></div>
-    <div class="article-box"><span>Article 4</span></div>
+    <?php foreach ($latestArticles as $article): ?>
+        <a href="detail?id=<?= $article['id'] ?>" class="article-box-link">
+            <div class="article-box">
+                <div class="article-image">
+                    <?php if (!empty($article['image_link'])): ?>
+                        <img src="<?= htmlspecialchars($article['image_link']) ?>" alt="<?= htmlspecialchars($article['name']) ?>" style="max-width:100%; height:auto;">
+                    <?php else: ?>
+                        <i class="fa-solid fa-image"></i>
+                    <?php endif; ?>
+                </div>
+                <span><?= htmlspecialchars($article['name']) ?></span>
+                <br>
+                <small><?= number_format($article['price'], 2) ?> €</small>
+            </div>
+        </a>
+    <?php endforeach; ?>
 </section>
 
 <section class="banner mid-banner">
@@ -17,10 +45,22 @@
 </section>
 
 <section class="grid-articles">
-    <div class="article-box"><span>Article 5</span></div>
-    <div class="article-box"><span>Article 6</span></div>
-    <div class="article-box"><span>Article 7</span></div>
-    <div class="article-box"><span>Article 8</span></div>
+    <?php foreach ($nextArticles as $article): ?>
+        <a href="detail?id=<?= $article['id'] ?>" class="article-box-link">
+            <div class="article-box">
+                <div class="article-image">
+                    <?php if (!empty($article['image_link'])): ?>
+                        <img src="<?= htmlspecialchars($article['image_link']) ?>" alt="<?= htmlspecialchars($article['name']) ?>" style="max-width:100%; height:auto;">
+                    <?php else: ?>
+                        <i class="fa-solid fa-image"></i>
+                    <?php endif; ?>
+                </div>
+                <span><?= htmlspecialchars($article['name']) ?></span>
+                <br>
+                <small><?= number_format($article['price'], 2) ?> €</small>
+            </div>
+        </a>
+    <?php endforeach; ?>
 </section>
 
 <section class="about-section">
