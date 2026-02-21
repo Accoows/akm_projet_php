@@ -2,97 +2,68 @@
 require_once 'database.php';
 
 try {
-    // 1. Nettoyage
+    // 1. Nettoyage (on repart sur du propre)
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 0;");
     $pdo->exec("TRUNCATE TABLE Stock; TRUNCATE TABLE Cart; TRUNCATE TABLE Invoice; TRUNCATE TABLE Article; TRUNCATE TABLE User;");
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 1;");
 
-    echo "--- Début du seeding ---<br>";
+    echo "--- Initialisation de la base JRSOFT ---<br>";
 
-    // 2. Utilisateurs
-    $users = [];
+    // 2. Création des Utilisateurs
     $password = password_hash('password123', PASSWORD_BCRYPT);
     
-    // Admin
-    $users[] = ['admin', $password, 'admin@jrsoft.fr', 5000.00, 'assets/images/user_admin.png', 'admin'];
+    // Insertion Admin (Compte test par défaut)
+    $pdo->prepare("INSERT INTO User (username, password, email, balance, profile_picture, role) VALUES (?, ?, ?, ?, ?, ?)")
+        ->execute(['Admin_Tactical', $password, 'admin@jrsoft.fr', 9999.99, 'assets/images/logo.png', 'admin']);
     
-    // Clients
-    $firstNames = ['Arthur', 'Thomas', 'Lucas', 'Maxime', 'Julien', 'Nicolas', 'Pierre', 'Paul', 'Louis', 'Antoine'];
-    $lastNames = ['Dupont', 'Durand', 'Martin', 'Bernard', 'Petit', 'Robert', 'Richard', 'Simon', 'Michel', 'Lefebvre'];
-    
-    for ($i = 0; $i < 20; $i++) {
-        $fn = $firstNames[array_rand($firstNames)];
-        $ln = $lastNames[array_rand($lastNames)];
-        $username = $fn . $ln . rand(10, 99);
-        $email = strtolower($fn . '.' . $ln . rand(1, 100) . '@mail.fr');
-        $users[] = [$username, $password, $email, rand(0, 500) + (rand(0, 99) / 100), 'assets/images/placeholder_user.png', 'user'];
-    }
+    $adminId = $pdo->lastInsertId();
 
+    // Insertion de 10 clients aléatoires
+    $firstNames = ['Arthur', 'Thomas', 'Lucas', 'Maxime', 'Julien'];
+    $lastNames = ['Dupont', 'Durand', 'Martin', 'Bernard', 'Petit'];
+    
     $stmtUser = $pdo->prepare("INSERT INTO User (username, password, email, balance, profile_picture, role) VALUES (?, ?, ?, ?, ?, ?)");
-    foreach ($users as $u) {
-        $stmtUser->execute($u);
+    for ($i = 0; $i < 10; $i++) {
+        $username = $firstNames[array_rand($firstNames)] . rand(10, 99);
+        $email = strtolower($username . "@mail.fr");
+        $stmtUser->execute([$username, $password, $email, rand(50, 500), 'assets/images/logo_atcfm.png', 'user']);
     }
-    echo count($users) . " Utilisateurs créés.<br>";
-    
-    // Récupérer un ID admin pour les articles
-    $stmtAdmin = $pdo->query("SELECT id FROM User WHERE role = 'admin' LIMIT 1");
-    $adminId = $stmtAdmin->fetchColumn();
 
-    // 3. Articles (Inspirés de jrsoft.fr - Airsoft & Tactique)
-    $adjectives = ['Tactique', 'Renforcé', 'Mil-Spec', 'Camo', 'Noir', 'Tan', 'OD Green', 'Léger', 'Lourd', 'Modulable'];
-    $nouns = [
-        'Gilet Porte-Plaques', 'Casque Ballistique', 'Gants de Combat', 'Ceinturon Cobra', 
-        'Sac à Dos Assault', 'Poche Radio', 'Holster Rigide', 'Sangle 2 Points', 
-        'Genouillères', 'Masque de Protection', 'Bottes d\'Intervention', 'Veste Softshell',
-        'Pantalon G3', 'Chemise de Combat', 'Lampe Tactique', 'Point Rouge', 'Lunette de Visée'
+    // 3. Articles basés sur TES fichiers (image_97b2dc.jpg)
+    $realItems = [
+        ['Gilet Porte-Plaques Lourd', 'gilet1.jpg', 'Gilet tactique haute résistance avec système MOLLE et compartiments plaques.', 129.90],
+        ['Bottes Commando Desert', 'bottes1.jpg', 'Bottes légères et respirantes pour opérations en milieu aride.', 85.00],
+        ['Casque FAST MH Noir', 'hat1.jpg', 'Casque tactique avec rails latéraux et montage NVG frontal.', 55.50],
+        ['Pistolet Gaz G17 Blowback', 'pistolgaz.jpg', 'Réplique de poing ultra-réaliste avec culasse mobile.', 145.00],
+        ['Gants de Combat Coqués', 'gants1.jpg', 'Gants renforcés offrant une protection optimale des phalanges.', 29.99],
+        ['Viseur Point Rouge Micro', 'viseur.jpg', 'Optique de visée rapide pour acquisition de cible instantanée.', 42.00],
+        ['Holster Rigide Universel', 'holster.jpg', 'Holster en polymère avec système de rétention active.', 35.00],
+        ['Masque Balistique Grillagé', 'masque1.jpg', 'Protection faciale indispensable contre les impacts.', 19.50],
+        ['Couteau d\'entraînement', 'couteau1.jpg', 'Réplique factice en caoutchouc pour l\'entraînement tactique.', 15.00],
+        ['Sac à Dos Assault 30L', 'bp1.jpg', 'Sac compact avec de nombreux compartiments pour vos missions.', 49.00],
+        ['Carabine AEG M4 RIS', 'carabine.jpg', 'Fusil d\'assaut électrique polyvalent avec garde-main rail.', 289.00],
+        ['Pack Billes 0.25g (3000pcs)', 'bille1.jpg', 'Billes de haute précision polies pour un groupement parfait.', 12.90]
     ];
-    
-    $descriptions = [
-        "Conçu pour les opérations les plus exigeantes. Matériaux haute résistance.",
-        "Léger et durable, idéal pour l'airsoft et le tir sportif.",
-        "Protection optimale sans sacrifier la mobilité.",
-        "Système MOLLE complet pour une personnalisation totale.",
-        "Résistant à l'eau et à l'abrasion. Testé sur le terrain.",
-        "Ergonomie étudiée pour un confort longue durée.",
-        "Compatible avec la plupart des standards du marché."
-    ];
-
-    $imageLinks = [
-        'assets/images/bg1.png',
-        'assets/images/bg2.png',
-    ];
-
-    $articles = [];
-    for ($i = 0; $i < 50; $i++) {
-        $name = $nouns[array_rand($nouns)] . ' ' . $adjectives[array_rand($adjectives)];
-        if (rand(0, 1)) $name .= ' V' . rand(1, 5);
-        
-        $desc = $descriptions[array_rand($descriptions)] . " " . $descriptions[array_rand($descriptions)];
-        $price = rand(15, 300) + (rand(0, 99) / 100);
-        $image = $imageLinks[array_rand($imageLinks)];
-        
-        $articles[] = [$name, $desc, $price, $adminId, $image];
-    }
 
     $stmtArt = $pdo->prepare("INSERT INTO Article (name, description, price, author_id, image_link, publication_date) VALUES (?, ?, ?, ?, ?, NOW() - INTERVAL ? DAY)");
     $stmtStock = $pdo->prepare("INSERT INTO Stock (article_id, quantity) VALUES (?, ?)");
 
-    foreach ($articles as $a) {
-        // Ajout d'un intervalle aléatoire pour la date
-        $daysAgo = rand(0, 30);
-        $params = $a;
-        $params[] = $daysAgo; // Ajout du paramètre pour INTERVAL
-        
-        $stmtArt->execute($params);
-        $articleId = $pdo->lastInsertId();
-        
-        // Stock aléatoire
-        $stmtStock->execute([$articleId, rand(0, 100)]);
+    // Insertion des articles réels
+    foreach ($realItems as $item) {
+        $stmtArt->execute([$item[0], $item[2], $item[3], $adminId, 'assets/images/' . $item[1], rand(0, 10)]);
+        $stmtStock->execute([$pdo->lastInsertId(), rand(5, 50)]);
     }
-    echo count($articles) . " Articles et Stocks générés.<br>";
 
-    echo "--- Seeding terminé avec succès ! ---";
+    // On complète à 50 articles avec des variantes (Génération procédurale)
+    for ($i = 0; $i < 38; $i++) {
+        $name = "Équipement Modulable V" . rand(1, 9);
+        $desc = "Produit tactique complémentaire testé sur le terrain. Robustesse assurée.";
+        $stmtArt->execute([$name, $desc, rand(20, 200), $adminId, 'assets/images/bg1.png', rand(10, 30)]);
+        $stmtStock->execute([$pdo->lastInsertId(), rand(0, 100)]);
+    }
+
+    echo "--- Seeding terminé : 50 Articles en stock ! ---";
 
 } catch (Exception $e) {
-    die("Erreur lors du seeding : " . $e->getMessage());
+    die("Erreur Fatale Seeder : " . $e->getMessage());
 }
