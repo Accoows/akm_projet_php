@@ -1,26 +1,3 @@
-<?php
-// pages/admin/index.php
-require_once 'config/database.php';
-
-// Check admin role
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
-    header('Location: ./');
-    exit();
-}
-
-$userCount = 0;
-$articleCount = 0;
-$orderCount = 0;
-
-try {
-    $userCount = $pdo->query("SELECT COUNT(*) FROM User")->fetchColumn();
-    $articleCount = $pdo->query("SELECT COUNT(*) FROM Article")->fetchColumn();
-    $orderCount = $pdo->query("SELECT COUNT(*) FROM Invoice")->fetchColumn();
-} catch (PDOException $e) {
-    // Silent error
-}
-?>
-
 <div class="container">
     <h2 class="section-title">
         <i class="fa-solid fa-gauge"></i> Tableau de bord Admin

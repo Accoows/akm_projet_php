@@ -1,17 +1,3 @@
-<?php
-// pages/articles.php
-$pageTitle = "Catalogue - Équipement Tactique";
-
-require_once 'config/database.php';
-
-try {
-    $stmt = $pdo->query("SELECT * FROM article");
-    $products = $stmt->fetchAll();
-} catch (PDOException $e) {
-    $products = [];
-}
-?>
-
 <div class="container">
     <h2 class="section-title">
         <i class="fa-solid fa-layer-group"></i> Catalogue Complet
