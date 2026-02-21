@@ -242,12 +242,6 @@ nav a:hover {
     cursor: pointer;
 }
 
-.article-box-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
 /* Product Card (Catalogue) */
 .product-card {
     background-color: #2a2a2a;

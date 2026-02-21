@@ -1,4 +1,7 @@
 <?php
+// pages/articles.php
+$pageTitle = "Catalogue - Équipement Tactique";
+
 require_once 'config/database.php';
 
 try {
@@ -30,6 +33,7 @@ try {
                     </h3>
                     <p class="article-category">
                         <!-- Category logic to be implemented or removed if not in DB -->
+                        <!-- Assuming description for now or just generic -->
                          <?= htmlspecialchars(substr($product['description'] ?? '', 0, 50)) ?>...
                     </p>
                     <div class="article-price">
