@@ -1,9 +1,48 @@
 <?php
+require_once 'config/database.php';
+
 $error = null;
 $success = null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_btn'])) {
-    // Registration logic will be implemented here
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+
+    if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
+        $error = "Veuillez remplir tous les champs.";
+    } elseif ($password !== $confirm_password) {
+        $error = "Les mots de passe ne correspondent pas.";
+    } else {
+        try {
+            // Vérifier si l'utilisateur existe déjà
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM User WHERE username = ? OR email = ?");
+            $stmt->execute([$username, $email]);
+            $count = $stmt->fetchColumn();
+
+            if ($count > 0) {
+                $error = "Ce nom d'utilisateur ou cet email est déjà utilisé.";
+            } else {
+                // Création du compte
+                $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+                // Image par défaut et solde de bienvenue (0 ou 100 ?)
+                $defaultAvatar = 'assets/images/placeholder_user.png';
+                $initialBalance = 0.00;
+
+                $stmtInsert = $pdo->prepare("INSERT INTO User (username, password, email, balance, profile_picture, role) VALUES (?, ?, ?, ?, ?, 'user')");
+                if ($stmtInsert->execute([$username, $hashedPassword, $email, $initialBalance, $defaultAvatar])) {
+                    $success = "Compte créé avec succès ! Vous pouvez maintenant vous connecter.";
+                    // Optionnel : Redirection automatique après quelques secondes
+                    echo "<script>setTimeout(function(){ window.location.replace('login'); }, 2000);</script>";
+                } else {
+                    $error = "Erreur lors de l'inscription.";
+                }
+            }
+        } catch (PDOException $e) {
+            $error = "Erreur base de données : " . $e->getMessage();
+        }
+    }
 }
 ?>
 
@@ -31,12 +70,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_btn'])) {
 
             <div class="form-group">
                 <label for="username">Nom d'utilisateur</label>
-                <input type="text" id="username" name="username" required placeholder="Votre pseudo tactique">
+                <input type="text" id="username" name="username" required placeholder="Votre pseudo tactique" value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>">
             </div>
 
             <div class="form-group">
                 <label for="email">Adresse Email</label>
-                <input type="email" id="email" name="email" required placeholder="soldat@exemple.com">
+                <input type="email" id="email" name="email" required placeholder="soldat@exemple.com" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>">
             </div>
 
             <div class="form-group">
@@ -64,5 +103,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_btn'])) {
             </p>
         </div>
     </div>
-
 </div>

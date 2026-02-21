@@ -5,11 +5,32 @@
     </div>
 </section>
 
+<?php
+require_once 'config/database.php';
+
+try {
+    $stmt = $pdo->query("SELECT * FROM article ORDER BY publication_date DESC LIMIT 4");
+    $latestArticles = $stmt->fetchAll();
+} catch (PDOException $e) {
+    $latestArticles = [];
+}
+?>
+
 <section class="grid-articles">
-    <div class="article-box"><span>Article 1</span></div>
-    <div class="article-box"><span>Article 2</span></div>
-    <div class="article-box"><span>Article 3</span></div>
-    <div class="article-box"><span>Article 4</span></div>
+    <?php foreach ($latestArticles as $article): ?>
+        <div class="article-box">
+            <div class="article-image">
+                <?php if (!empty($article['image_link'])): ?>
+                    <img src="<?= htmlspecialchars($article['image_link']) ?>" alt="<?= htmlspecialchars($article['name']) ?>" style="max-width:100%; height:auto;">
+                <?php else: ?>
+                    <i class="fa-solid fa-image"></i>
+                <?php endif; ?>
+            </div>
+            <span><?= htmlspecialchars($article['name']) ?></span>
+            <br>
+            <small><?= number_format($article['price'], 2) ?> €</small>
+        </div>
+    <?php endforeach; ?>
 </section>
 
 <section class="banner mid-banner">

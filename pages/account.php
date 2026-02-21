@@ -1,94 +1,102 @@
-<div class="profile-header">
-    <div class="profile-avatar">
-        <i class="fa-solid fa-user-secret"></i>
-    </div>
-    <div class="profile-info">
-        <h1>John Doe</h1> <p class="email">john.doe@exemple.com</p>
-        
-        <div class="badges">
-            <span class="badge badge-role">Utilisateur</span>
-            <span class="badge badge-solde">Solde : 150.00 €</span>
-        </div>
-    </div>
-    <div class="profile-actions">
-        <button class="btn-primary"><i class="fa-solid fa-wallet"></i> Ajouter Fonds</button>
-    </div>
-</div>
+<?php
+// pages/account.php
+require_once 'config/database.php';
 
-<h2 class="section-title"><i class="fa-solid fa-box-open"></i> Mes Articles en vente</h2>
+if (!isset($_SESSION['user'])) {
+    echo "<script>window.location.replace('login');</script>";
+    exit();
+}
 
-<div class="grid-articles">
-    <div class="article-box">
-        <div style="text-align:center;">
-            <i class="fa-solid fa-person-rifle" style="font-size: 2rem; color: #555;"></i>
-            <p style="margin-top:10px;">Gilet Tactique</p>
-            <small style="color: var(--bg-olive-light);">45.00 €</small>
-        </div>
-    </div>
+$userId = $_SESSION['user']['id'];
+$user = [];
+$invoices = [];
 
-    <div class="article-box">
-        <div style="text-align:center;">
-            <i class="fa-solid fa-binoculars" style="font-size: 2rem; color: #555;"></i>
-            <p style="margin-top:10px;">Jumelles X200</p>
-            <small style="color: var(--bg-olive-light);">120.00 €</small>
-        </div>
-    </div>
+try {
+    // 1. Récupérer infos utilisateur à jour
+    $stmtUser = $pdo->prepare("SELECT * FROM User WHERE id = ?");
+    $stmtUser->execute([$userId]);
+    $user = $stmtUser->fetch();
     
-    <div class="article-box" style="border-style: dashed; opacity: 0.5;">
-        <div style="text-align:center;">
-            <i class="fa-solid fa-plus" style="font-size: 2rem;"></i>
-            <p>Vendre un item</p>
+    // Mettre à jour la session si besoin
+    if ($user) {
+        $_SESSION['user']['balance'] = $user['balance']; // On suppose que la clé existe ou on l'ajoute
+    }
+
+    // 2. Récupérer l'historique des commandes
+    $stmtInv = $pdo->prepare("SELECT * FROM Invoice WHERE user_id = ? ORDER BY transaction_date DESC");
+    $stmtInv->execute([$userId]);
+    $invoices = $stmtInv->fetchAll();
+
+} catch (PDOException $e) {
+    // Silent error
+}
+?>
+
+<div class="container">
+    <h2 class="section-title">
+        <i class="fa-solid fa-user-shield"></i> Mon Espace Personnel
+    </h2>
+
+    <div class="account-grid">
+        <!-- Profil -->
+        <div class="account-card profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                   <?php 
+                        $avatar = !empty($user['profile_picture']) ? $user['profile_picture'] : 'assets/images/placeholder_user.png';
+                   ?>
+                   <img src="<?= htmlspecialchars($avatar) ?>" alt="Avatar">
+                </div>
+                <h3><?= htmlspecialchars($user['username']) ?></h3>
+                <span class="user-role"><?= htmlspecialchars($user['role']) ?></span>
+            </div>
+            
+            <div class="profile-details">
+                <div class="detail-row">
+                    <span class="label">Email :</span>
+                    <span class="value"><?= htmlspecialchars($user['email']) ?></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Solde :</span>
+                    <span class="value balance"><?= number_format($user['balance'], 2) ?> €</span>
+                </div>
+                <!-- Bouton Recharger (fictif pour l'instant) -->
+                <button class="btn-secondary btn-small" onclick="alert('Fonctionnalité de rechargement bientôt disponible !')">
+                    <i class="fa-solid fa-wallet"></i> Recharger
+                </button>
+            </div>
+        </div>
+
+        <!-- Historique Commandes -->
+        <div class="account-card history-card">
+            <h3><i class="fa-solid fa-clock-rotate-left"></i> Historique des commandes</h3>
+            
+            <?php if (empty($invoices)): ?>
+                <p>Aucune commande effectuée pour le moment.</p>
+            <?php else: ?>
+                <div class="table-scroll">
+                    <table class="table-dark">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Montant</th>
+                                <th>Lieu</th>
+                                <th>Ref</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($invoices as $inv): ?>
+                                <tr>
+                                    <td><?= date('d/m/Y H:i', strtotime($inv['transaction_date'])) ?></td>
+                                    <td><?= number_format($inv['amount'], 2) ?> €</td>
+                                    <td><?= htmlspecialchars($inv['billing_city']) ?></td>
+                                    <td>#<?= $inv['id'] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
-
-<h2 class="section-title"><i class="fa-solid fa-gear"></i> Modifier mes informations</h2>
-
-<div class="dark-form">
-    <form action="" method="POST">
-        <div class="form-group">
-            <label>Nom d'utilisateur</label>
-            <input type="text" value="John Doe" disabled style="opacity: 0.5; cursor: not-allowed;">
-            <small style="color: #666;">Le nom d'utilisateur n'est pas modifiable.</small>
-        </div>
-
-        <div class="form-group">
-            <label>Adresse Email</label>
-            <input type="email" value="john.doe@exemple.com">
-        </div>
-
-        <div class="form-group">
-            <label>Nouveau mot de passe (Laisser vide pour ne pas changer)</label>
-            <input type="password" placeholder="********">
-        </div>
-        
-        <button type="submit" class="btn-primary">Enregistrer les modifications</button>
-    </form>
-</div>
-
-<h2 class="section-title"><i class="fa-solid fa-file-invoice"></i> Mes Factures</h2>
-
-<table class="table-dark">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Article</th>
-            <th>Montant</th>
-            <th>PDF</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>12/02/2025</td>
-            <td>Sac à dos militaire</td>
-            <td>89.99 €</td>
-            <td><a href="#" style="color: var(--bg-olive-light);"><i class="fa-solid fa-download"></i></a></td>
-        </tr>
-        <tr>
-            <td>10/01/2025</td>
-            <td>Lampe Torche UV</td>
-            <td>25.50 €</td>
-            <td><a href="#" style="color: var(--bg-olive-light);"><i class="fa-solid fa-download"></i></a></td>
-        </tr>
-    </tbody>
-</table>
