@@ -1,42 +1,3 @@
-<?php
-require_once 'config/database.php';
-
-$error = null;
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_btn'])) {
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
-
-    if (!empty($username) && !empty($password)) {
-        try {
-            $stmt = $pdo->prepare("SELECT * FROM User WHERE username = ? LIMIT 1");
-            $stmt->execute([$username]);
-            $user = $stmt->fetch();
-
-            if ($user && password_verify($password, $user['password'])) {
-                // Succès
-                $_SESSION['user'] = [
-                    'id' => $user['id'],
-                    'username' => $user['username'],
-                    'email' => $user['email'],
-                    'role' => $user['role'],
-                    'avatar' => $user['profile_picture']
-                ];
-                // Redirection JS car les headers sont déjà envoyés par index.php
-                echo "<script>window.location.replace('account');</script>";
-                exit();
-            } else {
-                $error = "Nom d'utilisateur ou mot de passe incorrect.";
-            }
-        } catch (PDOException $e) {
-            $error = "Erreur de connexion.";
-        }
-    } else {
-        $error = "Veuillez remplir tous les champs.";
-    }
-}
-?>
-
 <div class="auth-container">
     <h2 class="section-title auth-title">
         <i class="fa-solid fa-user-lock"></i> Connexion
@@ -54,7 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_btn'])) {
 
             <div class="form-group">
                 <label for="username">Nom d'utilisateur</label>
-                <input type="text" id="username" name="username" required placeholder="Votre pseudo tactique" value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>">
+                <input type="text" id="username" name="username" required placeholder="Votre pseudo tactique"
+                    value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>">
             </div>
 
             <div class="form-group">

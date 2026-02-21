@@ -1,15 +1,21 @@
 <?php
 session_start();
-
+require_once 'config/database.php';
+require_once 'includes/functions.php';
+require_once 'includes/RequestHandler.php';
 
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
 if (!preg_match('/^[a-z0-9_-]+$/i', $page)) {
     $page = '404';
 }
-if ($page === 'logout') {
-    include 'pages/logout.php';
-    exit();
+
+// Global Role/Access check (Middleware)
+RequestHandler::handle($page);
+
+$controller_file = "controller/c_{$page}.php";
+if (file_exists($controller_file)) {
+    include $controller_file;
 }
 
 include_once 'includes/header.php';

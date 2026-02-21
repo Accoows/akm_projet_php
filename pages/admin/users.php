@@ -1,14 +1,3 @@
-<?php
-// pages/admin/users.php
-require_once 'config/database.php';
-
-$users = [];
-try {
-    $stmt = $pdo->query("SELECT * FROM User ORDER BY id DESC");
-    $users = $stmt->fetchAll();
-} catch (PDOException $e) { $users = []; }
-?>
-
 <div class="container">
     <div class="admin-header">
         <h2 class="section-title"><i class="fa-solid fa-users-gear"></i> Gestion des Utilisateurs</h2>
@@ -40,7 +29,9 @@ try {
                         </td>
                         <td><?= number_format($u['balance'], 2) ?> €</td>
                         <td>
-                            <button class="btn-small btn-danger" onclick="alert('Suppression désactivée pour la démo')"><i class="fa-solid fa-trash"></i></button>
+                            <a href="admin&sub=users&action=delete&id=<?= $u['id'] ?>" class="btn-small btn-danger"
+                                onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');"><i
+                                    class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -48,9 +39,3 @@ try {
         </table>
     </div>
 </div>
-
-<style>
-.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.badge-admin { background-color: #e74c3c; color: white; padding: 2px 5px; border-radius: 4px; font-size: 0.8rem; }
-.badge-user { background-color: #3498db; color: white; padding: 2px 5px; border-radius: 4px; font-size: 0.8rem; }
-</style>

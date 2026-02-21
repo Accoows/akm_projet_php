@@ -1,14 +1,3 @@
-<?php
-// pages/admin/articles.php
-require_once 'config/database.php';
-
-$articles = [];
-try {
-    $stmt = $pdo->query("SELECT a.*, s.quantity FROM Article a LEFT JOIN Stock s ON a.id = s.article_id ORDER BY a.id DESC");
-    $articles = $stmt->fetchAll();
-} catch (PDOException $e) { $articles = []; }
-?>
-
 <div class="container">
     <div class="admin-header">
         <h2 class="section-title"><i class="fa-solid fa-boxes-stacked"></i> Gestion des Articles</h2>
@@ -33,7 +22,7 @@ try {
                         <td><?= $a['id'] ?></td>
                         <td>
                             <?php if (!empty($a['image_link'])): ?>
-                                <img src="<?= htmlspecialchars($a['image_link']) ?>" width="40" height="40" style="object-fit:cover;">
+                                <img src="<?= htmlspecialchars($a['image_link']) ?>" class="admin-article-img">
                             <?php else: ?>
                                 <i class="fa-solid fa-image"></i>
                             <?php endif; ?>
@@ -42,7 +31,9 @@ try {
                         <td><?= number_format($a['price'], 2) ?> €</td>
                         <td><?= $a['quantity'] ?? 0 ?></td>
                         <td>
-                           <button class="btn-small btn-danger" onclick="alert('Suppression désactivée pour la démo')"><i class="fa-solid fa-trash"></i></button>
+                            <a href="admin&sub=articles&action=delete&id=<?= $a['id'] ?>" class="btn-small btn-danger"
+                                onclick="return confirm('Voulez-vous vraiment supprimer cet article ?');"><i
+                                    class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
