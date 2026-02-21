@@ -16,7 +16,7 @@ try {
     $stmtUser = $pdo->prepare("SELECT * FROM User WHERE id = ?");
     $stmtUser->execute([$userId]);
     $user = $stmtUser->fetch();
-    
+
     // Mettre à jour la session si besoin
     if ($user) {
         $_SESSION['user']['balance'] = $user['balance']; // On suppose que la clé existe ou on l'ajoute
@@ -42,15 +42,15 @@ try {
         <div class="account-card profile-card">
             <div class="profile-header">
                 <div class="profile-avatar">
-                   <?php 
-                        $avatar = !empty($user['profile_picture']) ? $user['profile_picture'] : 'assets/images/placeholder_user.png';
-                   ?>
-                   <img src="<?= htmlspecialchars($avatar) ?>" alt="Avatar">
+                    <?php
+                    $avatar = !empty($user['profile_picture']) ? $user['profile_picture'] : 'assets/images/placeholder_user.png';
+                    ?>
+                    <img src="<?= htmlspecialchars($avatar) ?>" alt="Avatar">
                 </div>
                 <h3><?= htmlspecialchars($user['username']) ?></h3>
                 <span class="user-role"><?= htmlspecialchars($user['role']) ?></span>
             </div>
-            
+
             <div class="profile-details">
                 <div class="detail-row">
                     <span class="label">Email :</span>
@@ -61,7 +61,8 @@ try {
                     <span class="value balance"><?= number_format($user['balance'], 2) ?> €</span>
                 </div>
                 <!-- Bouton Recharger (fictif pour l'instant) -->
-                <button class="btn-secondary btn-small" onclick="alert('Fonctionnalité de rechargement bientôt disponible !')">
+                <button class="btn-secondary btn-small"
+                    onclick="alert('Fonctionnalité de rechargement bientôt disponible !')">
                     <i class="fa-solid fa-wallet"></i> Recharger
                 </button>
             </div>
@@ -70,7 +71,7 @@ try {
         <!-- Historique Commandes -->
         <div class="account-card history-card">
             <h3><i class="fa-solid fa-clock-rotate-left"></i> Historique des commandes</h3>
-            
+
             <?php if (empty($invoices)): ?>
                 <p>Aucune commande effectuée pour le moment.</p>
             <?php else: ?>

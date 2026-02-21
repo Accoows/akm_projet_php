@@ -6,7 +6,9 @@ $articles = [];
 try {
     $stmt = $pdo->query("SELECT a.*, s.quantity FROM Article a LEFT JOIN Stock s ON a.id = s.article_id ORDER BY a.id DESC");
     $articles = $stmt->fetchAll();
-} catch (PDOException $e) { $articles = []; }
+} catch (PDOException $e) {
+    $articles = [];
+}
 ?>
 
 <div class="container">
@@ -33,7 +35,7 @@ try {
                         <td><?= $a['id'] ?></td>
                         <td>
                             <?php if (!empty($a['image_link'])): ?>
-                                <img src="<?= htmlspecialchars($a['image_link']) ?>" width="40" height="40" style="object-fit:cover;">
+                                <img src="<?= htmlspecialchars($a['image_link']) ?>" class="admin-article-img">
                             <?php else: ?>
                                 <i class="fa-solid fa-image"></i>
                             <?php endif; ?>
@@ -42,7 +44,8 @@ try {
                         <td><?= number_format($a['price'], 2) ?> €</td>
                         <td><?= $a['quantity'] ?? 0 ?></td>
                         <td>
-                           <button class="btn-small btn-danger" onclick="alert('Suppression désactivée pour la démo')"><i class="fa-solid fa-trash"></i></button>
+                            <button class="btn-small btn-danger" onclick="alert('Suppression désactivée pour la démo')"><i
+                                    class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 <?php endforeach; ?>

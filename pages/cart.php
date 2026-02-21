@@ -59,7 +59,7 @@ try {
     ");
     $stmt->execute([$userId]);
     $cartItems = $stmt->fetchAll();
-    
+
     foreach ($cartItems as $item) {
         $total += $item['price'];
     }
@@ -85,7 +85,8 @@ try {
                     <div class="cart-item">
                         <div class="item-image">
                             <?php if (!empty($item['image_link'])): ?>
-                                <img src="<?= htmlspecialchars($item['image_link']) ?>" alt="<?= htmlspecialchars($item['name']) ?>">
+                                <img src="<?= htmlspecialchars($item['image_link']) ?>"
+                                    alt="<?= htmlspecialchars($item['name']) ?>">
                             <?php else: ?>
                                 <i class="fa-solid fa-image"></i>
                             <?php endif; ?>

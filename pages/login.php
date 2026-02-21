@@ -54,7 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_btn'])) {
 
             <div class="form-group">
                 <label for="username">Nom d'utilisateur</label>
-                <input type="text" id="username" name="username" required placeholder="Votre pseudo tactique" value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>">
+                <input type="text" id="username" name="username" required placeholder="Votre pseudo tactique"
+                    value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>">
             </div>
 
             <div class="form-group">

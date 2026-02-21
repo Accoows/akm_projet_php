@@ -63,7 +63,7 @@ if (substr($scriptPath, -1) !== '/') {
                         <li><a href="cart"><i class="fa-solid fa-cart-shopping"></i> Panier</a></li>
 
                         <?php if ($isAdmin): ?>
-                            <li><a href="admin" style="color:#e74c3c;">Admin</a></li>
+                            <li><a href="admin" class="nav-link-admin">Admin</a></li>
                         <?php endif; ?>
 
                         <li><a href="account" class="btn-nav">Mon Compte</a></li>

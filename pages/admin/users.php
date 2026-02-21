@@ -6,7 +6,9 @@ $users = [];
 try {
     $stmt = $pdo->query("SELECT * FROM User ORDER BY id DESC");
     $users = $stmt->fetchAll();
-} catch (PDOException $e) { $users = []; }
+} catch (PDOException $e) {
+    $users = [];
+}
 ?>
 
 <div class="container">
@@ -40,7 +42,8 @@ try {
                         </td>
                         <td><?= number_format($u['balance'], 2) ?> €</td>
                         <td>
-                            <button class="btn-small btn-danger" onclick="alert('Suppression désactivée pour la démo')"><i class="fa-solid fa-trash"></i></button>
+                            <button class="btn-small btn-danger" onclick="alert('Suppression désactivée pour la démo')"><i
+                                    class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -48,9 +51,3 @@ try {
         </table>
     </div>
 </div>
-
-<style>
-.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.badge-admin { background-color: #e74c3c; color: white; padding: 2px 5px; border-radius: 4px; font-size: 0.8rem; }
-.badge-user { background-color: #3498db; color: white; padding: 2px 5px; border-radius: 4px; font-size: 0.8rem; }
-</style>

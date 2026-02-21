@@ -51,45 +51,8 @@ try {
                 <h3>Commandes</h3>
                 <span class="stat-number"><?= $orderCount ?></span>
             </div>
-             <!-- Pas de page dédiée pour l'instant -->
-             <span class="stat-link">Voir détails</span>
+            <!-- Pas de page dédiée pour l'instant -->
+            <span class="stat-link">Voir détails</span>
         </div>
     </div>
 </div>
-
-<style>
-/* Simple CSS for admin dashboard added inline or could be in CSS file */
-.admin-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-.stat-card {
-    background-color: #2c2c2c;
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    border: 1px solid #444;
-}
-.stat-card i {
-    font-size: 3rem;
-    color: var(--bg-olive-light, #8d9e78);
-    margin-bottom: 10px;
-}
-.stat-number {
-    font-size: 2rem;
-    font-weight: bold;
-    display: block;
-    margin: 10px 0;
-}
-.stat-link {
-    margin-top: auto;
-    color: #fff;
-    text-decoration: underline;
-    cursor: pointer;
-}
-</style>

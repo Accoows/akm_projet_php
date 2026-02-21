@@ -25,7 +25,7 @@ $pageTitle = $product ? $product['name'] : "Produit introuvable";
         <div class="product-detail-container">
             <div class="detail-image">
                 <?php if (!empty($product['image_link'])): ?>
-                    <img src="<?= htmlspecialchars($product['image_link']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" style="max-width:100%; height:auto;">
+                    <img src="<?= htmlspecialchars($product['image_link']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                 <?php else: ?>
                     <i class="fa-solid fa-image"></i>
                 <?php endif; ?>
@@ -34,8 +34,7 @@ $pageTitle = $product ? $product['name'] : "Produit introuvable";
                 <h2 class="detail-title">
                     <?= htmlspecialchars($product['name']) ?>
                 </h2>
-                <!-- Category removed as it's not in DB schema -->
-                
+
                 <div class="detail-price">
                     <?= number_format($product['price'], 2) ?> €
                 </div>
@@ -45,14 +44,14 @@ $pageTitle = $product ? $product['name'] : "Produit introuvable";
                 </p>
 
                 <div class="detail-actions">
-                     <!-- Form to add to cart (logic to be implemented later or via link) -->
-                     <form action="cart" method="POST" style="display:inline;">
+                    <!-- Form to add to cart (logic to be implemented later or via link) -->
+                    <form action="cart" method="POST" class="form-inline">
                         <input type="hidden" name="id" value="<?= $product['id'] ?>">
                         <button type="submit" class="btn-primary" name="add_to_cart">
                             <i class="fa-solid fa-cart-plus"></i> Ajouter au panier
                         </button>
                     </form>
-                    
+
                     <a href="articles" class="btn-secondary">
                         <i class="fa-solid fa-arrow-left"></i> Retour au catalogue
                     </a>

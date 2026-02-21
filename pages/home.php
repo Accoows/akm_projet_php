@@ -21,7 +21,7 @@ try {
         <div class="article-box">
             <div class="article-image">
                 <?php if (!empty($article['image_link'])): ?>
-                    <img src="<?= htmlspecialchars($article['image_link']) ?>" alt="<?= htmlspecialchars($article['name']) ?>" style="max-width:100%; height:auto;">
+                    <img src="<?= htmlspecialchars($article['image_link']) ?>" alt="<?= htmlspecialchars($article['name']) ?>">
                 <?php else: ?>
                     <i class="fa-solid fa-image"></i>
                 <?php endif; ?>
@@ -47,7 +47,8 @@ try {
 <section class="about-section">
     <div class="about-text">
         <h3>Notre Engagement</h3>
-        <p>Depuis des années, nous nous efforçons de proposer des solutions innovantes pour nos clients. Notre expertise et notre passion nous permettent de rester à la pointe de l'industrie.</p>
+        <p>Depuis des années, nous nous efforçons de proposer des solutions innovantes pour nos clients. Notre expertise
+            et notre passion nous permettent de rester à la pointe de l'industrie.</p>
     </div>
     <div class="about-image">
         <div class="img-placeholder">IMAGE ENTREPRISE</div>

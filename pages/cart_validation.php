@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = trim($_POST['address']);
     $city = trim($_POST['city']);
     $zip = trim($_POST['zip']);
-    
+
     if (empty($cartItems)) {
         $error = "Votre panier est vide.";
     } elseif ($total > $_SESSION['user']['balance']) { // (Si on avait mis à jour la session avec le solde réel)
@@ -43,41 +43,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmtBalance = $pdo->prepare("SELECT balance FROM User WHERE id = ?");
         $stmtBalance->execute([$userId]);
         $currentBalance = $stmtBalance->fetchColumn();
-        
+
         if ($total > $currentBalance) {
-             $error = "Solde insuffisant. Votre solde actuel est de " . number_format($currentBalance, 2) . " €.";
+            $error = "Solde insuffisant. Votre solde actuel est de " . number_format($currentBalance, 2) . " €.";
         }
     }
-    
+
     // Si pas d'erreur de solde (ou vérification faite ci-dessus), on procède
     if (!$error && !empty($address) && !empty($city) && !empty($zip)) {
         try {
             $pdo->beginTransaction();
-            
+
             // 1. Débiter l'utilisateur
             $stmtUpdateUser = $pdo->prepare("UPDATE User SET balance = balance - ? WHERE id = ?");
             $stmtUpdateUser->execute([$total, $userId]);
-            
+
             // 2. Créer la facture
             $fullAddress = $address . ', ' . $zip . ' ' . $city;
             $stmtInvoice = $pdo->prepare("INSERT INTO Invoice (user_id, amount, billing_address, billing_city, billing_zip, transaction_date) VALUES (?, ?, ?, ?, ?, NOW())");
             $stmtInvoice->execute([$userId, $total, $address, $city, $zip]);
-            
+
             // 3. Mettre à jour les stocks
             $stmtStock = $pdo->prepare("UPDATE Stock SET quantity = quantity - 1 WHERE article_id = ? AND quantity > 0");
             foreach ($cartItems as $item) {
                 $stmtStock->execute([$item['id']]);
             }
-            
+
             // 4. Vider le panier
             $stmtClear = $pdo->prepare("DELETE FROM Cart WHERE user_id = ?");
             $stmtClear->execute([$userId]);
-            
+
             $pdo->commit();
             $success = "Commande validée avec succès !";
             // Mise à jour session solde pour affichage immédiat
-             // (Simplification, idéalement re-fetch user)
-             
+            // (Simplification, idéalement re-fetch user)
+
         } catch (Exception $e) {
             $pdo->rollBack();
             $error = "Erreur lors de la validation : " . $e->getMessage();
@@ -100,12 +100,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="account" class="btn-primary">Voir mon compte</a>
         </div>
     <?php else: ?>
-    
+
         <div class="checkout-container">
             <!-- Left: Shipping Form -->
             <div class="checkout-form dark-form">
                 <h3><i class="fa-solid fa-location-dot"></i> Adresse de livraison</h3>
-                
+
                 <?php if ($error): ?>
                     <div class="alert alert-error">
                         <?= htmlspecialchars($error) ?>
@@ -115,7 +115,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <form action="cart_validation" method="POST" id="checkout-form">
                     <div class="form-group">
                         <label for="fullname">Nom complet</label>
-                        <input type="text" id="fullname" name="fullname" placeholder="John Doe" required value="<?= htmlspecialchars($_SESSION['user']['username']) ?>">
+                        <input type="text" id="fullname" name="fullname" placeholder="John Doe" required
+                            value="<?= htmlspecialchars($_SESSION['user']['username']) ?>">
                     </div>
 
                     <div class="form-group">
