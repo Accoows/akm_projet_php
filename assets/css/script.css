@@ -74,9 +74,17 @@
 }
 
 body {
-    background-color: var(--bg-dark);
+    /* On superpose un dégradé noir (92% d'opacité) sur l'image */
+    background: 
+        linear-gradient(rgba(10, 10, 10, 0.96), rgba(10, 10, 10, 0.96)), 
+        url('../images/bg3.webp');
+    
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* L'image reste fixe pendant le scroll, très moderne */
+    
     color: var(--text-white);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', sans-serif;
     line-height: 1.6;
     display: flex;
     flex-direction: column;
@@ -207,7 +215,7 @@ nav a:hover {
 .hero-banner {
     height: 500px; /* Plus grand */
     border-radius: var(--radius);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)), url('../images/bg1.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('../images/bg1.png');
     display: flex;
     flex-direction: column;
     justify-content: center;
