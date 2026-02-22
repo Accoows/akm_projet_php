@@ -11,17 +11,17 @@ try {
 
     // 2. Création des Utilisateurs
     $password = password_hash('password123', PASSWORD_BCRYPT);
-    
+
     // Insertion Admin (Compte test par défaut)
     $pdo->prepare("INSERT INTO User (username, password, email, balance, profile_picture, role) VALUES (?, ?, ?, ?, ?, ?)")
         ->execute(['Admin_Tactical', $password, 'admin@jrsoft.fr', 9999.99, 'assets/images/logo.png', 'admin']);
-    
+
     $adminId = $pdo->lastInsertId();
 
     // Insertion de 10 clients aléatoires
     $firstNames = ['Arthur', 'Thomas', 'Lucas', 'Maxime', 'Julien'];
     $lastNames = ['Dupont', 'Durand', 'Martin', 'Bernard', 'Petit'];
-    
+
     $stmtUser = $pdo->prepare("INSERT INTO User (username, password, email, balance, profile_picture, role) VALUES (?, ?, ?, ?, ?, ?)");
     for ($i = 0; $i < 10; $i++) {
         $username = $firstNames[array_rand($firstNames)] . rand(10, 99);
@@ -29,20 +29,20 @@ try {
         $stmtUser->execute([$username, $password, $email, rand(50, 500), 'assets/images/logo_atcfm.png', 'user']);
     }
 
-    // 3. Articles basés sur TES fichiers (image_97b2dc.jpg)
+    // 3. Articles basés sur TES fichiers (image_97b2dc.webp)
     $realItems = [
-        ['Gilet Porte-Plaques Lourd', 'gilet1.jpg', 'Gilet tactique haute résistance avec système MOLLE et compartiments plaques.', 129.90],
-        ['Bottes Commando Desert', 'bottes1.jpg', 'Bottes légères et respirantes pour opérations en milieu aride.', 85.00],
-        ['Casque FAST MH Noir', 'hat1.jpg', 'Casque tactique avec rails latéraux et montage NVG frontal.', 55.50],
-        ['Pistolet Gaz G17 Blowback', 'pistolgaz.jpg', 'Réplique de poing ultra-réaliste avec culasse mobile.', 145.00],
-        ['Gants de Combat Coqués', 'gants1.jpg', 'Gants renforcés offrant une protection optimale des phalanges.', 29.99],
-        ['Viseur Point Rouge Micro', 'viseur.jpg', 'Optique de visée rapide pour acquisition de cible instantanée.', 42.00],
-        ['Holster Rigide Universel', 'holster.jpg', 'Holster en polymère avec système de rétention active.', 35.00],
-        ['Masque Balistique Grillagé', 'masque1.jpg', 'Protection faciale indispensable contre les impacts.', 19.50],
-        ['Couteau d\'entraînement', 'couteau1.jpg', 'Réplique factice en caoutchouc pour l\'entraînement tactique.', 15.00],
-        ['Sac à Dos Assault 30L', 'bp1.jpg', 'Sac compact avec de nombreux compartiments pour vos missions.', 49.00],
-        ['Carabine AEG M4 RIS', 'carabine.jpg', 'Fusil d\'assaut électrique polyvalent avec garde-main rail.', 289.00],
-        ['Pack Billes 0.25g (3000pcs)', 'bille1.jpg', 'Billes de haute précision polies pour un groupement parfait.', 12.90]
+        ['Gilet Porte-Plaques Lourd', 'gilet1.webp', 'Gilet tactique haute résistance avec système MOLLE et compartiments plaques.', 129.90],
+        ['Bottes Commando Desert', 'bottes1.webp', 'Bottes légères et respirantes pour opérations en milieu aride.', 85.00],
+        ['Casque FAST MH Noir', 'hat1.webp', 'Casque tactique avec rails latéraux et montage NVG frontal.', 55.50],
+        ['Pistolet Gaz G17 Blowback', 'pistolgaz.webp', 'Réplique de poing ultra-réaliste avec culasse mobile.', 145.00],
+        ['Gants de Combat Coqués', 'gants1.webp', 'Gants renforcés offrant une protection optimale des phalanges.', 29.99],
+        ['Viseur Point Rouge Micro', 'viseur.webp', 'Optique de visée rapide pour acquisition de cible instantanée.', 42.00],
+        ['Holster Rigide Universel', 'holster.webp', 'Holster en polymère avec système de rétention active.', 35.00],
+        ['Masque Balistique Grillagé', 'masque1.webp', 'Protection faciale indispensable contre les impacts.', 19.50],
+        ['Couteau d\'entraînement', 'couteau1.webp', 'Réplique factice en caoutchouc pour l\'entraînement tactique.', 15.00],
+        ['Sac à Dos Assault 30L', 'bp1.webp', 'Sac compact avec de nombreux compartiments pour vos missions.', 49.00],
+        ['Carabine AEG M4 RIS', 'carabine.webp', 'Fusil d\'assaut électrique polyvalent avec garde-main rail.', 289.00],
+        ['Pack Billes 0.25g (3000pcs)', 'bille1.webp', 'Billes de haute précision polies pour un groupement parfait.', 12.90]
     ];
 
     $stmtArt = $pdo->prepare("INSERT INTO Article (name, description, price, author_id, image_link, publication_date) VALUES (?, ?, ?, ?, ?, NOW() - INTERVAL ? DAY)");
