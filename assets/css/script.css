@@ -2,16 +2,20 @@
    1. VARIABLES & GLOBAL RESET
    ========================================= */
 :root {
-    --bg-dark: #0f0f0f;           /* Un noir plus profond */
-    --bg-olive-dark: #3d4629;     /* Un vert plus "tactique premium" */
+    --bg-dark: #0f0f0f;
+    /* Un noir plus profond */
+    --bg-olive-dark: #3d4629;
+    /* Un vert plus "tactique premium" */
     --bg-olive-light: #a3b18a;
     --text-white: #ffffff;
-    --radius: 18px;               /* ON PASSE DE 3px A 18px (Essentiel) */
-    
-    --nav-bg: rgba(26, 26, 26, 0.8); /* Pour l'effet de transparence */
+    --radius: 18px;
+    /* ON PASSE DE 3px A 18px (Essentiel) */
+
+    --nav-bg: rgba(26, 26, 26, 0.8);
+    /* Pour l'effet de transparence */
     --nav-border: rgba(255, 255, 255, 0.05);
     --nav-hover: #a3b18a;
-    
+
     /* On ajoute une variable d'ombre */
     --shadow-modern: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
@@ -75,14 +79,15 @@
 
 body {
     /* On superpose un dégradé noir (92% d'opacité) sur l'image */
-    background: 
-        linear-gradient(rgba(10, 10, 10, 0.96), rgba(10, 10, 10, 0.96)), 
+    background:
+        linear-gradient(rgba(10, 10, 10, 0.96), rgba(10, 10, 10, 0.96)),
         url('../images/bg3.webp');
-    
+
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* L'image reste fixe pendant le scroll, très moderne */
-    
+    background-attachment: fixed;
+    /* L'image reste fixe pendant le scroll, très moderne */
+
     color: var(--text-white);
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
@@ -103,13 +108,16 @@ body {
    ========================================= */
 header {
     background-color: var(--nav-bg);
-    border-bottom: 1px solid var(--nav-border); /* Bordure plus fine */
+    border-bottom: 1px solid var(--nav-border);
+    /* Bordure plus fine */
     padding: 15px 0;
     width: 100%;
-    position: sticky; /* Reste en haut au scroll */
+    position: sticky;
+    /* Reste en haut au scroll */
     top: 0;
     z-index: 1000;
-    backdrop-filter: blur(10px); /* L'effet flou moderne */
+    backdrop-filter: blur(10px);
+    /* L'effet flou moderne */
 }
 
 .header-content {
@@ -213,7 +221,8 @@ nav a:hover {
 }
 
 .hero-banner {
-    height: 500px; /* Plus grand */
+    height: 500px;
+    /* Plus grand */
     border-radius: var(--radius);
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('../images/bg1.png');
     display: flex;
@@ -222,7 +231,8 @@ nav a:hover {
 }
 
 .hero-banner h1 {
-    font-size: 3.5rem;   /* Très gros */
+    font-size: 3.5rem;
+    /* Très gros */
     font-weight: 900;
     letter-spacing: -2px;
     margin-bottom: 10px;
@@ -250,7 +260,8 @@ nav a:hover {
 
 .hero-section {
     position: relative;
-    height: 600px; /* Plus haut pour plus d'impact */
+    height: 600px;
+    /* Plus haut pour plus d'impact */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -266,7 +277,7 @@ nav a:hover {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%);
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%);
     z-index: 1;
 }
 
@@ -283,7 +294,8 @@ nav a:hover {
 }
 
 .hero-section h1 {
-    font-size: 4rem; /* Très imposant */
+    font-size: 4rem;
+    /* Très imposant */
     font-weight: 900;
     line-height: 1.1;
     margin-bottom: 25px;
@@ -302,7 +314,7 @@ nav a:hover {
 }
 
 .btn-outline:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     border-color: #fff;
 }
 
@@ -314,15 +326,31 @@ nav a:hover {
 }
 
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .hero-section { height: 500px; }
-    .hero-section h1 { font-size: 2.5rem; }
-    .hero-btns { flex-direction: column; gap: 10px; }
+    .hero-section {
+        height: 500px;
+    }
+
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-btns {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
 
 /* Article Grids */
@@ -334,16 +362,19 @@ nav a:hover {
 }
 
 .article-box {
-    background-color: #1a1a1a;    /* Fond légèrement plus clair que le body */
-    height: auto;                 /* Laisse le contenu respirer */
+    background-color: #1a1a1a;
+    /* Fond légèrement plus clair que le body */
+    height: auto;
+    /* Laisse le contenu respirer */
     padding: 15px;
-    border: 1px solid rgba(255,255,255,0.03);
+    border: 1px solid rgba(255, 255, 255, 0.03);
     border-radius: var(--radius);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .article-box:hover {
-    transform: translateY(-8px);  /* Élévation */
+    transform: translateY(-8px);
+    /* Élévation */
     border-color: var(--bg-olive-light);
     box-shadow: var(--shadow-modern);
 }
@@ -361,7 +392,7 @@ nav a:hover {
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding-bottom: 20px;
 }
 
@@ -415,7 +446,8 @@ nav a:hover {
 }
 
 .article-image {
-    background-color: #ffffff; /* Pour tes photos à fond blanc */
+    background-color: #ffffff;
+    /* Pour tes photos à fond blanc */
     height: 220px;
     border-radius: calc(var(--radius) - 8px);
     display: flex;
@@ -457,7 +489,7 @@ nav a:hover {
     justify-content: space-between;
     align-items: center;
     padding: 10px 5px 5px;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .article-price {
@@ -493,9 +525,11 @@ nav a:hover {
 /* Product Detail Page */
 .product-detail-container {
     display: grid;
-    grid-template-columns: 40% 1fr; /* L'image prend 40% au lieu de 50% */
+    grid-template-columns: 40% 1fr;
+    /* L'image prend 40% au lieu de 50% */
     gap: 40px;
-    align-items: start; /* Évite que l'image s'étire si le texte est court */
+    align-items: start;
+    /* Évite que l'image s'étire si le texte est court */
     background-color: var(--bg-card);
     padding: 30px;
     border-radius: var(--radius);
@@ -503,7 +537,8 @@ nav a:hover {
 
 .product-main-img {
     max-width: 90%;
-    max-height: 320px; /* On réduit pour que l'objet paraisse mieux proportionné */
+    max-height: 320px;
+    /* On réduit pour que l'objet paraisse mieux proportionné */
     object-fit: contain;
 }
 
@@ -513,7 +548,8 @@ nav a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 380px; /* On descend de 500px à 380px */
+    min-height: 380px;
+    /* On descend de 500px à 380px */
     max-height: 400px;
     overflow: hidden;
     padding: 20px;
@@ -640,8 +676,10 @@ nav a:hover {
 .review-card {
     padding: 30px;
     background-color: #1a1a1a;
-    border-left: none; /* On enlève la bordure rigide */
-    border-top: 4px solid var(--bg-olive-light); /* On la met en haut */
+    border-left: none;
+    /* On enlève la bordure rigide */
+    border-top: 4px solid var(--bg-olive-light);
+    /* On la met en haut */
     border-radius: var(--radius);
     box-shadow: var(--shadow-modern);
 }
@@ -763,6 +801,41 @@ footer {
 }
 
 /* =========================================
+   6. UTILITIES & SPECIFICS
+   ========================================= */
+
+.hidden {
+    display: none !important;
+}
+
+/* Profile Edit Form */
+.profile-alert {
+    margin-bottom: 15px;
+}
+
+.profile-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.profile-edit-form {
+    width: 100%;
+}
+
+.profile-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.profile-form-btn {
+    flex: 1;
+    padding: 10px;
+}
+
+/* =========================================
    6. ACCOUNT PAGE
    ========================================= */
 
@@ -798,7 +871,6 @@ footer {
     top: 0;
     height: 100%;
     width: 5px;
-    background-color: var(--bg-olive-light);
 }
 
 .profile-header h3 {
@@ -916,7 +988,8 @@ footer {
 .table-dark {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 10px; /* Espace entre les lignes */
+    border-spacing: 0 10px;
+    /* Espace entre les lignes */
 }
 
 .table-dark tr {
@@ -941,8 +1014,13 @@ footer {
     padding: 15px 20px;
 }
 
-.table-dark td:first-child { border-radius: 12px 0 0 12px; }
-.table-dark td:last-child { border-radius: 0 12px 12px 0; }
+.table-dark td:first-child {
+    border-radius: 12px 0 0 12px;
+}
+
+.table-dark td:last-child {
+    border-radius: 0 12px 12px 0;
+}
 
 /* Responsive Dashboard */
 @media (max-width: 992px) {
@@ -1158,7 +1236,7 @@ footer {
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius);
     padding: 40px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
 .input-wrapper {
@@ -1178,7 +1256,8 @@ footer {
 
 .input-wrapper input {
     width: 100%;
-    padding: 14px 15px 14px 45px !important; /* Padding gauche pour l'icône */
+    padding: 14px 15px 14px 45px !important;
+    /* Padding gauche pour l'icône */
     background: rgba(10, 10, 10, 0.5) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: 12px !important;
@@ -1191,7 +1270,7 @@ footer {
     background: rgba(10, 10, 10, 0.8) !important;
 }
 
-.input-wrapper input:focus + i {
+.input-wrapper input:focus+i {
     color: var(--bg-olive-light);
 }
 

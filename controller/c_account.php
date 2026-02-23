@@ -2,21 +2,62 @@
 // controller/c_account.php
 
 $userId = $_SESSION['user']['id'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'edit_profile') {
+    $newUsername = trim($_POST['username'] ?? '');
+    $newEmail = trim($_POST['email'] ?? '');
+    
+    if (!empty($newUsername) && !empty($newEmail)) {
+        try {
+            $stmtCheck = $pdo->prepare("SELECT id FROM User WHERE (email = ? OR username = ?) AND id != ?");
+            $stmtCheck->execute([$newEmail, $newUsername, $userId]);
+            if ($stmtCheck->rowCount() > 0) {
+                $error_msg = "L'email ou le nom d'utilisateur est déjà utilisé.";
+            } else {
+                $stmtUpdate = $pdo->prepare("UPDATE User SET username = ?, email = ? WHERE id = ?");
+                $stmtUpdate->execute([$newUsername, $newEmail, $userId]);
+                
+                $_SESSION['user']['username'] = $newUsername;
+                $_SESSION['user']['email'] = $newEmail;
+                $success_msg = "Vos informations ont été mises à jour avec succès.";
+            }
+        } catch (PDOException $e) {
+            $error_msg = "Erreur lors de la mise à jour.";
+        }
+    } else {
+        $error_msg = "Veuillez remplir tous les champs.";
+    }
+} elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_balance') {
+    $newBalance = filter_var($_POST['balance'], FILTER_VALIDATE_FLOAT);
+    
+    if ($newBalance !== false && $newBalance >= 0) {
+        try {
+            $stmtUpdateBalance = $pdo->prepare("UPDATE User SET balance = ? WHERE id = ?");
+            $stmtUpdateBalance->execute([$newBalance, $userId]);
+            
+            // Mettre à jour la session
+            $_SESSION['user']['balance'] = $newBalance;
+            $success_msg = "Votre solde a été mis à jour avec succès.";
+        } catch (PDOException $e) {
+            $error_msg = "Erreur lors de la mise à jour du solde.";
+        }
+    } else {
+        $error_msg = "Veuillez entrer un montant valide (supérieur ou égal à 0).";
+    }
+}
+
 $user = [];
 $invoices = [];
 
 try {
-    // 1. Récupérer infos utilisateur à jour
     $stmtUser = $pdo->prepare("SELECT * FROM User WHERE id = ?");
     $stmtUser->execute([$userId]);
     $user = $stmtUser->fetch();
 
-    // Mettre à jour la session si besoin
     if ($user) {
-        $_SESSION['user']['balance'] = $user['balance']; // On suppose que la clé existe ou on l'ajoute
+        $_SESSION['user']['balance'] = $user['balance'];
     }
 
-    // 2. Récupérer l'historique des commandes
     $stmtInv = $pdo->prepare("SELECT * FROM Invoice WHERE user_id = ? ORDER BY transaction_date DESC");
     $stmtInv->execute([$userId]);
     $invoices = $stmtInv->fetchAll();
