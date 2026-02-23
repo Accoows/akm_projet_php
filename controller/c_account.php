@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             $stmtUpdateBalance = $pdo->prepare("UPDATE User SET balance = ? WHERE id = ?");
             $stmtUpdateBalance->execute([$newBalance, $userId]);
             
-            // Mettre à jour la session
             $_SESSION['user']['balance'] = $newBalance;
             $success_msg = "Votre solde a été mis à jour avec succès.";
         } catch (PDOException $e) {
@@ -48,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
 $user = [];
 $invoices = [];
+$myArticles = [];
 
 try {
     $stmtUser = $pdo->prepare("SELECT * FROM User WHERE id = ?");
@@ -61,6 +61,11 @@ try {
     $stmtInv = $pdo->prepare("SELECT * FROM Invoice WHERE user_id = ? ORDER BY transaction_date DESC");
     $stmtInv->execute([$userId]);
     $invoices = $stmtInv->fetchAll();
+
+    // Récupérer les articles créés par l'utilisateur
+    $stmtMyArt = $pdo->prepare("SELECT a.*, s.quantity FROM Article a LEFT JOIN Stock s ON a.id = s.article_id WHERE a.author_id = ? ORDER BY a.id DESC");
+    $stmtMyArt->execute([$userId]);
+    $myArticles = $stmtMyArt->fetchAll();
 
 } catch (PDOException $e) {
     // Silent error

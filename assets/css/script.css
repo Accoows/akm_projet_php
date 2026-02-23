@@ -20,57 +20,6 @@
     --shadow-modern: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* ============================================== */
-/* DEV MENU (Temporary) */
-.dev-menu {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-}
-
-.dev-menu-btn {
-    background-color: var(--bg-olive-dark);
-    color: white;
-    padding: 10px 15px;
-    border-radius: var(--radius);
-    cursor: pointer;
-    border: 1px solid var(--bg-olive-light);
-    font-size: 1.2rem;
-}
-
-.dev-menu-dropdown {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background-color: #333;
-    border: 1px solid #555;
-    border-radius: var(--radius);
-    width: 200px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    margin-top: 5px;
-}
-
-.dev-menu-dropdown.show {
-    display: block;
-}
-
-.dev-menu-dropdown a {
-    display: block;
-    padding: 10px;
-    color: #ccc;
-    text-decoration: none;
-    border-bottom: 1px solid #444;
-}
-
-.dev-menu-dropdown a:hover {
-    background-color: #444;
-    color: white;
-}
-
-/* ============================================== */
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -1090,23 +1039,79 @@ footer {
     background-color: #fff;
 }
 
-/* Simple Table */
+/* Simple Table (Premium Style) */
+.table-scroll {
+    overflow-x: auto;
+    border-radius: var(--radius);
+    background: #2a2a2a;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.table-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 4px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+    background: var(--bg-olive-dark);
+    border-radius: 4px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--bg-olive-light);
+}
+
 .table-dark {
     width: 100%;
-    border-collapse: collapse;
-    background-color: #2a2a2a;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: transparent;
+    /* Retrait de min-width: 600px; pour s'adapter au conteneur */
 }
 
-.table-dark th,
-.table-dark td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #333;
-}
-
-.table-dark th {
-    background-color: #333;
+.table-dark thead th {
+    background-color: rgba(0, 0, 0, 0.4);
     color: var(--bg-olive-light);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 15px;
+    /* Légèrement plus compact */
+    text-align: left;
+    border-bottom: 2px solid var(--bg-olive-dark);
+    font-weight: 700;
+}
+
+.table-dark tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.table-dark tbody tr:last-child {
+    border-bottom: none;
+}
+
+.table-dark tbody tr:hover {
+    background-color: rgba(150, 168, 110, 0.1);
+    /* Retrait du transform: scale qui causait l'apparition de la barre de scroll */
+}
+
+.table-dark td {
+    padding: 12px 15px;
+    /* Réduction du padding pour être moins large */
+    text-align: left;
+    color: var(--text-white);
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.table-dark tbody tr:last-child td {
+    border-bottom: none;
 }
 
 /* =========================================
@@ -1741,4 +1746,77 @@ footer {
 /* Header link admin */
 .nav-link-admin {
     color: #e74c3c !important;
+}
+
+/* Article Detail Management */
+.detail-action-form,
+.detail-action-link {
+    display: inline-block;
+}
+
+.detail-management-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-management-title {
+    margin-bottom: 10px;
+    color: var(--bg-olive-light);
+}
+
+.detail-management-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-danger {
+    background-color: #8b0000;
+    border-color: #ff0000;
+}
+
+.btn-danger:hover {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+/* Account - My Articles */
+.account-article-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.text-link {
+    color: var(--bg-olive-light);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.text-link:hover {
+    text-decoration: underline;
+}
+
+/* Utilities (Account layout) */
+.grid-full-width {
+    grid-column: 1 / -1;
+}
+
+.mt-15 {
+    margin-top: 15px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.flex-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.icon-large {
+    font-size: 24px;
 }

@@ -136,5 +136,68 @@
                 </div>
             <?php endif; ?>
         </div>
+
+        <!-- Mes Articles en Vente -->
+        <div class="account-card my-articles-card grid-full-width">
+            <h3><i class="fa-solid fa-box-open"></i> Mes articles en vente</h3>
+
+            <?php if (empty($myArticles)): ?>
+                <p>Vous n'avez aucun article en vente.</p>
+                <div class="mt-15">
+                    <a href="sell" class="btn-primary btn-small">
+                        <i class="fa-solid fa-plus"></i> Créer une annonce
+                    </a>
+                </div>
+            <?php else: ?>
+                <div class="mt-15 mb-15">
+                    <a href="sell" class="btn-primary btn-small">
+                        <i class="fa-solid fa-plus"></i> Créer une nouvelle annonce
+                    </a>
+                </div>
+                <div class="table-scroll">
+                    <table class="table-dark">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Nom</th>
+                                <th>Prix</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($myArticles as $art): ?>
+                                <tr>
+                                    <td>
+                                        <?php if (!empty($art['image_link'])): ?>
+                                            <img src="<?= htmlspecialchars($art['image_link']) ?>" alt="Aperçu" class="account-article-img">
+                                        <?php else: ?>
+                                            <i class="fa-solid fa-image icon-large"></i>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <a href="detail&id=<?= $art['id'] ?>" class="text-link">
+                                            <?= htmlspecialchars($art['name']) ?>
+                                        </a>
+                                    </td>
+                                    <td class="balance"><?= number_format($art['price'], 2) ?> €</td>
+                                    <td><?= (int)$art['quantity'] ?></td>
+                                    <td>
+                                        <div class="flex-actions">
+                                            <a href="edit_article&id=<?= $art['id'] ?>" class="btn-secondary btn-small" title="Modifier">
+                                                <i class="fa-solid fa-pen"></i>
+                                            </a>
+                                            <a href="delete_article&id=<?= $art['id'] ?>" class="btn-secondary btn-small btn-danger" title="Supprimer" onclick="return confirm('Supprimer cet article ?');">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
 </div>

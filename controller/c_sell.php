@@ -11,7 +11,7 @@ if (isPost() && isset($_POST['sell_btn'])) {
     $quantity = intval($_POST['quantity']);
 
     // Gestion de l'image
-    $imagePath = 'assets/images/bg1.png'; // Défaut
+    $imagePath = 'uploads/articles/bg1.png'; // Défaut
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
         $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
@@ -23,7 +23,7 @@ if (isPost() && isset($_POST['sell_btn'])) {
         if (in_array($ext, $allowed)) {
             if ($filesize < 5 * 1024 * 1024) { // 5MB max
                 $newFilename = uniqid() . '.' . $ext;
-                $uploadDir = 'assets/images/uploads/';
+                $uploadDir = 'uploads/articles/';
 
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
