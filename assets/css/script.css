@@ -1820,3 +1820,100 @@ footer {
 .icon-large {
     font-size: 24px;
 }
+
+/* Forms (sell.php & edit_article.php) */
+.form-card {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.input-icon-align-top {
+    align-items: flex-start;
+}
+
+.icon-textarea {
+    margin-top: 15px;
+}
+
+.input-wrapper .textarea-custom {
+    width: 100%;
+    padding: 15px 15px 15px 45px !important;
+    background: rgba(10, 10, 10, 0.5) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    transition: 0.3s;
+    outline: none;
+    resize: vertical;
+}
+
+.input-wrapper .textarea-custom:focus {
+    border-color: var(--bg-olive-light) !important;
+    background: rgba(10, 10, 10, 0.8) !important;
+}
+
+.input-wrapper .input-file-custom {
+    color: #ccc !important;
+    background: rgba(10, 10, 10, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    padding: 10px 10px 10px 45px !important;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.input-wrapper .input-file-custom:focus {
+    border-color: var(--bg-olive-light) !important;
+    background: rgba(10, 10, 10, 0.8) !important;
+}
+
+.form-row-flex {
+    display: flex;
+    gap: 15px;
+}
+
+.form-item-flex {
+    flex: 1;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.d-block {
+    display: block;
+}
+
+.d-inline-block {
+    display: inline-block;
+}
+
+.text-muted-small {
+    color: #666;
+    margin-top: 5px;
+    display: block;
+}
+
+.img-preview {
+    max-width: 150px;
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
