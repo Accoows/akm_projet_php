@@ -29,25 +29,6 @@ if (substr($scriptPath, -1) !== '/') {
 <body>
 
     <header>
-        <!--======================================== -->
-        <!-- DEV MENU -->
-        <div class="dev-menu">
-            <button class="dev-menu-btn"><i class="fa-solid fa-bars"></i></button>
-            <div class="dev-menu-dropdown">
-                <a href="./">Home</a>
-                <a href="articles">Articles</a>
-                <a href="login">Login</a>
-                <a href="register">Register</a>
-                <a href="account">Account</a>
-                <a href="cart">Cart</a>
-                <a href="cart_validation">Cart Validation</a>
-                <a href="sell">Sell</a>
-                <a href="admin">Admin Users</a>
-                <a href="404">404 Page</a>
-            </div>
-        </div>
-        <!--======================================== -->
-
         <div class="header-content">
             <a href="./" class="logo">
                 <i class="fa-solid fa-shield-halved"></i> AT<span>CFM</span>

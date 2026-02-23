@@ -25,6 +25,11 @@ if ($action === 'delete' && $id > 0) {
         }
     } elseif ($sub === 'articles') {
         try {
+            // Récupérer le chemin de l'image
+            $stmtImg = $pdo->prepare("SELECT image_link FROM Article WHERE id = ?");
+            $stmtImg->execute([$id]);
+            $article = $stmtImg->fetch();
+            
             // Delete stock first
             $stmtDelStock = $pdo->prepare("DELETE FROM Stock WHERE article_id = ?");
             $stmtDelStock->execute([$id]);
@@ -33,8 +38,17 @@ if ($action === 'delete' && $id > 0) {
             $stmtDelCart = $pdo->prepare("DELETE FROM Cart WHERE article_id = ?");
             $stmtDelCart->execute([$id]);
 
+            // Supprimer l'article en BDD
             $stmtDelArt = $pdo->prepare("DELETE FROM Article WHERE id = ?");
-            $stmtDelArt->execute([$id]);
+            if ($stmtDelArt->execute([$id])) {
+                // Supprimer le fichier image s'il existe et s'il est dans le dossier uploads (pour la sécurité)
+                if ($article && !empty($article['image_link'])) {
+                    $imgPath = $article['image_link'];
+                    if (file_exists($imgPath) && strpos($imgPath, 'uploads/articles/') === 0) {
+                        unlink($imgPath);
+                    }
+                }
+            }
         } catch (PDOException $e) {
             // Ignore constraint errors
         }

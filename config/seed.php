@@ -14,7 +14,7 @@ try {
 
     // Insertion Admin (Compte test par défaut)
     $pdo->prepare("INSERT INTO User (username, password, email, balance, profile_picture, role) VALUES (?, ?, ?, ?, ?, ?)")
-        ->execute(['Admin_Tactical', $password, 'admin@jrsoft.fr', 9999.99, 'assets/images/logo.png', 'admin']);
+        ->execute(['Admin', $password, 'admin@jrsoft.fr', 9999.99, 'assets/images/logo.png', 'admin']);
 
     $adminId = $pdo->lastInsertId();
 
@@ -50,7 +50,7 @@ try {
 
     // Insertion des articles réels
     foreach ($realItems as $item) {
-        $stmtArt->execute([$item[0], $item[2], $item[3], $adminId, 'assets/images/' . $item[1], rand(0, 10)]);
+        $stmtArt->execute([$item[0], $item[2], $item[3], $adminId, 'uploads/articles/' . $item[1], rand(0, 10)]);
         $stmtStock->execute([$pdo->lastInsertId(), rand(5, 50)]);
     }
 
@@ -58,7 +58,7 @@ try {
     for ($i = 0; $i < 38; $i++) {
         $name = "Équipement Modulable V" . rand(1, 9);
         $desc = "Produit tactique complémentaire testé sur le terrain. Robustesse assurée.";
-        $stmtArt->execute([$name, $desc, rand(20, 200), $adminId, 'assets/images/bg1.png', rand(10, 30)]);
+        $stmtArt->execute([$name, $desc, rand(20, 200), $adminId, 'uploads/articles/bg1.png', rand(10, 30)]);
         $stmtStock->execute([$pdo->lastInsertId(), rand(0, 100)]);
     }
 

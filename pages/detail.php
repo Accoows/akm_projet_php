@@ -23,17 +23,35 @@
 
                 <div class="detail-actions">
                     <!-- Form to add to cart (logic to be implemented later or via link) -->
-                    <form action="cart" method="POST" class="form-inline">
+                    <form action="cart" method="POST" class="form-inline detail-action-form">
                         <input type="hidden" name="id" value="<?= $product['id'] ?>">
                         <button type="submit" class="btn-primary" name="add_to_cart">
                             <i class="fa-solid fa-cart-plus"></i> Ajouter au panier
                         </button>
                     </form>
 
-                    <a href="articles" class="btn-secondary">
+                    <a href="articles" class="btn-secondary detail-action-link">
                         <i class="fa-solid fa-arrow-left"></i> Retour au catalogue
                     </a>
                 </div>
+                
+                <?php
+                $isOwner = isset($_SESSION['user']) && $_SESSION['user']['id'] == $product['author_id'];
+                $isAdmin = isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin';
+                ?>
+                <?php if ($isOwner || $isAdmin): ?>
+                    <div class="detail-management-section">
+                        <h4 class="detail-management-title"><i class="fa-solid fa-gear"></i> Gestion de l'article</h4>
+                        <div class="detail-management-actions">
+                            <a href="edit_article&id=<?= $product['id'] ?>" class="btn-secondary btn-small">
+                                <i class="fa-solid fa-pen"></i> Modifier
+                            </a>
+                            <a href="delete_article&id=<?= $product['id'] ?>" class="btn-secondary btn-small btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ? Cette action est irréversible.');">
+                                <i class="fa-solid fa-trash"></i> Supprimer
+                            </a>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     <?php else: ?>
