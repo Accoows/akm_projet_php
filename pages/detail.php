@@ -17,6 +17,15 @@
                     <?= number_format($product['price'], 2) ?> €
                 </div>
 
+                <div class="detail-stock <?= (isset($product['stock_quantity']) && $product['stock_quantity'] > 0) ? 'stock-available' : 'stock-empty' ?>">
+                    <i class="fa-solid fa-box"></i> 
+                    <?php if (isset($product['stock_quantity']) && $product['stock_quantity'] > 0): ?>
+                        En stock : <?= $product['stock_quantity'] ?> disponible(s)
+                    <?php else: ?>
+                        Rupture de stock
+                    <?php endif; ?>
+                </div>
+
                 <p class="detail-description">
                     <?= nl2br(htmlspecialchars($product['description'] ?? '')) ?>
                 </p>
@@ -25,9 +34,15 @@
                     <!-- Form to add to cart (logic to be implemented later or via link) -->
                     <form action="cart" method="POST" class="form-inline detail-action-form">
                         <input type="hidden" name="id" value="<?= $product['id'] ?>">
-                        <button type="submit" class="btn-primary" name="add_to_cart">
-                            <i class="fa-solid fa-cart-plus"></i> Ajouter au panier
-                        </button>
+                        <?php if (isset($product['stock_quantity']) && $product['stock_quantity'] > 0): ?>
+                            <button type="submit" class="btn-primary" name="add_to_cart">
+                                <i class="fa-solid fa-cart-plus"></i> Ajouter au panier
+                            </button>
+                        <?php else: ?>
+                            <button type="button" class="btn-primary btn-disabled" disabled>
+                                <i class="fa-solid fa-cart-arrow-down"></i> Épuisé
+                            </button>
+                        <?php endif; ?>
                     </form>
 
                     <a href="articles" class="btn-secondary detail-action-link">

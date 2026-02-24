@@ -53,8 +53,11 @@
                 <div class="summary-items">
                     <?php foreach ($cartItems as $item): ?>
                         <div class="summary-item">
-                            <span><?= htmlspecialchars($item['name']) ?></span>
-                            <span><?= number_format($item['price'], 2) ?> €</span>
+                            <span class="summary-item-name"><?= htmlspecialchars($item['name']) ?></span>
+                            <span class="summary-item-price">
+                                <span class="summary-item-qty">x<?= $item['quantity'] ?></span>
+                                <?= number_format($item['price'] * $item['quantity'], 2) ?> €
+                            </span>
                         </div>
                     <?php endforeach; ?>
                 </div>

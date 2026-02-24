@@ -22,14 +22,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                     if ($newQty <= $stockQty) {
                         $stmtUpdate = $pdo->prepare("UPDATE Cart SET quantity = ? WHERE id = ?");
                         $stmtUpdate->execute([$newQty, $cartRow['id']]);
+                        $_SESSION['cart_success'] = "Quantité mise à jour dans le panier.";
+                        redirect('cart');
+                    } else {
+                        $_SESSION['cart_error'] = "Impossible d'ajouter ! Stock maximum disponible : " . $stockQty;
+                        redirect('cart');
                     }
                 } else {
                     $stmtInsert = $pdo->prepare("INSERT INTO Cart (user_id, article_id, quantity) VALUES (?, ?, 1)");
                     $stmtInsert->execute([$userId, $articleId]);
+                    $_SESSION['cart_success'] = "Article ajouté au panier.";
+                    redirect('cart');
                 }
-                redirect('cart');
             } else {
-                echo "<script>alert('Stock épuisé pour cet article !');</script>";
+                $_SESSION['cart_error'] = "Stock épuisé pour cet article !";
+                redirect('cart');
             }
         } catch (PDOException $e) {
             // Log error
@@ -39,16 +46,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])) {
     if (isset($_POST['quantities']) && is_array($_POST['quantities'])) {
+        $alertMessage = "";
         foreach ($_POST['quantities'] as $cartId => $qty) {
             $qty = (int)$qty;
             if ($qty > 0) {
                 try {
-                    $stmtCheckStock = $pdo->prepare("SELECT s.quantity FROM Cart c JOIN Stock s ON c.article_id = s.article_id WHERE c.id = ?");
+                    $stmtCheckStock = $pdo->prepare("SELECT s.quantity, a.name FROM Cart c JOIN Stock s ON c.article_id = s.article_id JOIN Article a ON c.article_id = a.id WHERE c.id = ?");
                     $stmtCheckStock->execute([$cartId]);
-                    $stockQty = $stmtCheckStock->fetchColumn();
+                    $stockData = $stmtCheckStock->fetch();
+                    $stockQty = $stockData['quantity'];
+                    $articleName = $stockData['name'];
                     
                     if ($qty > $stockQty) {
                         $qty = $stockQty;
+                        $alertMessage .= "Stock insuffisant pour " . htmlspecialchars($articleName) . ". Quantité ajustée à " . $stockQty . ".\n";
                     }
                     if ($qty > 0) {
                         $stmtUpdate = $pdo->prepare("UPDATE Cart SET quantity = ? WHERE id = ? AND user_id = ?");
@@ -61,6 +72,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_cart'])) {
                     $stmtDel->execute([$cartId, $userId]);
                 } catch (PDOException $e) { }
             }
+        }
+        
+        if (!empty($alertMessage)) {
+            $_SESSION['cart_error'] = nl2br(trim($alertMessage));
+        } else {
+            $_SESSION['cart_success'] = "Quantités mises à jour avec succès.";
         }
         redirect('cart');
     }

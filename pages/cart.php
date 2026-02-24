@@ -1,13 +1,30 @@
+<?php
+$cart_error = $_SESSION['cart_error'] ?? null;
+$cart_success = $_SESSION['cart_success'] ?? null;
+unset($_SESSION['cart_error'], $_SESSION['cart_success']);
+?>
 <div class="container">
     <h2 class="section-title">
         <i class="fa-solid fa-cart-shopping"></i> Mon Panier
     </h2>
 
+    <?php if ($cart_error): ?>
+        <div class="alert alert-error">
+            <i class="fa-solid fa-circle-exclamation"></i> <?= $cart_error ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($cart_success): ?>
+        <div class="alert alert-success">
+            <i class="fa-solid fa-check-circle"></i> <?= htmlspecialchars($cart_success) ?>
+        </div>
+    <?php endif; ?>
+
     <?php if (empty($cartItems)): ?>
-        <div class="auth-container dark-form glass-card form-card text-center" style="max-width: 600px; margin: 40px auto;">
+        <div class="auth-container dark-form glass-card form-card text-center cart-empty-container">
             <i class="fa-solid fa-basket-shopping cart-empty-basket"></i>
             <h3>Votre panier est vide.</h3>
-            <p style="color: #aaa; margin-bottom: 20px;">Découvrez notre sélection d'équipements pour commencer vos achats.</p>
+            <p class="cart-empty-text">Découvrez notre sélection d'équipements pour commencer vos achats.</p>
             <a href="articles" class="btn-primary">Retour au catalogue</a>
         </div>
     <?php else: ?>
@@ -20,7 +37,7 @@
                                 <tr>
                                     <th>Produit</th>
                                     <th>Prix unitaire</th>
-                                    <th style="width: 120px;">Quantité</th>
+                                    <th class="cart-qty-column">Quantité</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -45,7 +62,7 @@
                                             <?= number_format($item['price'], 2) ?> €
                                         </td>
                                         <td>
-                                            <div class="input-wrapper" style="margin-bottom: 0;">
+                                            <div class="cart-qty-wrapper">
                                                 <input type="number" name="quantities[<?= $item['cart_id'] ?>]" value="<?= $item['quantity'] ?>" min="1" class="cart-qty-input">
                                             </div>
                                         </td>
@@ -80,8 +97,8 @@
                         <span><?= number_format($total, 2) ?> €</span>
                     </div>
                     
-                    <a href="cart_validation" class="btn-primary btn-full-width btn-glow" style="display: block; text-align: center;">
-                        Valider la commande <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i>
+                    <a href="cart_validation" class="btn-primary btn-full-width btn-glow cart-validate-btn">
+                        Valider la commande <i class="fa-solid fa-arrow-right cart-validate-icon"></i>
                     </a>
                     
                     <div class="cart-continue">

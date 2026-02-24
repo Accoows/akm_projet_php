@@ -8,7 +8,7 @@ $success = null;
 // 1. Récupérer le panier
 try {
     $stmt = $pdo->prepare("
-        SELECT a.id, a.price, a.name 
+        SELECT a.id, a.price, a.name, c.quantity
         FROM Cart c 
         JOIN Article a ON c.article_id = a.id 
         WHERE c.user_id = ?
@@ -21,7 +21,7 @@ try {
 
 $total = 0;
 foreach ($cartItems as $item) {
-    $total += $item['price'];
+    $total += $item['price'] * $item['quantity'];
 }
 
 // 2. Traitement du formulaire
@@ -58,9 +58,10 @@ if (isPost()) {
             $stmtInvoice->execute([$userId, $total, $address, $city, $zip]);
 
             // 3. Mettre à jour les stocks
-            $stmtStock = $pdo->prepare("UPDATE Stock SET quantity = quantity - 1 WHERE article_id = ? AND quantity > 0");
+            $stmtStock = $pdo->prepare("UPDATE Stock SET quantity = quantity - ? WHERE article_id = ? AND quantity >= ?");
             foreach ($cartItems as $item) {
-                $stmtStock->execute([$item['id']]);
+                // Diminuer le stock de la quantité achetée
+                $stmtStock->execute([$item['quantity'], $item['id'], $item['quantity']]);
             }
 
             // 4. Vider le panier
