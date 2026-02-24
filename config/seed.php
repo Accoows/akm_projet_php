@@ -14,7 +14,7 @@ try {
 
     // Insertion Admin (Compte test par défaut)
     $pdo->prepare("INSERT INTO User (username, password, email, balance, profile_picture, role) VALUES (?, ?, ?, ?, ?, ?)")
-        ->execute(['Admin', $password, 'admin@atcfm.fr', 9999.99, 'assets/images/logo.png', 'admin']);
+        ->execute(['Admin', $password, 'admin@atcfm.fr', 9999.99, 'uploads/articles/test.jpg', 'admin']);
 
     $adminId = $pdo->lastInsertId();
 
@@ -26,7 +26,7 @@ try {
     for ($i = 0; $i < 10; $i++) {
         $username = $firstNames[array_rand($firstNames)] . rand(10, 99);
         $email = strtolower($username . "@mail.fr");
-        $stmtUser->execute([$username, $password, $email, rand(50, 500), 'assets/images/logo_atcfm.png', 'user']);
+        $stmtUser->execute([$username, $password, $email, rand(50, 500), 'uploads/articles/test.jpg', 'user']);
     }
 
     // 3. Articles basés sur TES fichiers (image_97b2dc.webp)

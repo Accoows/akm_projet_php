@@ -63,7 +63,7 @@
                 <img id="image-preview" src="" alt="Aperçu" class="img-preview">
             </div>
 
-            <button type="submit" class="btn-primary btn-full-width">
+            <button type="submit" name="sell_btn" class="btn-primary btn-full-width">
                 <i class="fa-solid fa-paper-plane"></i> Mettre en vente
             </button>
         </form>

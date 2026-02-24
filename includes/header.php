@@ -8,6 +8,8 @@ require_once 'controller/c_header.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ATCFM - Équipement Tactique</title>
+    
+    <link rel="icon" type="image/x-icon" href="assets/images/logo_atcfm.ico">
 
     <base href="<?= $scriptPath ?>">
 

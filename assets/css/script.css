@@ -1060,6 +1060,10 @@ footer {
     text-transform: uppercase;
     transition: background 0.3s;
     font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .btn-primary:hover {
@@ -1471,7 +1475,10 @@ footer {
     text-transform: uppercase;
     transition: background 0.3s;
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     font-size: 0.9rem;
 }
 
@@ -1850,10 +1857,16 @@ footer {
 }
 
 .nav-avatar-img {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav-avatar-btn i {
+    font-size: 1.4rem;
+    color: var(--bg-olive-light);
 }
 
 /* =========================================
