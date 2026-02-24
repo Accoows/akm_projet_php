@@ -54,7 +54,7 @@
                 <div class="form-group">
                     <label for="confirm_password">Confirmation</label>
                     <div class="input-wrapper">
-                        <i class="fa-solid fa-shield-check"></i>
+                        <i class="fa-solid fa-lock"></i>
                         <input type="password" id="confirm_password" name="confirm_password" required placeholder="••••••••">
                     </div>
                 </div>

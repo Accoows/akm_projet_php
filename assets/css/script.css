@@ -811,6 +811,16 @@ footer {
     border-radius: 50%;
 }
 
+.profile-avatar .default-avatar-icon {
+    font-size: 110px;
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
 .profile-info {
     flex: 1;
 }
@@ -1042,6 +1052,8 @@ footer {
 .table-dark tbody tr {
     transition: all 0.3s ease;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: #1f1f1f;
+    /* Added a dark background so white text is readable */
 }
 
 .table-dark tbody tr:last-child {
@@ -1096,6 +1108,85 @@ footer {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+}
+
+.articles-search-form {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.articles-search-input-wrapper {
+    flex: 1;
+}
+
+.articles-search-input-wrapper .search-input {
+    width: 100%;
+}
+
+/* Custom Filter Dropdown (articles.php) */
+.custom-dropdown-wrapper {
+    width: 200px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.custom-dropdown-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 12px 15px 12px 45px !important;
+}
+
+.custom-dropdown-trigger .fa-filter {
+    position: absolute;
+    left: 15px;
+    color: var(--text-muted);
+}
+
+.custom-dropdown-trigger .fa-chevron-down {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    transition: transform 0.3s;
+}
+
+.custom-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    margin-top: 5px;
+    z-index: 1000;
+    overflow: hidden;
+    display: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.custom-dropdown-option {
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.custom-dropdown-option.active {
+    color: var(--bg-olive-light);
+}
+
+.custom-dropdown-option .fa-check {
+    font-size: 0.8em;
 }
 
 .error-icon span {

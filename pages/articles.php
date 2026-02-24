@@ -9,12 +9,47 @@
     </section>
 
     <div class="search-container">
-        <form action="articles" method="GET" class="search-form">
+        <form action="articles" method="GET" class="search-form articles-search-form">
             <!-- Hidden input if the router relies on ?page=articles -->
             <?php if(isset($_GET['page'])): ?>
                 <input type="hidden" name="page" value="articles">
             <?php endif; ?>
-            <div class="search-input-wrapper">
+
+            <div class="custom-dropdown-wrapper" id="sortDropdown">
+                <input type="hidden" name="sort" id="sortInput" value="<?= isset($_GET['sort']) ? htmlspecialchars($_GET['sort']) : 'newest' ?>">
+                
+                <?php 
+                $sortLabels = [
+                    'newest' => 'Plus récents',
+                    'oldest' => 'Plus anciens',
+                    'price_asc' => 'Prix croissant',
+                    'price_desc' => 'Prix décroissant',
+                    'name_asc' => 'Nom (A-Z)',
+                    'name_desc' => 'Nom (Z-A)'
+                ];
+                $currentSort = isset($_GET['sort']) && array_key_exists($_GET['sort'], $sortLabels) ? $_GET['sort'] : 'newest';
+                $currentLabel = $sortLabels[$currentSort];
+                ?>
+
+                <div class="custom-dropdown-trigger search-input">
+                    <i class="fa-solid fa-filter"></i>
+                    <span id="sortSelectedText"><?= $currentLabel ?></span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+
+                <div class="custom-dropdown-menu">
+                    <?php foreach ($sortLabels as $value => $label): ?>
+                        <div class="custom-dropdown-option <?= $currentSort === $value ? 'active' : '' ?>" data-value="<?= $value ?>">
+                            <?= $label ?>
+                            <?php if ($currentSort === $value): ?>
+                                <i class="fa-solid fa-check"></i>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <div class="search-input-wrapper articles-search-input-wrapper">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" name="q" placeholder="Rechercher un équipement, une marque..." value="<?= isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '' ?>" class="search-input">
                 <button type="submit" class="btn-primary search-btn">Rechercher</button>
