@@ -27,9 +27,12 @@
                         <h3 class="article-title">
                             <?= htmlspecialchars($product['name']) ?>
                         </h3>
-                        <div class="article-seller">
-                            <i class="fa-solid fa-user"></i> <?= htmlspecialchars($product['seller_name'] ?? 'Inconnu') ?>
-                        </div>
+                    </div>
+                </a>
+                <div class="article-info pt-0">
+                    <a href="account&id=<?= $product['author_id'] ?>" class="article-seller text-link d-inline-block">
+                        <i class="fa-solid fa-user"></i> <?= htmlspecialchars($product['seller_name'] ?? 'Inconnu') ?>
+                    </a>
                         <p class="article-description">
                             <?= htmlspecialchars(substr($product['description'] ?? '', 0, 60)) ?>...
                         </p>

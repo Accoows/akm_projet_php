@@ -7,8 +7,8 @@
 
 <section class="grid-articles">
     <?php foreach ($latestArticles as $article): ?>
-        <a href="detail?id=<?= $article['id'] ?>" class="article-box-link">
-            <div class="article-box">
+        <div class="article-box">
+            <a href="detail?id=<?= $article['id'] ?>" class="article-box-link">
                 <div class="article-image">
                     <?php if (!empty($article['image_link'])): ?>
                         <img src="<?= htmlspecialchars($article['image_link']) ?>"
@@ -18,10 +18,12 @@
                     <?php endif; ?>
                 </div>
                 <span><?= htmlspecialchars($article['name']) ?></span>
-                <small class="article-seller"><i class="fa-solid fa-user"></i> <?= htmlspecialchars($article['seller_name'] ?? 'Inconnu') ?></small>
+            </a>
+            <a href="account&id=<?= $article['author_id'] ?>" class="article-seller text-link">
+                    <i class="fa-solid fa-user"></i> <?= htmlspecialchars($article['seller_name'] ?? 'Inconnu') ?>
+                </a>
                 <div class="article-price price-home"><?= number_format($article['price'], 2) ?> €</div>
-            </div>
-        </a>
+        </div>
     <?php endforeach; ?>
 </section>
 
@@ -31,8 +33,8 @@
 
 <section class="grid-articles">
     <?php foreach ($nextArticles as $article): ?>
-        <a href="detail?id=<?= $article['id'] ?>" class="article-box-link">
-            <div class="article-box">
+        <div class="article-box">
+            <a href="detail?id=<?= $article['id'] ?>" class="article-box-link">
                 <div class="article-image">
                     <?php if (!empty($article['image_link'])): ?>
                         <img src="<?= htmlspecialchars($article['image_link']) ?>"
@@ -44,12 +46,14 @@
                 <span>
                     <?= htmlspecialchars($article['name']) ?>
                 </span>
-                <small class="article-seller"><i class="fa-solid fa-user"></i> <?= htmlspecialchars($article['seller_name'] ?? 'Inconnu') ?></small>
+            </a>
+            <a href="account&id=<?= $article['author_id'] ?>" class="article-seller text-link">
+                    <i class="fa-solid fa-user"></i> <?= htmlspecialchars($article['seller_name'] ?? 'Inconnu') ?>
+                </a>
                 <div class="article-price price-home">
                     <?= number_format($article['price'], 2) ?> €
                 </div>
-            </div>
-        </a>
+        </div>
     <?php endforeach; ?>
 </section>
 

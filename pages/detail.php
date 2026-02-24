@@ -27,7 +27,10 @@
                 </div>
 
                 <div class="detail-seller">
-                    <i class="fa-solid fa-user"></i> Vendu par : <strong><?= htmlspecialchars($product['seller_name'] ?? 'Inconnu') ?></strong>
+                    <i class="fa-solid fa-user"></i> Vendu par : 
+                    <a href="account&id=<?= $product['author_id'] ?>" class="text-link">
+                        <strong><?= htmlspecialchars($product['seller_name'] ?? 'Inconnu') ?></strong>
+                    </a>
                 </div>
 
                 <p class="detail-description">

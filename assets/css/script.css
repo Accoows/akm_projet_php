@@ -2206,3 +2206,17 @@ footer {
     margin-bottom: 10px;
     border-radius: 8px;
 }
+
+/* Utilities for cleaning PHP inline styles */
+.pt-0 {
+    padding-top: 0 !important;
+}
+
+.grid-span-1 {
+    grid-column: span 1 !important;
+}
+
+.text-muted-xs {
+    color: #666;
+    font-size: 0.8rem;
+}
