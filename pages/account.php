@@ -73,7 +73,7 @@
                 </div>
 
                 <div id="profile-edit" class="hidden">
-                    <form action="index.php?page=account" method="POST" class="auth-form profile-edit-form">
+                    <form action="index.php?page=account" method="POST" class="auth-form profile-edit-form" enctype="multipart/form-data">
                         <input type="hidden" name="action" value="edit_profile">
                         
                         <div class="form-group">
@@ -90,6 +90,20 @@
                                 <i class="fa-solid fa-envelope"></i>
                                 <input type="email" id="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profile_picture">Photo de profil (Optionnel)</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-image"></i>
+                                <input type="file" id="profile_picture" name="profile_picture" accept="image/png, image/jpeg, image/webp" class="input-file-custom profile-file-input">
+                            </div>
+                            <?php if (!empty($user['profile_picture'])): ?>
+                                <div style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
+                                    <input type="checkbox" id="delete_picture" name="delete_picture" value="1" style="width: auto;">
+                                    <label for="delete_picture" style="margin: 0; font-size: 0.9em; color: var(--text-muted); font-weight: normal; cursor: pointer;">Supprimer la photo actuelle</label>
+                                </div>
+                            <?php endif; ?>
                         </div>
 
                         <div class="form-group">

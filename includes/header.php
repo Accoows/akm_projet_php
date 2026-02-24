@@ -47,7 +47,16 @@ if (substr($scriptPath, -1) !== '/') {
                             <li><a href="admin" class="nav-link-admin">Admin</a></li>
                         <?php endif; ?>
 
-                        <li><a href="account" class="btn-nav">Mon Compte</a></li>
+                        <li>
+                            <a href="account" class="btn-nav nav-avatar-btn">
+                                <?php if (!empty($_SESSION['user']['profile_picture'])): ?>
+                                    <img src="<?= htmlspecialchars($_SESSION['user']['profile_picture']) ?>" alt="Avatar" class="nav-avatar-img">
+                                <?php else: ?>
+                                    <i class="fa-solid fa-user-circle"></i>
+                                <?php endif; ?>
+                                Mon Compte
+                            </a>
+                        </li>
                         <li><a href="logout"><i class="fa-solid fa-right-from-bracket"></i></a></li>
 
                     <?php else: ?>

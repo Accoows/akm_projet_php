@@ -1457,6 +1457,10 @@ footer {
     text-decoration: none;
 }
 
+.profile-file-input {
+    padding: 10px;
+}
+
 /* =========================================
    9. CART
    ========================================= */
@@ -1464,7 +1468,7 @@ footer {
 .btn-danger {
     background-color: #e74c3c;
     color: var(--text-white);
-    padding: 8px 16px;
+    padding: 12px 24px;
     border: none;
     border-radius: var(--radius);
     cursor: pointer;
@@ -1797,6 +1801,19 @@ footer {
     font-weight: bold;
 }
 
+.nav-avatar-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-avatar-img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 /* =========================================
    10. CHECKOUT (Validation)
    ========================================= */
@@ -2084,9 +2101,23 @@ footer {
     background: rgba(10, 10, 10, 0.8) !important;
 }
 
+.textarea-custom {
+    padding-top: 15px;
+    resize: vertical;
+}
+
+.img-preview {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    margin-top: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+}
+
 .form-row-flex {
     display: flex;
-    gap: 15px;
+    gap: 20px;
 }
 
 .form-item-flex {
