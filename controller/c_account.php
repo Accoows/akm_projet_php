@@ -6,23 +6,35 @@ $userId = $_SESSION['user']['id'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'edit_profile') {
     $newUsername = trim($_POST['username'] ?? '');
     $newEmail = trim($_POST['email'] ?? '');
+    $newPassword = $_POST['password'] ?? '';
+    $newPasswordConfirm = $_POST['password_confirm'] ?? '';
     
     if (!empty($newUsername) && !empty($newEmail)) {
-        try {
-            $stmtCheck = $pdo->prepare("SELECT id FROM User WHERE (email = ? OR username = ?) AND id != ?");
-            $stmtCheck->execute([$newEmail, $newUsername, $userId]);
-            if ($stmtCheck->rowCount() > 0) {
-                $error_msg = "L'email ou le nom d'utilisateur est déjà utilisé.";
-            } else {
-                $stmtUpdate = $pdo->prepare("UPDATE User SET username = ?, email = ? WHERE id = ?");
-                $stmtUpdate->execute([$newUsername, $newEmail, $userId]);
-                
-                $_SESSION['user']['username'] = $newUsername;
-                $_SESSION['user']['email'] = $newEmail;
-                $success_msg = "Vos informations ont été mises à jour avec succès.";
+        if (!empty($newPassword) && $newPassword !== $newPasswordConfirm) {
+            $error_msg = "Les mots de passe ne correspondent pas.";
+        } else {
+            try {
+                $stmtCheck = $pdo->prepare("SELECT id FROM User WHERE (email = ? OR username = ?) AND id != ?");
+                $stmtCheck->execute([$newEmail, $newUsername, $userId]);
+                if ($stmtCheck->rowCount() > 0) {
+                    $error_msg = "L'email ou le nom d'utilisateur est déjà utilisé.";
+                } else {
+                    if (!empty($newPassword)) {
+                        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                        $stmtUpdate = $pdo->prepare("UPDATE User SET username = ?, email = ?, password = ? WHERE id = ?");
+                        $stmtUpdate->execute([$newUsername, $newEmail, $hashedPassword, $userId]);
+                    } else {
+                        $stmtUpdate = $pdo->prepare("UPDATE User SET username = ?, email = ? WHERE id = ?");
+                        $stmtUpdate->execute([$newUsername, $newEmail, $userId]);
+                    }
+                    
+                    $_SESSION['user']['username'] = $newUsername;
+                    $_SESSION['user']['email'] = $newEmail;
+                    $success_msg = "Vos informations ont été mises à jour avec succès.";
+                }
+            } catch (PDOException $e) {
+                $error_msg = "Erreur lors de la mise à jour.";
             }
-        } catch (PDOException $e) {
-            $error_msg = "Erreur lors de la mise à jour.";
         }
     } else {
         $error_msg = "Veuillez remplir tous les champs.";
@@ -62,7 +74,6 @@ try {
     $stmtInv->execute([$userId]);
     $invoices = $stmtInv->fetchAll();
 
-    // Récupérer les articles créés par l'utilisateur
     $stmtMyArt = $pdo->prepare("SELECT a.*, s.quantity FROM Article a LEFT JOIN Stock s ON a.id = s.article_id WHERE a.author_id = ? ORDER BY a.id DESC");
     $stmtMyArt->execute([$userId]);
     $myArticles = $stmtMyArt->fetchAll();

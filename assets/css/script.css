@@ -16,6 +16,8 @@
     --nav-border: rgba(255, 255, 255, 0.05);
     --nav-hover: #a3b18a;
 
+    --bg-card: rgba(26, 26, 26, 0.6);
+
     /* On ajoute une variable d'ombre */
     --shadow-modern: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
@@ -353,6 +355,7 @@ nav a:hover {
 
 .product-card {
     background: var(--bg-card);
+    backdrop-filter: blur(10px);
     border-radius: var(--radius);
     border: 1px solid rgba(255, 255, 255, 0.03);
     padding: 12px;
@@ -452,7 +455,7 @@ nav a:hover {
 }
 
 .btn-cart-icon {
-    background: var(--olive-primary);
+    background: var(--bg-olive-dark);
     color: white;
     border: none;
     width: 42px;
@@ -466,7 +469,7 @@ nav a:hover {
 }
 
 .btn-cart-icon:hover {
-    background: var(--olive-light);
+    background: var(--bg-olive-light);
     color: var(--bg-dark);
     transform: scale(1.1);
 }
@@ -800,6 +803,7 @@ footer {
 
 .account-card {
     background: var(--bg-card);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius);
     padding: 30px;

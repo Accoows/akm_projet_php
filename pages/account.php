@@ -92,6 +92,22 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="password">Nouveau mot de passe</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" id="password" name="password" placeholder="Laisser vide pour ne pas changer" autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password_confirm">Confirmer le mot de passe</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" id="password_confirm" name="password_confirm" placeholder="Laisser vide pour ne pas changer" autocomplete="new-password">
+                            </div>
+                        </div>
+
                         <div class="profile-form-actions">
                             <button type="submit" class="btn-primary profile-form-btn">
                                 <i class="fa-solid fa-save"></i> Enregistrer
