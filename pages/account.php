@@ -99,9 +99,9 @@
                                 <input type="file" id="profile_picture" name="profile_picture" accept="image/png, image/jpeg, image/webp" class="input-file-custom profile-file-input">
                             </div>
                             <?php if (!empty($user['profile_picture'])): ?>
-                                <div style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
-                                    <input type="checkbox" id="delete_picture" name="delete_picture" value="1" style="width: auto;">
-                                    <label for="delete_picture" style="margin: 0; font-size: 0.9em; color: var(--text-muted); font-weight: normal; cursor: pointer;">Supprimer la photo actuelle</label>
+                                <div class="profile-delete-wrapper">
+                                    <input type="checkbox" id="delete_picture" name="delete_picture" value="1" class="profile-delete-checkbox">
+                                    <label for="delete_picture" class="profile-delete-label">Supprimer la photo actuelle</label>
                                 </div>
                             <?php endif; ?>
                         </div>

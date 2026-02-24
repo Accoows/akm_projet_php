@@ -1461,8 +1461,27 @@ footer {
     padding: 10px;
 }
 
+.profile-delete-wrapper {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.profile-delete-checkbox {
+    width: auto !important;
+}
+
+.profile-delete-label {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    font-weight: normal;
+    cursor: pointer;
+}
+
 /* =========================================
-   9. CART
+   09. PANIERT
    ========================================= */
 
 .btn-danger {

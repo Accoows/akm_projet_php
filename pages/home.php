@@ -12,7 +12,7 @@
                 <div class="article-image">
                     <?php if (!empty($article['image_link'])): ?>
                         <img src="<?= htmlspecialchars($article['image_link']) ?>"
-                            alt="<?= htmlspecialchars($article['name']) ?>" style="max-width:100%; height:auto;">
+                            alt="<?= htmlspecialchars($article['name']) ?>" class="article-image-img">
                     <?php else: ?>
                         <i class="fa-solid fa-image"></i>
                     <?php endif; ?>
@@ -36,7 +36,7 @@
                 <div class="article-image">
                     <?php if (!empty($article['image_link'])): ?>
                         <img src="<?= htmlspecialchars($article['image_link']) ?>"
-                            alt="<?= htmlspecialchars($article['name']) ?>" style="max-width:100%; height:auto;">
+                            alt="<?= htmlspecialchars($article['name']) ?>" class="article-image-img">
                     <?php else: ?>
                         <i class="fa-solid fa-image"></i>
                     <?php endif; ?>
