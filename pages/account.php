@@ -8,10 +8,11 @@
         <div class="account-card profile-card">
             <div class="profile-header">
                 <div class="profile-avatar">
-                    <?php
-                    $avatar = !empty($user['profile_picture']) ? $user['profile_picture'] : 'assets/images/placeholder_user.png';
-                    ?>
-                    <img src="<?= htmlspecialchars($avatar) ?>" alt="Avatar">
+                    <?php if (!empty($user['profile_picture'])): ?>
+                        <img src="<?= htmlspecialchars($user['profile_picture']) ?>" alt="Avatar">
+                    <?php else: ?>
+                        <i class="fa-solid fa-user-circle default-avatar-icon"></i>
+                    <?php endif; ?>
                 </div>
                 <h3><?= htmlspecialchars($user['username']) ?></h3>
                 <span class="user-role"><?= htmlspecialchars($user['role']) ?></span>

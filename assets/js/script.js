@@ -69,4 +69,51 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Custom Filter Dropdown logic (articles.php)
+    const sortDropdown = document.getElementById('sortDropdown');
+    if (sortDropdown) {
+        const trigger = sortDropdown.querySelector('.custom-dropdown-trigger');
+        const menu = sortDropdown.querySelector('.custom-dropdown-menu');
+        const options = sortDropdown.querySelectorAll('.custom-dropdown-option');
+        const input = document.getElementById('sortInput');
+        const icon = trigger.querySelector('.fa-chevron-down');
+
+        // Toggle menu
+        trigger.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const isOpen = menu.style.display === 'block';
+            menu.style.display = isOpen ? 'none' : 'block';
+            icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!sortDropdown.contains(e.target)) {
+                menu.style.display = 'none';
+                icon.style.transform = 'rotate(0deg)';
+            }
+        });
+
+        // Handle option selection
+        options.forEach(option => {
+            option.addEventListener('click', function () {
+                const value = this.getAttribute('data-value');
+                input.value = value;
+
+                // Submit the parent form
+                input.closest('form').submit();
+            });
+
+            // Add hover effect
+            option.addEventListener('mouseenter', function () {
+                if (!this.classList.contains('active')) {
+                    this.style.backgroundColor = 'rgba(255,255,255,0.05)';
+                }
+            });
+            option.addEventListener('mouseleave', function () {
+                this.style.backgroundColor = 'transparent';
+            });
+        });
+    }
 });
