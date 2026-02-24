@@ -103,18 +103,17 @@ header {
 
 /* Logo */
 .logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--text-white);
-    text-decoration: none;
-    text-transform: uppercase;
     display: flex;
     align-items: center;
-    gap: 10px;
+    text-decoration: none;
 }
 
-.logo span {
-    color: var(--nav-hover);
+.logo img {
+    height: 45px;
+    width: auto;
+    display: block;
+    transform: scale(1.8);
+    transform-origin: left center;
 }
 
 /* Menu */
@@ -599,6 +598,10 @@ nav a:hover {
     margin-top: auto;
 }
 
+.price-home {
+    margin-bottom: 0;
+}
+
 /* About Section */
 .about-section {
     display: grid;
@@ -615,6 +618,26 @@ nav a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#about-presentation-img {
+    background: url('../images/airsoft_presentation.webp') center/cover no-repeat;
+    padding: 0;
+}
+
+.article-seller {
+    display: block;
+    color: #888;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+.detail-seller {
+    color: #888;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 1rem;
 }
 
 /* Reviews Section */
@@ -1414,7 +1437,7 @@ footer {
 
 .detail-stock {
     margin-top: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 0px;
     font-weight: bold;
 }
 

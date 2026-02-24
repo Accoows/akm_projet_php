@@ -14,7 +14,7 @@ try {
 
     // Insertion Admin (Compte test par défaut)
     $pdo->prepare("INSERT INTO User (username, password, email, balance, profile_picture, role) VALUES (?, ?, ?, ?, ?, ?)")
-        ->execute(['Admin', $password, 'admin@jrsoft.fr', 9999.99, 'assets/images/logo.png', 'admin']);
+        ->execute(['Admin', $password, 'admin@atcfm.fr', 9999.99, 'assets/images/logo.png', 'admin']);
 
     $adminId = $pdo->lastInsertId();
 

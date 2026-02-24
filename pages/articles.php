@@ -27,6 +27,9 @@
                         <h3 class="article-title">
                             <?= htmlspecialchars($product['name']) ?>
                         </h3>
+                        <div class="article-seller">
+                            <i class="fa-solid fa-user"></i> <?= htmlspecialchars($product['seller_name'] ?? 'Inconnu') ?>
+                        </div>
                         <p class="article-description">
                             <?= htmlspecialchars(substr($product['description'] ?? '', 0, 60)) ?>...
                         </p>

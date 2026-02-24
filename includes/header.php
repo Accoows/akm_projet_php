@@ -31,7 +31,7 @@ if (substr($scriptPath, -1) !== '/') {
     <header>
         <div class="header-content">
             <a href="./" class="logo">
-                <i class="fa-solid fa-shield-halved"></i> AT<span>CFM</span>
+                <img src="assets/images/logo_atcfm_bg.webp" alt="ATCFM Logo">
             </a>
 
             <nav>

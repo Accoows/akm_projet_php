@@ -26,6 +26,10 @@
                     <?php endif; ?>
                 </div>
 
+                <div class="detail-seller">
+                    <i class="fa-solid fa-user"></i> Vendu par : <strong><?= htmlspecialchars($product['seller_name'] ?? 'Inconnu') ?></strong>
+                </div>
+
                 <p class="detail-description">
                     <?= nl2br(htmlspecialchars($product['description'] ?? '')) ?>
                 </p>

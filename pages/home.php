@@ -18,8 +18,8 @@
                     <?php endif; ?>
                 </div>
                 <span><?= htmlspecialchars($article['name']) ?></span>
-                <br>
-                <small><?= number_format($article['price'], 2) ?> €</small>
+                <small class="article-seller"><i class="fa-solid fa-user"></i> <?= htmlspecialchars($article['seller_name'] ?? 'Inconnu') ?></small>
+                <div class="article-price price-home"><?= number_format($article['price'], 2) ?> €</div>
             </div>
         </a>
     <?php endforeach; ?>
@@ -44,10 +44,10 @@
                 <span>
                     <?= htmlspecialchars($article['name']) ?>
                 </span>
-                <br>
-                <small>
+                <small class="article-seller"><i class="fa-solid fa-user"></i> <?= htmlspecialchars($article['seller_name'] ?? 'Inconnu') ?></small>
+                <div class="article-price price-home">
                     <?= number_format($article['price'], 2) ?> €
-                </small>
+                </div>
             </div>
         </a>
     <?php endforeach; ?>
@@ -60,7 +60,7 @@
             et notre passion nous permettent de rester à la pointe de l'industrie.</p>
     </div>
     <div class="about-image">
-        <div class="img-placeholder">IMAGE ENTREPRISE</div>
+        <div class="img-placeholder" id="about-presentation-img"></div>
     </div>
 </section>
 
