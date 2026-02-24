@@ -36,4 +36,37 @@ document.addEventListener('DOMContentLoaded', () => {
             balanceEdit.classList.add('hidden');
         });
     }
+
+    // Image Upload Preview functionality
+    const imageInput = document.getElementById('image');
+    const previewContainer = document.getElementById('preview-container');
+    const imagePreview = document.getElementById('image-preview');
+
+    if (imageInput && imagePreview) {
+        imageInput.addEventListener('change', function () {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.addEventListener('load', function () {
+                    imagePreview.src = this.result;
+                    if (previewContainer) {
+                        previewContainer.classList.remove('hidden');
+                    } else {
+                        imagePreview.classList.remove('hidden'); // Fallback if no container
+                    }
+                });
+
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = '';
+                if (previewContainer) {
+                    previewContainer.classList.add('hidden');
+                } else {
+                    imagePreview.classList.add('hidden'); // Fallback
+                }
+            }
+        });
+    }
 });

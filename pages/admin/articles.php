@@ -31,6 +31,7 @@
                         <td><?= number_format($a['price'], 2) ?> €</td>
                         <td><?= $a['quantity'] ?? 0 ?></td>
                         <td>
+                            <a href="edit_article&id=<?= $a['id'] ?>" class="btn-small btn-secondary"><i class="fa-solid fa-pen"></i></a>
                             <a href="admin&sub=articles&action=delete&id=<?= $a['id'] ?>" class="btn-small btn-danger"
                                 onclick="return confirm('Voulez-vous vraiment supprimer cet article ?');"><i
                                     class="fa-solid fa-trash"></i></a>

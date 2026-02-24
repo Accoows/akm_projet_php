@@ -1,5 +1,5 @@
 <?php
-// controller/c_sell.php
+
 
 $error = null;
 $success = null;
@@ -10,9 +10,10 @@ if (isPost() && isset($_POST['sell_btn'])) {
     $price = floatval($_POST['price']);
     $quantity = intval($_POST['quantity']);
 
-    // Gestion de l'image
-    $imagePath = 'uploads/articles/bg1.png'; // Défaut
+    // Set a default image if none is provided
+    $imagePath = 'uploads/articles/bg1.png'; 
 
+    // Handle image upload with validation
     if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
         $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
         $filename = $_FILES['image']['name'];
@@ -21,7 +22,7 @@ if (isPost() && isset($_POST['sell_btn'])) {
         $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
         if (in_array($ext, $allowed)) {
-            if ($filesize < 5 * 1024 * 1024) { // 5MB max
+            if ($filesize < 5 * 1024 * 1024) { 
                 $newFilename = uniqid() . '.' . $ext;
                 $uploadDir = 'uploads/articles/';
 
@@ -45,14 +46,15 @@ if (isPost() && isset($_POST['sell_btn'])) {
     if (!$error) {
         if (!empty($name) && $price > 0 && $quantity >= 0) {
             try {
+                // Begin a transaction to ensure both Article and Stock are inserted atomically
                 $pdo->beginTransaction();
 
-                // Insertion Article
+                // Insert the new article
                 $stmt = $pdo->prepare("INSERT INTO Article (name, description, price, author_id, image_link, publication_date) VALUES (?, ?, ?, ?, ?, NOW())");
                 $stmt->execute([$name, $description, $price, $_SESSION['user']['id'], $imagePath]);
                 $articleId = $pdo->lastInsertId();
 
-                // Insertion Stock
+                // Insert the corresponding stock quantity
                 $stmtStock = $pdo->prepare("INSERT INTO Stock (article_id, quantity) VALUES (?, ?)");
                 $stmtStock->execute([$articleId, $quantity]);
 

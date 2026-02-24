@@ -12,7 +12,7 @@
     <?php else: ?>
 
         <div class="checkout-container">
-            <!-- Left: Shipping Form -->
+            
             <div class="checkout-form dark-form">
                 <h3><i class="fa-solid fa-location-dot"></i> Adresse de livraison</h3>
 
@@ -46,15 +46,18 @@
                 </form>
             </div>
 
-            <!-- Right: Order Summary -->
+            
             <div class="checkout-summary">
                 <h3><i class="fa-solid fa-file-invoice-dollar"></i> Récapitulatif</h3>
 
                 <div class="summary-items">
                     <?php foreach ($cartItems as $item): ?>
                         <div class="summary-item">
-                            <span><?= htmlspecialchars($item['name']) ?></span>
-                            <span><?= number_format($item['price'], 2) ?> €</span>
+                            <span class="summary-item-name"><?= htmlspecialchars($item['name']) ?></span>
+                            <span class="summary-item-price">
+                                <span class="summary-item-qty">x<?= $item['quantity'] ?></span>
+                                <?= number_format($item['price'] * $item['quantity'], 2) ?> €
+                            </span>
                         </div>
                     <?php endforeach; ?>
                 </div>

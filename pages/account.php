@@ -1,10 +1,10 @@
 <div class="container">
     <h2 class="section-title">
-        <i class="fa-solid fa-user-shield"></i> Mon Espace Personnel
+        <i class="fa-solid fa-<?= $isPublicProfile ? 'user' : 'user-shield' ?>"></i> 
+        <?= $isPublicProfile ? 'Profil de ' . htmlspecialchars($user['username']) : 'Mon Espace Personnel' ?>
     </h2>
 
     <div class="account-grid">
-        <!-- Profil -->
         <div class="account-card profile-card">
             <div class="profile-header">
                 <div class="profile-avatar">
@@ -32,8 +32,9 @@
                 <div id="profile-info">
                     <div class="detail-row">
                         <span class="label">Email :</span>
-                        <span class="value"><?= htmlspecialchars($user['email']) ?></span>
+                        <span class="value"><?= $isPublicProfile ? '<i class="fa-solid fa-lock text-muted-xs" title="Privé"></i> Privé' : htmlspecialchars($user['email']) ?></span>
                     </div>
+                    <?php if (!$isPublicProfile): ?>
                     <div class="detail-row">
                         <span class="label">Solde :</span>
                         <span class="value balance"><?= number_format($user['balance'], 2) ?> €</span>
@@ -47,8 +48,10 @@
                             <i class="fa-solid fa-wallet"></i> Recharger
                         </button>
                     </div>
+                    <?php endif; ?>
                 </div>
 
+                <?php if (!$isPublicProfile): ?>
                 <div id="balance-edit" class="hidden">
                     <form action="index.php?page=account" method="POST" class="auth-form profile-edit-form">
                         <input type="hidden" name="action" value="update_balance">
@@ -73,7 +76,7 @@
                 </div>
 
                 <div id="profile-edit" class="hidden">
-                    <form action="index.php?page=account" method="POST" class="auth-form profile-edit-form">
+                    <form action="index.php?page=account" method="POST" class="auth-form profile-edit-form" enctype="multipart/form-data">
                         <input type="hidden" name="action" value="edit_profile">
                         
                         <div class="form-group">
@@ -92,6 +95,36 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="profile_picture">Photo de profil (Optionnel)</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-image"></i>
+                                <input type="file" id="profile_picture" name="profile_picture" accept="image/png, image/jpeg, image/webp" class="input-file-custom profile-file-input">
+                            </div>
+                            <?php if (!empty($user['profile_picture'])): ?>
+                                <div class="profile-delete-wrapper">
+                                    <input type="checkbox" id="delete_picture" name="delete_picture" value="1" class="profile-delete-checkbox">
+                                    <label for="delete_picture" class="profile-delete-label">Supprimer la photo actuelle</label>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Nouveau mot de passe</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" id="password" name="password" placeholder="Laisser vide pour ne pas changer" autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password_confirm">Confirmer le mot de passe</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" id="password_confirm" name="password_confirm" placeholder="Laisser vide pour ne pas changer" autocomplete="new-password">
+                            </div>
+                        </div>
+
                         <div class="profile-form-actions">
                             <button type="submit" class="btn-primary profile-form-btn">
                                 <i class="fa-solid fa-save"></i> Enregistrer
@@ -102,10 +135,11 @@
                         </div>
                     </form>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
 
-        <!-- Historique Commandes -->
+        <?php if (!$isPublicProfile): ?>
         <div class="account-card history-card">
             <h3><i class="fa-solid fa-clock-rotate-left"></i> Historique des commandes</h3>
 
@@ -117,7 +151,7 @@
                         <thead>
                             <tr>
                                 <th>Date</th>
-                                <th>Montant</th>
+                                <th>Montant TTC</th>
                                 <th>Lieu</th>
                                 <th>Ref</th>
                             </tr>
@@ -136,24 +170,28 @@
                 </div>
             <?php endif; ?>
         </div>
+        <?php endif; ?>
 
-        <!-- Mes Articles en Vente -->
-        <div class="account-card my-articles-card grid-full-width">
-            <h3><i class="fa-solid fa-box-open"></i> Mes articles en vente</h3>
+        <div class="account-card my-articles-card <?= $isPublicProfile ? 'grid-span-1' : 'grid-full-width' ?>">
+            <h3><i class="fa-solid fa-box-open"></i> <?= $isPublicProfile ? 'Articles en vente' : 'Mes articles en vente' ?></h3>
 
             <?php if (empty($myArticles)): ?>
-                <p>Vous n'avez aucun article en vente.</p>
+                <p><?= $isPublicProfile ? 'Cet utilisateur n\'a' : 'Vous n\'avez' ?> aucun article en vente.</p>
+                <?php if (!$isPublicProfile): ?>
                 <div class="mt-15">
                     <a href="sell" class="btn-primary btn-small">
                         <i class="fa-solid fa-plus"></i> Créer une annonce
                     </a>
                 </div>
+                <?php endif; ?>
             <?php else: ?>
+                <?php if (!$isPublicProfile): ?>
                 <div class="mt-15 mb-15">
                     <a href="sell" class="btn-primary btn-small">
                         <i class="fa-solid fa-plus"></i> Créer une nouvelle annonce
                     </a>
                 </div>
+                <?php endif; ?>
                 <div class="table-scroll">
                     <table class="table-dark">
                         <thead>
@@ -162,7 +200,7 @@
                                 <th>Nom</th>
                                 <th>Prix</th>
                                 <th>Stock</th>
-                                <th>Actions</th>
+                                <?php if (!$isPublicProfile): ?><th>Actions</th><?php endif; ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -182,6 +220,7 @@
                                     </td>
                                     <td class="balance"><?= number_format($art['price'], 2) ?> €</td>
                                     <td><?= (int)$art['quantity'] ?></td>
+                                    <?php if (!$isPublicProfile): ?>
                                     <td>
                                         <div class="flex-actions">
                                             <a href="edit_article&id=<?= $art['id'] ?>" class="btn-secondary btn-small" title="Modifier">
@@ -192,6 +231,7 @@
                                             </a>
                                         </div>
                                     </td>
+                                    <?php endif; ?>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

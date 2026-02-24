@@ -7,21 +7,23 @@
 
 <section class="grid-articles">
     <?php foreach ($latestArticles as $article): ?>
-        <a href="detail?id=<?= $article['id'] ?>" class="article-box-link">
-            <div class="article-box">
+        <div class="article-box">
+            <a href="detail?id=<?= $article['id'] ?>" class="article-box-link">
                 <div class="article-image">
                     <?php if (!empty($article['image_link'])): ?>
                         <img src="<?= htmlspecialchars($article['image_link']) ?>"
-                            alt="<?= htmlspecialchars($article['name']) ?>" style="max-width:100%; height:auto;">
+                            alt="<?= htmlspecialchars($article['name']) ?>" class="article-image-img">
                     <?php else: ?>
                         <i class="fa-solid fa-image"></i>
                     <?php endif; ?>
                 </div>
                 <span><?= htmlspecialchars($article['name']) ?></span>
-                <br>
-                <small><?= number_format($article['price'], 2) ?> €</small>
-            </div>
-        </a>
+            </a>
+            <a href="account&id=<?= $article['author_id'] ?>" class="article-seller text-link">
+                    <i class="fa-solid fa-user"></i> <?= htmlspecialchars($article['seller_name'] ?? 'Inconnu') ?>
+                </a>
+                <div class="article-price price-home"><?= number_format($article['price'], 2) ?> €</div>
+        </div>
     <?php endforeach; ?>
 </section>
 
@@ -31,12 +33,12 @@
 
 <section class="grid-articles">
     <?php foreach ($nextArticles as $article): ?>
-        <a href="detail?id=<?= $article['id'] ?>" class="article-box-link">
-            <div class="article-box">
+        <div class="article-box">
+            <a href="detail?id=<?= $article['id'] ?>" class="article-box-link">
                 <div class="article-image">
                     <?php if (!empty($article['image_link'])): ?>
                         <img src="<?= htmlspecialchars($article['image_link']) ?>"
-                            alt="<?= htmlspecialchars($article['name']) ?>" style="max-width:100%; height:auto;">
+                            alt="<?= htmlspecialchars($article['name']) ?>" class="article-image-img">
                     <?php else: ?>
                         <i class="fa-solid fa-image"></i>
                     <?php endif; ?>
@@ -44,12 +46,14 @@
                 <span>
                     <?= htmlspecialchars($article['name']) ?>
                 </span>
-                <br>
-                <small>
+            </a>
+            <a href="account&id=<?= $article['author_id'] ?>" class="article-seller text-link">
+                    <i class="fa-solid fa-user"></i> <?= htmlspecialchars($article['seller_name'] ?? 'Inconnu') ?>
+                </a>
+                <div class="article-price price-home">
                     <?= number_format($article['price'], 2) ?> €
-                </small>
-            </div>
-        </a>
+                </div>
+        </div>
     <?php endforeach; ?>
 </section>
 
@@ -60,7 +64,7 @@
             et notre passion nous permettent de rester à la pointe de l'industrie.</p>
     </div>
     <div class="about-image">
-        <div class="img-placeholder">IMAGE ENTREPRISE</div>
+        <div class="img-placeholder" id="about-presentation-img"></div>
     </div>
 </section>
 

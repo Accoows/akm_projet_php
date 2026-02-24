@@ -1,5 +1,5 @@
 <?php
-// controller/c_edit_article.php
+
 
 if (!isset($_SESSION['user'])) {
     redirect('login');
@@ -10,7 +10,7 @@ $article = null;
 $stock = null;
 
 if ($articleId > 0) {
-    // Récupérer l'article et son stock
+    
     $stmt = $pdo->prepare("SELECT a.*, s.quantity FROM Article a LEFT JOIN Stock s ON a.id = s.article_id WHERE a.id = ?");
     $stmt->execute([$articleId]);
     $article = $stmt->fetch();
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_btn'])) {
     $price = filter_var($_POST['price'], FILTER_VALIDATE_FLOAT);
     $quantity = filter_var($_POST['quantity'], FILTER_VALIDATE_INT);
     
-    // Image handling logic omitted for brevity, keeping old image if no new one uploaded
+    
     $imagePath = $article['image_link'];
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_btn'])) {
             if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
             
             if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadDir . $newFilename)) {
-                // Delete old image if it's in uploads
+                
                 if (file_exists($imagePath) && strpos($imagePath, 'uploads/articles/') === 0 && $imagePath != 'uploads/articles/bg1.png') {
                     unlink($imagePath);
                 }
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_btn'])) {
             $pdo->commit();
             $success = "L'article a été mis à jour.";
             
-            // Refresh data
+            
             $article['name'] = $name;
             $article['description'] = $description;
             $article['price'] = $price;

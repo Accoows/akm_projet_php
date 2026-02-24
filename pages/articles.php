@@ -8,8 +8,35 @@
         </div>
     </section>
 
+    <div class="search-container">
+        <form action="articles" method="GET" class="search-form">
+            <!-- Hidden input if the router relies on ?page=articles -->
+            <?php if(isset($_GET['page'])): ?>
+                <input type="hidden" name="page" value="articles">
+            <?php endif; ?>
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" name="q" placeholder="Rechercher un équipement, une marque..." value="<?= isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '' ?>" class="search-input">
+                <button type="submit" class="btn-primary search-btn">Rechercher</button>
+            </div>
+        </form>
+        <?php if(isset($_GET['q']) && !empty($_GET['q'])): ?>
+            <p class="search-results-text">
+                <?= count($products) ?> résultat(s) pour "<strong><?= htmlspecialchars($_GET['q']) ?></strong>"
+                <a href="articles" class="clear-search"><i class="fa-solid fa-times-circle"></i> Effacer</a>
+            </p>
+        <?php endif; ?>
+    </div>
+
     <div class="grid-articles">
-        <?php foreach ($products as $product): ?>
+        <?php if (empty($products)): ?>
+            <div class="no-results-card">
+                <i class="fa-solid fa-box-open"></i>
+                <h3>Aucun équipement trouvé</h3>
+                <p>Essayez avec d'autres mots-clés ou <a href="articles">revenez au catalogue</a>.</p>
+            </div>
+        <?php else: ?>
+            <?php foreach ($products as $product): ?>
             <article class="product-card">
                 <a href="detail?id=<?= $product['id'] ?>" class="card-link">
                     <div class="article-image">
@@ -27,6 +54,12 @@
                         <h3 class="article-title">
                             <?= htmlspecialchars($product['name']) ?>
                         </h3>
+                    </div>
+                </a>
+                <div class="article-info pt-0">
+                    <a href="account&id=<?= $product['author_id'] ?>" class="article-seller text-link d-inline-block">
+                        <i class="fa-solid fa-user"></i> <?= htmlspecialchars($product['seller_name'] ?? 'Inconnu') ?>
+                    </a>
                         <p class="article-description">
                             <?= htmlspecialchars(substr($product['description'] ?? '', 0, 60)) ?>...
                         </p>
@@ -47,5 +80,6 @@
                 </div>
             </article>
         <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </div>

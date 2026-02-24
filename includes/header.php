@@ -1,15 +1,5 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-$isLogged = isset($_SESSION['user']);
-$isAdmin = $isLogged && isset($_SESSION['user']['role']) && $_SESSION['user']['role'] === 'admin';
-$scriptPath = dirname($_SERVER['SCRIPT_NAME']);
-$scriptPath = str_replace('\\', '/', $scriptPath);
-if (substr($scriptPath, -1) !== '/') {
-    $scriptPath .= '/';
-}
+require_once 'controller/c_header.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -18,6 +8,8 @@ if (substr($scriptPath, -1) !== '/') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ATCFM - Équipement Tactique</title>
+    
+    <link rel="icon" type="image/x-icon" href="assets/images/logo_atcfm.ico">
 
     <base href="<?= $scriptPath ?>">
 
@@ -31,7 +23,7 @@ if (substr($scriptPath, -1) !== '/') {
     <header>
         <div class="header-content">
             <a href="./" class="logo">
-                <i class="fa-solid fa-shield-halved"></i> AT<span>CFM</span>
+                <img src="assets/images/logo_atcfm_bg.webp" alt="ATCFM Logo">
             </a>
 
             <nav>
@@ -47,7 +39,16 @@ if (substr($scriptPath, -1) !== '/') {
                             <li><a href="admin" class="nav-link-admin">Admin</a></li>
                         <?php endif; ?>
 
-                        <li><a href="account" class="btn-nav">Mon Compte</a></li>
+                        <li>
+                            <a href="account" class="btn-nav nav-avatar-btn">
+                                <?php if (!empty($_SESSION['user']['profile_picture'])): ?>
+                                    <img src="<?= htmlspecialchars($_SESSION['user']['profile_picture']) ?>" alt="Avatar" class="nav-avatar-img">
+                                <?php else: ?>
+                                    <i class="fa-solid fa-user-circle"></i>
+                                <?php endif; ?>
+                                Mon Compte
+                            </a>
+                        </li>
                         <li><a href="logout"><i class="fa-solid fa-right-from-bracket"></i></a></li>
 
                     <?php else: ?>

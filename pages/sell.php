@@ -58,8 +58,13 @@
                 <small class="text-muted-small">Formats acceptés : JPG, PNG, WEBP. Max 5Mo.</small>
             </div>
 
-            <button type="submit" name="sell_btn" class="btn-primary btn-full-width btn-glow mt-20">
-                <i class="fa-solid fa-plus-circle"></i> Mettre en vente
+            <div class="form-group hidden" id="preview-container">
+                <label>Aperçu de la nouvelle image</label>
+                <img id="image-preview" src="" alt="Aperçu" class="img-preview">
+            </div>
+
+            <button type="submit" name="sell_btn" class="btn-primary btn-full-width">
+                <i class="fa-solid fa-paper-plane"></i> Mettre en vente
             </button>
         </form>
     </div>
