@@ -19,10 +19,12 @@ try {
     $cartItems = [];
 }
 
-$total = 0;
+$totalHT = 0;
 foreach ($cartItems as $item) {
-    $total += $item['price'] * $item['quantity'];
+    $totalHT += $item['price'] * $item['quantity'];
 }
+$totalTTC = $totalHT * 1.20;
+$total = $totalTTC; // On utilise le TTC pour le paiement et le solde
 
 // 2. Traitement du formulaire
 if (isPost()) {

@@ -95,7 +95,8 @@ if (isset($_GET['remove']) && is_numeric($_GET['remove'])) {
 }
 
 $cartItems = [];
-$total = 0;
+$totalHT = 0;
+$totalTTC = 0;
 
 try {
     $stmt = $pdo->prepare("
@@ -107,9 +108,11 @@ try {
     $stmt->execute([$userId]);
     $cartItems = $stmt->fetchAll();
 
+    $totalHT = 0;
     foreach ($cartItems as $item) {
-        $total += $item['price'] * $item['quantity'];
+        $totalHT += $item['price'] * $item['quantity'];
     }
+    $totalTTC = $totalHT * 1.20;
 } catch (PDOException $e) {
     $cartItems = [];
 }

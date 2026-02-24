@@ -89,12 +89,12 @@ unset($_SESSION['cart_error'], $_SESSION['cart_success']);
                     
                     <div class="cart-summary-row">
                         <span class="cart-summary-label">Total HT</span>
-                        <span><?= number_format($total, 2) ?> €</span>
+                        <span><?= number_format($totalHT, 2) ?> €</span>
                     </div>
                     
                     <div class="cart-summary-total">
                         <span>Total TTC</span>
-                        <span><?= number_format($total, 2) ?> €</span>
+                        <span><?= number_format($totalTTC, 2) ?> €</span>
                     </div>
                     
                     <a href="cart_validation" class="btn-primary btn-full-width btn-glow cart-validate-btn">

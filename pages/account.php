@@ -153,7 +153,7 @@
                         <thead>
                             <tr>
                                 <th>Date</th>
-                                <th>Montant</th>
+                                <th>Montant TTC</th>
                                 <th>Lieu</th>
                                 <th>Ref</th>
                             </tr>
