@@ -28,8 +28,7 @@
                 <h3>Commandes</h3>
                 <span class="stat-number"><?= $orderCount ?></span>
             </div>
-            <!-- Pas de page dédiée pour l'instant -->
-            <span class="stat-link">Voir détails</span>
+            <a href="admin&sub=orders" class="stat-link">Gérer</a>
         </div>
     </div>
 </div>

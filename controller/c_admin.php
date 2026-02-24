@@ -2,7 +2,7 @@
 // controller/c_admin.php
 
 $sub = isset($_GET['sub']) ? $_GET['sub'] : 'index';
-$allowed = ['index', 'users', 'articles'];
+$allowed = ['index', 'users', 'articles', 'orders'];
 
 if (!in_array($sub, $allowed)) {
     $sub = 'index';
@@ -84,5 +84,12 @@ if ($sub === 'index') {
         $articles = $stmt->fetchAll();
     } catch (PDOException $e) {
         $articles = [];
+    }
+} elseif ($sub === 'orders') {
+    try {
+        $stmt = $pdo->query("SELECT i.*, u.username, u.email FROM Invoice i LEFT JOIN User u ON i.user_id = u.id ORDER BY i.transaction_date DESC");
+        $orders = $stmt->fetchAll();
+    } catch (PDOException $e) {
+        $orders = [];
     }
 }

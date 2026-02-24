@@ -2233,3 +2233,108 @@ footer {
     color: #666;
     font-size: 0.8rem;
 }
+
+/* =========================================
+   7. ADMIN DASHBOARD
+   ========================================= */
+
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background-color: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius);
+    padding: 25px 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--bg-olive-light);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--bg-olive-light);
+    box-shadow: var(--shadow-modern);
+}
+
+.stat-card:hover::before {
+    opacity: 1;
+}
+
+.stat-card i {
+    font-size: 3.5rem;
+    color: var(--bg-olive-light);
+    margin-right: 25px;
+    margin-bottom: 0;
+    opacity: 0.9;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover i {
+    transform: scale(1.1);
+}
+
+.stat-info {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.stat-info h3 {
+    font-size: 1.1rem;
+    color: #bbb;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--text-white);
+    display: block;
+    line-height: 1;
+}
+
+.stat-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-white);
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: auto;
+    margin-left: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-link:hover {
+    background: var(--bg-olive-light);
+    color: var(--bg-dark);
+    border-color: var(--bg-olive-light);
+}
