@@ -1,5 +1,5 @@
 <?php
-// controller/c_header.php
+
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -18,7 +18,7 @@ if ($isLogged) {
             $_SESSION['user']['role'] = $headerUser['role'];
         }
     } catch (PDOException $e) {
-        // Fallback to existing session if DB error
+        
     }
 }
 

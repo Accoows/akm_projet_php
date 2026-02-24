@@ -12,7 +12,7 @@
     <?php else: ?>
 
         <div class="checkout-container">
-            <!-- Left: Shipping Form -->
+            
             <div class="checkout-form dark-form">
                 <h3><i class="fa-solid fa-location-dot"></i> Adresse de livraison</h3>
 
@@ -46,7 +46,7 @@
                 </form>
             </div>
 
-            <!-- Right: Order Summary -->
+            
             <div class="checkout-summary">
                 <h3><i class="fa-solid fa-file-invoice-dollar"></i> Récapitulatif</h3>
 

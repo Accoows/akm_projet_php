@@ -1,5 +1,4 @@
 <?php
-// controller/c_delete_article.php
 
 if (!isset($_SESSION['user'])) {
     redirect('login');
@@ -18,18 +17,14 @@ if ($articleId > 0) {
             $isAdmin = $_SESSION['user']['role'] === 'admin';
 
             if ($isOwner || $isAdmin) {
-                // Delete stock
                 $stmtDelStock = $pdo->prepare("DELETE FROM Stock WHERE article_id = ?");
                 $stmtDelStock->execute([$articleId]);
 
-                // Delete cart items
                 $stmtDelCart = $pdo->prepare("DELETE FROM Cart WHERE article_id = ?");
                 $stmtDelCart->execute([$articleId]);
 
-                // Supprimer l'article en BDD
                 $stmtDelArt = $pdo->prepare("DELETE FROM Article WHERE id = ?");
                 if ($stmtDelArt->execute([$articleId])) {
-                    // Supprimer l'image physique
                     if (!empty($article['image_link'])) {
                         $imgPath = $article['image_link'];
                         if (file_exists($imgPath) && strpos($imgPath, 'uploads/articles/') === 0 && $imgPath != 'uploads/articles/bg1.png') {
@@ -42,7 +37,6 @@ if ($articleId > 0) {
             }
         }
     } catch (PDOException $e) {
-        // Ignorer l'erreur pour ne pas bloquer
     }
 }
 

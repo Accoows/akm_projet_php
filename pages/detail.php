@@ -38,7 +38,7 @@
                 </p>
 
                 <div class="detail-actions">
-                    <!-- Form to add to cart (logic to be implemented later or via link) -->
+                    
                     <form action="cart" method="POST" class="form-inline detail-action-form">
                         <input type="hidden" name="id" value="<?= $product['id'] ?>">
                         <?php if (isset($product['stock_quantity']) && $product['stock_quantity'] > 0): ?>

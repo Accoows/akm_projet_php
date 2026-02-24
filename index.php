@@ -10,7 +10,7 @@ if (!preg_match('/^[a-z0-9_-]+$/i', $page)) {
     $page = '404';
 }
 
-// Global Role/Access check (Middleware)
+
 RequestHandler::handle($page);
 
 $controller_file = "controller/c_{$page}.php";

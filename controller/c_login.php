@@ -1,5 +1,5 @@
 <?php
-// controller/c_login.php
+
 
 $error = null;
 
@@ -14,7 +14,7 @@ if (isPost() && isset($_POST['login_btn'])) {
             $user = $stmt->fetch();
 
             if ($user && password_verify($password, $user['password'])) {
-                // Succès
+                
                 $_SESSION['user'] = [
                     'id' => $user['id'],
                     'username' => $user['username'],
@@ -22,7 +22,7 @@ if (isPost() && isset($_POST['login_btn'])) {
                     'role' => $user['role'],
                     'avatar' => $user['profile_picture']
                 ];
-                // Redirection côté serveur
+                
                 redirect("account");
             } else {
                 $error = "Nom d'utilisateur ou mot de passe incorrect.";

@@ -1,5 +1,5 @@
 <?php
-// controller/c_logout.php
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

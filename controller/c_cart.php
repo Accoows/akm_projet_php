@@ -1,5 +1,4 @@
 <?php
-// controller/c_cart.php
 
 $userId = $_SESSION['user']['id'];
 
@@ -39,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                 redirect('cart');
             }
         } catch (PDOException $e) {
-            // Log error
         }
     }
 }
@@ -90,7 +88,6 @@ if (isset($_GET['remove']) && is_numeric($_GET['remove'])) {
         $stmtDel->execute([$cartId, $userId]);
         redirect('cart');
     } catch (PDOException $e) {
-        // Silent error
     }
 }
 

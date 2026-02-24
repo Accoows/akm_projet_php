@@ -5,7 +5,6 @@
     </h2>
 
     <div class="account-grid">
-        <!-- Profil -->
         <div class="account-card profile-card">
             <div class="profile-header">
                 <div class="profile-avatar">
@@ -140,7 +139,6 @@
             </div>
         </div>
 
-        <!-- Historique Commandes -->
         <?php if (!$isPublicProfile): ?>
         <div class="account-card history-card">
             <h3><i class="fa-solid fa-clock-rotate-left"></i> Historique des commandes</h3>
@@ -174,7 +172,6 @@
         </div>
         <?php endif; ?>
 
-        <!-- Mes Articles en Vente -->
         <div class="account-card my-articles-card <?= $isPublicProfile ? 'grid-span-1' : 'grid-full-width' ?>">
             <h3><i class="fa-solid fa-box-open"></i> <?= $isPublicProfile ? 'Articles en vente' : 'Mes articles en vente' ?></h3>
 

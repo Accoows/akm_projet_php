@@ -1,7 +1,7 @@
 <?php
-// controller/c_detail.php
 
-// Get product ID from URL
+
+
 $product_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 $product = null;
 

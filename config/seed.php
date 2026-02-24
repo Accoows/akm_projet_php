@@ -2,23 +2,23 @@
 require_once 'database.php';
 
 try {
-    // 1. Nettoyage (on repart sur du propre)
+    
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 0;");
     $pdo->exec("TRUNCATE TABLE Stock; TRUNCATE TABLE Cart; TRUNCATE TABLE Invoice; TRUNCATE TABLE Article; TRUNCATE TABLE User;");
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 1;");
 
     echo "--- Initialisation de la base JRSOFT ---<br>";
 
-    // 2. Création des Utilisateurs
+    
     $password = password_hash('password123', PASSWORD_BCRYPT);
 
-    // Insertion Admin (Compte test par défaut)
+    
     $pdo->prepare("INSERT INTO User (username, password, email, balance, profile_picture, role) VALUES (?, ?, ?, ?, ?, ?)")
         ->execute(['Admin', $password, 'admin@atcfm.fr', 9999.99, null, 'admin']);
 
     $adminId = $pdo->lastInsertId();
 
-    // Insertion de 10 clients aléatoires
+    
     $firstNames = ['Arthur', 'Thomas', 'Lucas', 'Maxime', 'Julien'];
     $lastNames = ['Dupont', 'Durand', 'Martin', 'Bernard', 'Petit'];
 
@@ -29,7 +29,7 @@ try {
         $stmtUser->execute([$username, $password, $email, rand(50, 500), 'uploads/articles/test.jpg', 'user']);
     }
 
-    // 3. Articles basés sur TES fichiers (image_97b2dc.webp)
+    
     $realItems = [
         ['Gilet Porte-Plaques Lourd', 'gilet1.webp', 'Gilet tactique haute résistance avec système MOLLE et compartiments plaques.', 129.90],
         ['Bottes Commando Desert', 'bottes1.webp', 'Bottes légères et respirantes pour opérations en milieu aride.', 85.00],
@@ -79,7 +79,7 @@ try {
     $stmtArt = $pdo->prepare("INSERT INTO Article (name, description, price, author_id, image_link, publication_date) VALUES (?, ?, ?, ?, ?, NOW() - INTERVAL ? DAY)");
     $stmtStock = $pdo->prepare("INSERT INTO Stock (article_id, quantity) VALUES (?, ?)");
 
-    // Insertion des articles réels
+    
     foreach ($realItems as $item) {
         $stmtArt->execute([$item[0], $item[2], $item[3], $adminId, 'uploads/articles/' . $item[1], rand(0, 10)]);
         $stmtStock->execute([$pdo->lastInsertId(), rand(5, 50)]);

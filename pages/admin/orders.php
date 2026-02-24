@@ -16,7 +16,6 @@
                         <th>Date et Heure</th>
                         <th>Adresse de Facturation</th>
                         <th>Montant TTC</th>
-                        <!-- Action placeholder just in case -->
                     </tr>
                 </thead>
                 <tbody>

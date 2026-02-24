@@ -1,6 +1,6 @@
 <?php
-// pages/admin.php
 
+// Dynamically include the requested admin sub-page file
 $file = "pages/admin/{$sub}.php";
 
 if (file_exists($file)) {
