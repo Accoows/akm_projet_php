@@ -26,14 +26,21 @@ if (isPost() && isset($_POST['register_btn'])) {
             } else {
                 // Apply a secure hash to the password before database insertion
                 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-                $defaultAvatar = 'assets/images/placeholder_user.png';
                 $initialBalance = 0.00;
 
                 // Create the new user with a standard 'user' role
-                $stmtInsert = $pdo->prepare("INSERT INTO User (username, password, email, balance, profile_picture, role) VALUES (?, ?, ?, ?, ?, 'user')");
-                if ($stmtInsert->execute([$username, $hashedPassword, $email, $initialBalance, $defaultAvatar])) {
-                    $success = "Compte créé avec succès ! Vous pouvez maintenant vous connecter.";
-                    redirect("login");
+                $stmtInsert = $pdo->prepare("INSERT INTO User (username, password, email, balance, role) VALUES (?, ?, ?, ?, 'user')");
+                if ($stmtInsert->execute([$username, $hashedPassword, $email, $initialBalance])) {
+                    // Automatically log the user in
+                    $_SESSION['user'] = [
+                        'id' => $pdo->lastInsertId(),
+                        'username' => $username,
+                        'email' => $email,
+                        'role' => 'user',
+                        'avatar' => null
+                    ];
+                    
+                    redirect("account");
                 } else {
                     $error = "Erreur lors de l'inscription.";
                 }
