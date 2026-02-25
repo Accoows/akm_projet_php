@@ -78,8 +78,6 @@
                         <?php else: ?>
                             <div class="image-placeholder"><i class="fa-solid fa-image"></i></div>
                         <?php endif; ?>
-                        
-                        <span class="card-badge">Équipement</span>
                     </div>
 
                     <div class="article-info">
