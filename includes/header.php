@@ -20,42 +20,53 @@ require_once 'controller/c_header.php';
 
 <body>
 
-    <header>
-        <div class="header-content">
-            <a href="./" class="logo">
-                <img src="assets/images/logo_atcfm_bg.webp" alt="ATCFM Logo">
-            </a>
+<header>
+    <div class="header-content">
+        <a href="./" class="logo">
+            <img src="assets/images/logo_atcfm_bg.webp" alt="ATCFM Logo">
+        </a>
 
-            <nav>
-                <ul>
-                    <li><a href="./">Accueil</a></li>
-                    <li><a href="articles">Catalogue</a></li>
+        <div class="header-search">
+            <form action="articles" method="GET" class="header-search-form">
+                <?php if(isset($_GET['page'])): ?>
+                    <input type="hidden" name="page" value="articles">
+                <?php endif; ?>
 
-                    <?php if ($isLogged): ?>
-                        <li><a href="sell">Vendre</a></li>
-                        <li><a href="cart"><i class="fa-solid fa-cart-shopping"></i> Panier</a></li>
-
-                        <?php if ($isAdmin): ?>
-                            <li><a href="admin" class="nav-link-admin">Admin</a></li>
-                        <?php endif; ?>
-
-                        <li>
-                            <a href="account" class="btn-nav nav-avatar-btn">
-                                <?php if (!empty($_SESSION['user']['profile_picture'])): ?>
-                                    <img src="<?= htmlspecialchars($_SESSION['user']['profile_picture']) ?>" alt="Avatar" class="nav-avatar-img">
-                                <?php else: ?>
-                                    <i class="fa-solid fa-user-circle"></i>
-                                <?php endif; ?>
-                                Mon Compte
-                            </a>
-                        </li>
-                        <li><a href="logout"><i class="fa-solid fa-right-from-bracket"></i></a></li>
-
-                    <?php else: ?>
-                        <li><a href="register">Inscription</a></li>
-                        <li><a href="login" class="btn-nav"><i class="fa-solid fa-user"></i> Connexion</a></li>
-                    <?php endif; ?>
-                </ul>
-            </nav>
+                <div class="header-input-group">
+                    <input type="text" name="q" placeholder="Rechercher..." value="<?= isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '' ?>">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </form>
         </div>
-    </header>
+
+        <nav>
+            <ul>
+                <li><a href="./">Accueil</a></li>
+                <li><a href="articles">Catalogue</a></li>
+                <?php if ($isLogged): ?>
+                    <li><a href="sell">Vendre</a></li>
+                    <li><a href="cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                    <li class="nav-dropdown">
+                        <a href="account" class="nav-avatar-btn">
+                            <?php if (!empty($_SESSION['user']['profile_picture'])): ?>
+                                <img src="<?= htmlspecialchars($_SESSION['user']['profile_picture']) ?>" alt="Avatar" class="nav-avatar-img">
+                            <?php else: ?>
+                                <i class="fa-solid fa-user-circle"></i>
+                            <?php endif; ?>
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7em; margin-left: 5px;"></i>
+                        </a>
+                        <ul class="nav-dropdown-menu">
+                            <li><a href="account"><i class="fa-solid fa-user"></i> Mon compte</a></li>
+                            <?php if (isset($isAdmin) && $isAdmin): ?>
+                                <li><a href="admin"><i class="fa-solid fa-gauge"></i> Admin</a></li>
+                            <?php endif; ?>
+                            <li><a href="logout"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a></li>
+                        </ul>
+                    </li>
+                <?php else: ?>
+                    <li><a href="login" class="btn-nav">Connexion</a></li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+    </div>
+</header>

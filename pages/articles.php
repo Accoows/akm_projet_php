@@ -14,6 +14,9 @@
             <?php if(isset($_GET['page'])): ?>
                 <input type="hidden" name="page" value="articles">
             <?php endif; ?>
+            <?php if(isset($_GET['q'])): ?>
+                <input type="hidden" name="q" value="<?= htmlspecialchars($_GET['q']) ?>">
+            <?php endif; ?>
 
             <div class="custom-dropdown-wrapper" id="sortDropdown">
                 <input type="hidden" name="sort" id="sortInput" value="<?= isset($_GET['sort']) ? htmlspecialchars($_GET['sort']) : 'newest' ?>">
@@ -47,12 +50,6 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
-            </div>
-
-            <div class="search-input-wrapper articles-search-input-wrapper">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" name="q" placeholder="Rechercher un équipement, une marque..." value="<?= isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '' ?>" class="search-input">
-                <button type="submit" class="btn-primary search-btn">Rechercher</button>
             </div>
         </form>
         <?php if(isset($_GET['q']) && !empty($_GET['q'])): ?>
