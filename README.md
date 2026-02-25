@@ -54,6 +54,7 @@ Vérifiez ou créez le fichier `.env` à la racine de votre projet avec vos prop
 
 ```env
 DB_HOST=127.0.0.1
+DB_PORT=3307
 DB_NAME=php_exam_db
 DB_USER=votre_utilisateur
 DB_PASS=votre_mot_de_passe
