@@ -1,5 +1,6 @@
 <section class="banner hero-banner">
-    <div class="banner-content">
+    <div class="hero-overlay"></div>
+    <div class="banner-content hero-content"> 
         <h1>L'excellence à votre portée</h1>
         <p>Découvrez notre sélection exclusive 2025.</p>
     </div>

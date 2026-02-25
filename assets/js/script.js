@@ -70,6 +70,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Research header
+    const headerSort = document.getElementById('headerSortDropdown');
+    if (headerSort) {
+        const trigger = headerSort.querySelector('.header-sort-trigger');
+        const menu = headerSort.querySelector('.header-sort-menu');
+        const input = document.getElementById('headerSortInput');
+        const form = headerSort.closest('form');
+
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        headerSort.querySelectorAll('.header-sort-option').forEach(option => {
+            option.addEventListener('click', function() {
+                input.value = this.dataset.value;
+                form.submit();
+            });
+        });
+
+        document.addEventListener('click', () => {
+            menu.style.display = 'none';
+        });
+    }
+
     // Custom Filter Dropdown logic (articles.php)
     const sortDropdown = document.getElementById('sortDropdown');
     if (sortDropdown) {

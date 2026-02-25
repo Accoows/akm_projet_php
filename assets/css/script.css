@@ -82,7 +82,79 @@ header {
     /* Allow wrapping */
 }
 
+/* recherche header */
+
+.header-search {
+    flex: 1;
+    max-width: 450px;
+    margin: 0 40px;
+}
+
+.header-search-form {
+    display: flex;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    /* On augmente un peu le padding pour que le texte ne colle pas aux bords arrondis */
+    padding: 5px 5px 5px 15px;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.header-search-form:focus-within {
+    border-color: var(--bg-olive-light);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 15px rgba(150, 168, 110, 0.2);
+}
+
+/* L'input de texte */
+
+.header-input-group {
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+
+.header-input-group input {
+    background: transparent !important;
+    border: none !important;
+    padding: 8px !important;
+    font-size: 0.95rem;
+    width: 100%;
+    color: var(--text-white) !important;
+    outline: none;
+}
+
+.header-input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.header-input-group button {
+    background: var(--bg-olive-light);
+    color: var(--bg-dark);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.header-input-group button:hover {
+    transform: scale(1.05);
+    background: #fff;
+}
+
 /* ... existing code ... */
+
+@media (max-width: 992px) {
+    .header-search {
+        display: none;
+    }
+}
 
 @media (max-width: 768px) {
     .header-content {
@@ -171,26 +243,39 @@ nav a:hover {
 }
 
 .hero-banner {
-    height: 500px;
-    /* Plus grand */
+    position: relative; /* Nécessaire pour l'overlay */
+    height: 250px; /* Aligné sur la taille de la bannière articles */
     border-radius: var(--radius);
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('../images/bg1.png');
+    background-position: center;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center; /* Centrage horizontal */
+    text-align: center;
+    overflow: hidden;
 }
 
 .hero-banner h1 {
-    font-size: 3.5rem;
-    /* Très gros */
+    position: relative;
+    z-index: 2;
+    font-size: 3rem; /* Taille réduite pour le format 350px */
     font-weight: 900;
-    letter-spacing: -2px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    background: linear-gradient(to bottom, #fff 60%, #888);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-bottom: 10px;
 }
 
 .hero-banner p {
-    font-size: 1.2rem;
-    opacity: 0.8;
+    position: relative;
+    z-index: 2;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 500px;
 }
 
 .mid-banner {
@@ -210,18 +295,34 @@ nav a:hover {
 
 .hero-section {
     position: relative;
-    height: 600px;
-    /* Plus haut pour plus d'impact */
+    height: 250px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     border-radius: var(--radius);
-    margin: 20px 0 40px 0;
+    margin: 5px 0 30px 0;
     overflow: hidden;
-    /* Image de fond tactique (remplace par ton image) */
     background: url('../images/hero-tactical.jpg') center/cover no-repeat;
     background-color: #000;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    background: linear-gradient(to bottom, #fff 60%, #888);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+
+.hero-section p {
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin-bottom: 0;
 }
 
 .hero-overlay {
@@ -238,14 +339,13 @@ nav a:hover {
     letter-spacing: 4px;
     font-size: 0.8rem;
     font-weight: 800;
-    margin-bottom: 20px;
+    margin-top: 40px;
     opacity: 0;
     animation: fadeInUp 0.8s forwards;
 }
 
 .hero-section h1 {
-    font-size: 4rem;
-    /* Très imposant */
+    font-size: 3.5rem;
     font-weight: 900;
     line-height: 1.1;
     margin-bottom: 25px;
@@ -256,10 +356,10 @@ nav a:hover {
 }
 
 .hero-section p {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     color: #ccc;
     margin-bottom: 40px;
-    max-width: 600px;
+    max-width: 650px;
     margin-inline: auto;
 }
 
@@ -288,13 +388,23 @@ nav a:hover {
 }
 
 /* Responsive */
+
+@media (max-width: 768px) {
+    .hero-banner {
+        height: 250px;
+    }
+    .hero-banner h1 {
+        font-size: 2rem;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-section {
-        height: 500px;
+        height: 250px;
     }
-
+    
     .hero-section h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 }
 
