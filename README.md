@@ -23,7 +23,7 @@ Le projet est structuré de manière à séparer les responsabilités tout en ga
 
 - **Authentification et Gestion de compte** : Inscription, connexion et gestion du profil utilisateur (solde, informations).
 - **Achat et Vente** : Possibilité de lister des articles à vendre, avec ajout d'images, gestion des prix, et système de panier d'achat.
-- **Paiement** : Système de paiement simulé basique pour finaliser les commandes fictives.
+- **Paiement** : Intégration de l'API de paiement **Stripe Checkout** (Mode Test via requêtes cURL natives) et système de gestion de solde de compte virtuel pour finaliser les commandes fictives.
 - **Filtres et Recherche** : Système de filtrage pour rechercher des produits facilement selon différents critères.
 - **Panneau d'administration** : Interface dédiée aux administrateurs pour gérer la plateforme.
 
@@ -58,9 +58,12 @@ DB_PORT=3307
 DB_NAME=php_exam_db
 DB_USER=votre_utilisateur
 DB_PASS=votre_mot_de_passe
+
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_PUBLISHABLE_KEY=pk_test_...
 ```
 
-_(Remarque : Remplacez les valeurs par celles correspondantes à votre environnement local)._
+_(Remarque : Remplacez les valeurs par celles correspondantes à votre base de données locales et ajoutez vos clés de test Stripe, générables gratuitement sur le Dashboard Développeur Stripe)._
 
 ### 4. Lancement du site
 
