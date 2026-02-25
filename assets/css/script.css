@@ -86,8 +86,8 @@ header {
 
 .header-search {
     flex: 1;
-    max-width: 450px;
-    margin: 0 40px;
+    max-width: 380px;
+    margin: 0 40px 0 60px;
 }
 
 .header-search-form {
@@ -96,7 +96,7 @@ header {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 50px;
     /* On augmente un peu le padding pour que le texte ne colle pas aux bords arrondis */
-    padding: 5px 5px 5px 15px;
+    padding: 3px 3px 3px 12px;
     align-items: center;
     transition: all 0.3s ease;
 }
@@ -118,8 +118,8 @@ header {
 .header-input-group input {
     background: transparent !important;
     border: none !important;
-    padding: 8px !important;
-    font-size: 0.95rem;
+    padding: 6px !important;
+    font-size: 0.9rem;
     width: 100%;
     color: var(--text-white) !important;
     outline: none;
@@ -133,14 +133,15 @@ header {
     background: var(--bg-olive-light);
     color: var(--bg-dark);
     border: none;
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.2s ease;
+    flex-shrink: 0;
 }
 
 .header-input-group button:hover {
@@ -178,6 +179,7 @@ header {
     display: flex;
     align-items: center;
     text-decoration: none;
+    margin-right: 40px;
 }
 
 .logo img {
@@ -226,6 +228,55 @@ nav a:hover {
     color: #232323;
 }
 
+/* Dropdown Navigation */
+.nav-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.nav-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--nav-border);
+    border-radius: var(--radius);
+    padding: 10px 0;
+    min-width: 160px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-modern);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-dropdown-menu li {
+    width: 100%;
+}
+
+.nav-dropdown-menu a {
+    padding: 10px 20px;
+    width: 100%;
+    border-radius: 0;
+}
+
+.nav-dropdown-menu a:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
 /* =========================================
    3. SITE CONTENT
    ========================================= */
@@ -243,8 +294,10 @@ nav a:hover {
 }
 
 .hero-banner {
-    position: relative; /* Nécessaire pour l'overlay */
-    height: 250px; /* Aligné sur la taille de la bannière articles */
+    position: relative;
+    /* Nécessaire pour l'overlay */
+    height: 250px;
+    /* Aligné sur la taille de la bannière articles */
     border-radius: var(--radius);
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('../images/bg1.png');
     background-position: center;
@@ -252,7 +305,8 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* Centrage horizontal */
+    align-items: center;
+    /* Centrage horizontal */
     text-align: center;
     overflow: hidden;
 }
@@ -260,7 +314,8 @@ nav a:hover {
 .hero-banner h1 {
     position: relative;
     z-index: 2;
-    font-size: 3rem; /* Taille réduite pour le format 350px */
+    font-size: 3rem;
+    /* Taille réduite pour le format 350px */
     font-weight: 900;
     line-height: 1.1;
     letter-spacing: -1px;
@@ -276,6 +331,7 @@ nav a:hover {
     font-size: 1.1rem;
     opacity: 0.9;
     max-width: 500px;
+    margin: 0 auto;
 }
 
 .mid-banner {
@@ -373,6 +429,7 @@ nav a:hover {
     z-index: 2;
     max-width: 800px;
     padding: 0 20px;
+    text-align: center;
 }
 
 @keyframes fadeInUp {
@@ -393,6 +450,7 @@ nav a:hover {
     .hero-banner {
         height: 250px;
     }
+
     .hero-banner h1 {
         font-size: 2rem;
     }
@@ -402,7 +460,7 @@ nav a:hover {
     .hero-section {
         height: 250px;
     }
-    
+
     .hero-section h1 {
         font-size: 2rem;
     }
@@ -1222,25 +1280,16 @@ footer {
 
 .articles-search-form {
     display: flex;
-    gap: 15px;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.articles-search-input-wrapper {
-    flex: 1;
-}
-
-.articles-search-input-wrapper .search-input {
-    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 20px auto;
 }
 
 /* Custom Filter Dropdown (articles.php) */
 .custom-dropdown-wrapper {
-    width: 200px;
+    width: 220px;
     flex-shrink: 0;
     position: relative;
 }

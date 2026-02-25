@@ -44,17 +44,25 @@ require_once 'controller/c_header.php';
                 <li><a href="./">Accueil</a></li>
                 <li><a href="articles">Catalogue</a></li>
                 <?php if ($isLogged): ?>
+                    <li><a href="sell">Vendre</a></li>
                     <li><a href="cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
-                    <li>
+                    <li class="nav-dropdown">
                         <a href="account" class="nav-avatar-btn">
                             <?php if (!empty($_SESSION['user']['profile_picture'])): ?>
                                 <img src="<?= htmlspecialchars($_SESSION['user']['profile_picture']) ?>" alt="Avatar" class="nav-avatar-img">
                             <?php else: ?>
                                 <i class="fa-solid fa-user-circle"></i>
                             <?php endif; ?>
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.7em; margin-left: 5px;"></i>
                         </a>
+                        <ul class="nav-dropdown-menu">
+                            <li><a href="account"><i class="fa-solid fa-user"></i> Mon compte</a></li>
+                            <?php if (isset($isAdmin) && $isAdmin): ?>
+                                <li><a href="admin"><i class="fa-solid fa-gauge"></i> Admin</a></li>
+                            <?php endif; ?>
+                            <li><a href="logout"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a></li>
+                        </ul>
                     </li>
-                    <li><a href="logout"><i class="fa-solid fa-right-from-bracket"></i></a></li>
                 <?php else: ?>
                     <li><a href="login" class="btn-nav">Connexion</a></li>
                 <?php endif; ?>
