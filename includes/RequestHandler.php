@@ -17,6 +17,7 @@ class RequestHandler
         'account' => 'user',
         'cart' => 'user',
         'cart_validation' => 'user',
+        'stripe_success' => 'user',
         'sell' => 'user',
 
         'admin' => 'admin',
