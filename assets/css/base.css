@@ -1,0 +1,87 @@
+/* 1. VARIABLES & GLOBAL RESET */
+:root {
+    --bg-dark: #0f0f0f;
+    /* Deeper black color */
+    --bg-olive-dark: #3d4629;
+    /* Premium tactical green color */
+    --bg-olive-light: #a3b18a;
+    --text-white: #ffffff;
+    --radius: 18px;
+    /* Essential border radius */
+
+    --nav-bg: rgba(26, 26, 26, 0.8);
+    /* Transparent effect */
+    --nav-border: rgba(255, 255, 255, 0.05);
+    --nav-hover: #a3b18a;
+
+    --bg-card: rgba(26, 26, 26, 0.6);
+
+    /* Shadow variable */
+    --shadow-modern: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* Black gradient overlay on background image */
+    background:
+        linear-gradient(rgba(10, 10, 10, 0.96), rgba(10, 10, 10, 0.96)),
+        url('../images/bg3.webp');
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    /* Fixed background image for modern parallax effect */
+
+    color: var(--text-white);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
+}
+
+/* 6. UTILITIES & SPECIFICS */
+
+.hidden {
+    display: none !important;
+}
+
+/* Profile Edit Form */
+.profile-alert {
+    margin-bottom: 15px;
+}
+
+.profile-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.profile-edit-form {
+    width: 100%;
+}
+
+.profile-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.profile-form-btn {
+    flex: 1;
+    padding: 10px;
+}
+
