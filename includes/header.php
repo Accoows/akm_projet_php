@@ -15,7 +15,11 @@ require_once 'controller/c_header.php';
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link rel="stylesheet" href="assets/css/script.css?v=<?= filemtime('assets/css/script.css'); ?>">
+    <link rel="stylesheet" href="assets/css/base.css?v=<?= filemtime('assets/css/base.css'); ?>">
+    <link rel="stylesheet" href="assets/css/layout.css?v=<?= filemtime('assets/css/layout.css'); ?>">
+    <link rel="stylesheet" href="assets/css/components.css?v=<?= filemtime('assets/css/components.css'); ?>">
+    <link rel="stylesheet" href="assets/css/pages.css?v=<?= filemtime('assets/css/pages.css'); ?>">
+    <link rel="stylesheet" href="assets/css/admin.css?v=<?= filemtime('assets/css/admin.css'); ?>">
 </head>
 
 <body>
